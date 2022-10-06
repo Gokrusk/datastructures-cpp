@@ -1,5 +1,5 @@
 #include<iostream>
-#define EXT 5
+#define EXT 5					//valor constante
 using namespace std;
 	
 	//PROTOTIPOS
