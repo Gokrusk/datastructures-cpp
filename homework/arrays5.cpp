@@ -6,7 +6,6 @@ using namespace std;
 
 // Prototipos
 void leerV(int a[], int n);
-void imprimirV(int a[], int n);
 void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen);
 void vectorResultante(int a[], int n);
 void solucion();
@@ -14,6 +13,7 @@ void solucion();
 int main()
 {
     solucion();
+    return 0;
 }
 
 void leerV(int a[], int n) // leer vector(array, nelementos)
@@ -23,19 +23,6 @@ void leerV(int a[], int n) // leer vector(array, nelementos)
         cout << "Ingrese el elemento " << i + 1 << ": ";
         cin >> a[i];
     }
-}
-void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
-{
-    cout << "Vector: [";
-    for (int i = 0; i < n; i++)
-    {
-        cout << a[i];
-        if (i < n - 1)
-        {
-            cout << ",";
-        }
-    }
-    cout << "]" << endl;
 }
 void solucion()
 {

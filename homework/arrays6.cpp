@@ -4,22 +4,16 @@
 #include <iostream>
 using namespace std;
 
-//Prototipos
+// Prototipos
 void leerV(int a[], int n);
 void imprimirV(int a[], int n);
 void productoPosiciones(int a[], int n, int &produc);
 void factorial(double a);
+void solucion();
 
 int main()
 {
-    int l, produc = 1;
-    cout << "Ingrese la cantidad de elementos a ingresar: ";
-    cin >> l;
-    int a[l];
-    leerV(a, l);                      // Lectura elementos de vector
-    imprimirV(a, l);                  // Imprimir vector
-    productoPosiciones(a, l, produc); // Producto posiciones
-    factorial(produc);                // factorial de producto
+    solucion();
     return 0;
 }
 
@@ -47,10 +41,20 @@ void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
 void productoPosiciones(int a[], int n, int &produc)
 {
     int ini, fin;
-    cout << "Indique posicion inicial: ";
-    cin >> ini;
-    cout << "Indique posicion final: ";
-    cin >> fin;
+    do
+    {
+        do
+        {
+            cout << "Indique posicion inicial: ";
+            cin >> ini;
+        } while (ini < 1 || ini > n);
+        do
+        {
+            cout << "Indique posicion final: ";
+            cin >> fin;
+        } while (fin < 1 || fin > n);
+    } while (ini > fin || fin < ini);
+
     for (int i = ini - 1; i < fin; i++)
     {
         produc *= a[i];
@@ -66,4 +70,15 @@ void factorial(double a) // factorial(n)
     }
 
     cout << "Factorial: " << f << endl;
+}
+void solucion()
+{
+    int l, produc = 1;
+    cout << "Ingrese la cantidad de elementos a ingresar: ";
+    cin >> l;
+    int a[l];
+    leerV(a, l);                      // Lectura elementos de vector
+    imprimirV(a, l);                  // Imprimir vector
+    productoPosiciones(a, l, produc); // Producto posiciones
+    factorial(produc);                // factorial de producto
 }

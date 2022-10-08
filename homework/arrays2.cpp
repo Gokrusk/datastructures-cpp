@@ -1,5 +1,5 @@
-// 2. Ingresar un vector y formar, a partir de este, 
-//un arreglo de valores primos y otro de valores compuestos.
+// 2. Ingresar un vector y formar, a partir de este,
+// un arreglo de valores primos y otro de valores compuestos.
 
 #include <iostream>
 #include <cmath>
@@ -11,24 +11,15 @@ void imprimirV(int a[], int n);
 void asignarVectorPrimo(int a[], int b[], int n, int npri);
 void asignarVectorComp(int a[], int b[], int n, int ncomp);
 void calcNums(int a[], int n);
+void solucion();
 
 int main()
 {
-    int l = 0;
-    // Lectura cantidad de elementos
-    cout << "Ingrese la cantidad de elementos a ingresar: ";
-    cin >> l;
-    int a[l];
-    // Lectura elementos de vector
-    leerV(a, l);
-    // Imprimir vector
-    imprimirV(a, l);
-    // Buscar primo
-    calcNums(a, l);
+    solucion();
     return 0;
 }
 
-void leerV(int a[], int n)              // leer vector(array, nelementos)
+void leerV(int a[], int n) // leer vector(array, nelementos)
 {
     for (int i = 0; i < n; i++)
     {
@@ -36,7 +27,7 @@ void leerV(int a[], int n)              // leer vector(array, nelementos)
         cin >> a[i];
     }
 }
-void imprimirV(int a[], int n)          // imprimir vector(array, nelementos)
+void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
 {
     cout << "Vector: [";
     for (int i = 0; i < n; i++)
@@ -111,7 +102,7 @@ void asignarVectorComp(int a[], int b[], int n, int ncomp) // array, nelementos,
     }
     cout << "]" << endl;
 }
-void calcNums(int a[], int n)          // calcular cantidad de primos y compuestos (array, nelementos)
+void calcNums(int a[], int n) // calcular cantidad de primos y compuestos (array, nelementos)
 {
     int cont = 0, contp = 0, contc = 0;
     for (int i = 0; i < n; i++)
@@ -137,4 +128,18 @@ void calcNums(int a[], int n)          // calcular cantidad de primos y compuest
     asignarVectorPrimo(a, vectorPrimos, n, contp);
     int vectorComp[contc];
     asignarVectorComp(a, vectorComp, n, contc);
+}
+void solucion()
+{
+    int l = 0;
+    // Lectura cantidad de elementos
+    cout << "Ingrese la cantidad de elementos a ingresar: ";
+    cin >> l;
+    int a[l];
+    // Lectura elementos de vector
+    leerV(a, l);
+    // Imprimir vector
+    imprimirV(a, l);
+    // Buscar primo
+    calcNums(a, l);
 }
