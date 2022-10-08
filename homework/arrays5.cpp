@@ -6,12 +6,14 @@ using namespace std;
 
 // Prototipos
 void leerV(int a[], int n);
-void lectura2Vectores();
 void imprimirV(int a[], int n);
+void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen);
+void vectorResultante(int a[], int n);
+void solucion();
 
 int main()
 {
-    lectura2Vectores();
+    solucion();
 }
 
 void leerV(int a[], int n) // leer vector(array, nelementos)
@@ -35,15 +37,53 @@ void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
     }
     cout << "]" << endl;
 }
-void lectura2Vectores()
+void solucion()
 {
-    int n1, n2;
-    cout << "Ingrese cantidad de elementos de vector 1:";
+    int n1, n2, may;
+    cout << "Ingrese cantidad de elementos de vector 1: ";
     cin >> n1;
     int a[n1];
     leerV(a, n1);
-    cout << "Ingrese cantidad de elementos de vector 2:";
+    cout << "Ingrese cantidad de elementos de vector 2: ";
     cin >> n2;
     int b[n2];
     leerV(b, n2);
+    if (n1 > n2) // comprobando vector mayor
+    {
+        int c[n1];
+        sumaVectores(a, b, c, n1, n2);
+    }
+    else
+    {
+        int c[n2];
+        sumaVectores(b, a, c, n2, n1);
+    }
+}
+void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen)
+{
+    for (int i = 0; i < nmay; i++)
+    {
+        if (i < nmen)
+        {
+            c[i] = amay[i] + bmen[i]; // asginar la suma de elementos en posiciones iguales
+        }
+        else
+        {
+            c[i] = amay[i]; // asignar directamente al llegar a la posicion mayor
+        }
+    }
+    vectorResultante(c, nmay);
+}
+void vectorResultante(int a[], int n) // imprimir vector resultante
+{
+    cout << "Vector resultante: [";
+    for (int i = 0; i < n; i++)
+    {
+        cout << a[i];
+        if (i < n - 1)
+        {
+            cout << ",";
+        }
+    }
+    cout << "]" << endl;
 }
