@@ -7,8 +7,8 @@ using namespace std;
 // Prototipos
 void leerV(int a[], int n);
 void imprimirV(int a[], int n);
-void asignarVectorPrimo(int a[], int n);
-void asignarVectorComp(int a[], int n);
+void asignarVectorPrimo(int a[], int b[], int n, int npri);
+void asignarVectorComp(int a[], int b[], int n, int ncomp);
 void calcNums(int a[], int n);
 
 int main()
