@@ -1,4 +1,5 @@
-// 2. Ingresar un vector y formar, a partir de este, un arreglo de valores primos y otro de valores compuestos.
+// 2. Ingresar un vector y formar, a partir de este, 
+//un arreglo de valores primos y otro de valores compuestos.
 
 #include <iostream>
 #include <cmath>
