@@ -13,8 +13,7 @@ void calcNums(int a[], int n);
 
 int main()
 {
-    int l = 0, cont = 0, cont2 = 0,
-        nprimos = 0, ncomp = 0;
+    int l = 0;
     // Lectura cantidad de elementos
     cout << "Ingrese la cantidad de elementos a ingresar: ";
     cin >> l;
@@ -51,7 +50,7 @@ void imprimirV(int a[], int n)          // imprimir vector(array, nelementos)
 }
 void asignarVectorPrimo(int a[], int b[], int n, int npri) // array, nelementos, cantidadprimos
 {
-    int cont = 0, aux, posicion = 0;
+    int cont = 0, posicion = 0;
     for (int i = 0; i < n; i++)
     {
         for (int j = 1; j <= a[i]; j++)
@@ -82,7 +81,7 @@ void asignarVectorPrimo(int a[], int b[], int n, int npri) // array, nelementos,
 }
 void asignarVectorComp(int a[], int b[], int n, int ncomp) // array, nelementos, cantidadcompuestos
 {
-    int cont = 0, aux, posicion = 0;
+    int cont = 0, posicion = 0;
     for (int i = 0; i < n; i++)
     {
         for (int j = 1; j <= a[i]; j++)
@@ -113,13 +112,12 @@ void asignarVectorComp(int a[], int b[], int n, int ncomp) // array, nelementos,
 }
 void calcNums(int a[], int n)          // calcular cantidad de primos y compuestos (array, nelementos)
 {
-    int cont = 0, contp = 0, contc = 0, aux;
+    int cont = 0, contp = 0, contc = 0;
     for (int i = 0; i < n; i++)
     {
-        aux = a[i];
-        for (int j = 1; j <= aux; j++)
+        for (int j = 1; j <= a[i]; j++)
         {
-            if (aux % j == 0)
+            if (a[i] % j == 0)
             {
                 cont++;
             }
