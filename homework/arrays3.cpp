@@ -32,7 +32,6 @@ void solucion(int a[], int n)
                 {
                     cout << "Secuencia de numeros: [" << aux / 2 << " " << aux2 / 2 << " " << aux3 / 2 << "]" << endl;
                     cout << "Suma: " << sum << endl;
-                    // break;
                 }
             }
         }
