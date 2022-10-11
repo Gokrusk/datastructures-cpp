@@ -1,3 +1,4 @@
+//2. Leer, imprimir, sumar elementos de un array
 #include <iostream>
 #define EXT 5 // valor constante
 using namespace std;
