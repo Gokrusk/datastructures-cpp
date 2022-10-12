@@ -10,7 +10,7 @@ void leerV(int a[], int n);
 void imprimirV(int a[], int n);
 void ordenarasc(int a[], int n);
 void ordenardesc(int a[], int n);
-void insertar(int a[], int n);
+void insertar(int a[], int *n);
 void solucion();
 
 int main()
@@ -44,7 +44,7 @@ void ordernarAsc(int a[], int n) // ordenar ascendente
     int aux;
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < n - 1; j++)
         {
             if (a[j] > a[j + 1])
             {
@@ -62,7 +62,7 @@ void ordernarDesc(int a[], int n) // ordenar descendente
     int aux;
     for (int i = n - 1; i >= 0; i--)
     {
-        for (int j = n - 1; j >= 0; j--)
+        for (int j = n - 1; j >= n - i; j--)
         {
             if (a[j] > a[j - 1])
             {
@@ -75,26 +75,22 @@ void ordernarDesc(int a[], int n) // ordenar descendente
     cout << "Vector descendente: " << endl;
     imprimirV(a, n);
 }
-void insertar(int a[], int n)
+void insertar(int a[], int *n)
 {
-    int x;
+    int x, j = 0, val;
     cout << "Ingrese la cantidad de valores a insertar: ";
     cin >> x;
-    int y = x + n; // cantidad total de elementos
-    int b[y];
-    for (int i = 0; i < y; i++)
+    while (j < x)
     {
-        if (i < n)
+        cout << "Ingrese el valor " << j + 1 << ": ";
+        cin >> val;
+        for (int i = *n; i < *n + x; i++)
         {
-            b[i] = a[i]; // insertar valores del vector inicial
+            a[i] = val;
         }
-        else
-        {
-            cout << "Ingrese valor a insertar: "; // insertar nuevos valores
-            cin >> b[i];
-        }
+        *n += 1;
+        j++;
     }
-    imprimirV(b, y);
 }
 void solucion()
 {
@@ -112,11 +108,13 @@ void solucion()
     {
     case 1:
         ordernarAsc(a, l); // Ordenar ascendente
-        insertar(a, l);
+        insertar(a, &l);
+        imprimirV(a, l);
         break;
     case 2:
         ordernarDesc(a, l); // Ordenar descendente
-        insertar(a, l);
+        insertar(a, &l);
+        imprimirV(a, l);
         break;
     default:
         cout << "No existe la opcion" << endl;
