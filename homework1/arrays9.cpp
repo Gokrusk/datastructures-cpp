@@ -109,10 +109,9 @@ void intervalos(int a[], int n)
     bool igual = false, asc = false, desc = false;
     for (int i = 0; i < n; i++)
     {
-        aux = a[i];
         if (i < n - 1)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < n - i; j++)
             {
                 igual = arrayIgual(a, n, i, j + 1);
                 if (igual == false)
