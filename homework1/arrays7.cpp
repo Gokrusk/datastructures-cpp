@@ -7,13 +7,20 @@ using namespace std;
 // Prototipos
 void leerV(int a[], int n);
 void imprimirV(int a[], int n);
+void elementosRepetidos(int a[], int n, int *pos, int *cont);
 void eleminarRepetido(int a[], int *n, int x, int cant);
-void elementosRepetidos(int a[], int *n);
-void solucion();
 
 int main()
 {
-    solucion();
+    int l = 0, pos = 0, cont = 0;
+    cout << "Ingrese la cantidad de elementos a ingresar en vector: ";
+    cin >> l;
+    int a[l];
+    leerV(a, l);                            // Lectura elementos de vector
+    imprimirV(a, l);                        // Imprimir vector
+    elementosRepetidos(a, l, &pos, &cont); // Elemento repetido
+    eleminarRepetido(a, &l, pos, cont);
+    imprimirV(a, l);
     return 0;
 }
 
@@ -37,6 +44,27 @@ void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
     }
     cout << "]" << endl;
 }
+void elementosRepetidos(int a[], int n, int *pos, int *cont) // buscar elementos repetidos
+{
+    int aux,cant=0;
+    for (int i = 0; i < n; i++)
+    {
+        aux = a[i]; // elemento anclado
+        for (int j = 0; j < n; j++)
+        {
+            if (aux == a[j]) // comproband elemento anclado con todos los elementos
+            {
+                cant++;
+            }
+        }
+        if (cant > 1)
+        {
+            *pos = i;
+            *cont = cant;
+            break;
+        }
+    }
+}
 void eleminarRepetido(int a[], int *n, int x, int cant)
 {
     int j = 0;
@@ -49,36 +77,4 @@ void eleminarRepetido(int a[], int *n, int x, int cant)
         *n -= 1;
         j++;
     }
-}
-void elementosRepetidos(int a[], int *n) // buscar elementos repetidos
-{
-    int aux, cont = 0;
-    for (int i = 0; i < *n; i++)
-    {
-        aux = a[i]; // elemento anclado
-        cont = 0;
-        for (int j = 0; j < *n; j++)
-        {
-            if (aux == a[j]) // comproband elemento anclado con todos los elementos
-            {
-                cont++;
-            }
-        }
-        if (cont > 1)
-        {
-            eleminarRepetido(a, n, i, cont);
-            break;
-        }
-    }
-}
-void solucion()
-{
-    int l = 0;
-    cout << "Ingrese la cantidad de elementos a ingresar en vector: ";
-    cin >> l;
-    int a[l];
-    leerV(a, l);               // Lectura elementos de vector
-    imprimirV(a, l);           // Imprimir vector
-    elementosRepetidos(a, &l); // Elemento repetido
-    imprimirV(a, l);
 }

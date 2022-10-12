@@ -11,14 +11,33 @@ void imprimirV(int a[], int n);
 bool arrayIgual(int a[], int n);
 bool ordenDesc(int a[], int n);
 bool ordenAsc(int a[], int n);
-void solucion(int n);
 
 int main()
 {
-    int n = 0;
+    int n = 0, l = 0;
+    bool igual = false, asc = false, desc = false;
     cout << "Ingrese cantidad de vectores: ";
     cin >> n;
-    solucion(n);
+    for (int i = 0; i < n; i++)
+    {
+        // Lectura cantidad de elementos
+        cout << "Ingrese la cantidad de elementos a ingresar en vector " << i + 1 << ": ";
+        cin >> l;
+        int a[l];
+        leerV(a, l);              // Lectura elementos de vector
+        imprimirV(a, l);          // Imprimir vector
+        igual = arrayIgual(a, l); // Elementos iguales
+        if (igual == false)
+        {
+            asc = ordenAsc(a, l);   // ascendente
+            desc = ordenDesc(a, l); // descendente
+            if (asc == false && desc == false)
+            {
+                cout << "Los elementos no tiene un orden especifico" << endl;
+            }
+        }
+        cout << endl;
+    }
     return 0;
 }
 
@@ -98,16 +117,21 @@ bool ordenDesc(int a[], int n)
 bool ordenAsc(int a[], int n)
 {
     bool flag = false;
+
     for (int i = 0; i < n; i++)
     {
-        if (a[i] < a[i + 1])
+        if (i < n - 1)
         {
-            flag = true;
-        }
-        else
-        {
-            flag = false;
-            break;
+
+            if (a[i] < a[i + 1])
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+                break;
+            }
         }
     }
     if (flag)
@@ -115,29 +139,4 @@ bool ordenAsc(int a[], int n)
         cout << "Vector ascendente" << endl;
     }
     return flag;
-}
-void solucion(int n)
-{
-    int l = 0;
-    bool igual = false, asc = false, desc = false;
-    for (int i = 0; i < n; i++)
-    {
-        // Lectura cantidad de elementos
-        cout << "Ingrese la cantidad de elementos a ingresar en vector " << i + 1 << ": ";
-        cin >> l;
-        int a[l];
-        leerV(a, l);              // Lectura elementos de vector
-        imprimirV(a, l);          // Imprimir vector
-        igual = arrayIgual(a, l); // Elementos iguales
-        if (igual == false)
-        {
-            asc = ordenAsc(a, l);   // ascendente
-            desc = ordenDesc(a, l); // descendente
-            if (asc == false && desc == false)
-            {
-                cout << "Los elementos no tiene un orden especifico" << endl;
-            }
-        }
-        cout << endl;
-    }
 }

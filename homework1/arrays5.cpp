@@ -8,23 +8,8 @@ using namespace std;
 void leerV(int a[], int n);
 void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen);
 void vectorResultante(int a[], int n);
-void solucion();
 
 int main()
-{
-    solucion();
-    return 0;
-}
-
-void leerV(int a[], int n) // leer vector(array, nelementos)
-{
-    for (int i = 0; i < n; i++)
-    {
-        cout << "Ingrese el elemento " << i + 1 << ": ";
-        cin >> a[i];
-    }
-}
-void solucion()
 {
     int n1, n2, may;
     cout << "Ingrese cantidad de elementos de vector 1: ";
@@ -39,11 +24,23 @@ void solucion()
     {
         int c[n1];
         sumaVectores(a, b, c, n1, n2);
+        vectorResultante(c, n1);
     }
     else
     {
         int c[n2];
         sumaVectores(b, a, c, n2, n1);
+        vectorResultante(c, n2);
+    }
+    return 0;
+}
+
+void leerV(int a[], int n) // leer vector(array, nelementos)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Ingrese el elemento " << i + 1 << ": ";
+        cin >> a[i];
     }
 }
 void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen)
@@ -59,7 +56,6 @@ void sumaVectores(int amay[], int bmen[], int c[], int nmay, int nmen)
             c[i] = amay[i]; // asignar directamente al llegar a la posicion mayor
         }
     }
-    vectorResultante(c, nmay);
 }
 void vectorResultante(int a[], int n) // imprimir vector resultante
 {

@@ -8,11 +8,16 @@ using namespace std;
 void leerV(int a[], int n);
 void imprimirV(int a[], int n);
 void intervalos(int a[], int n);
-void solucion();
 
 int main()
 {
-    solucion();
+    int l;
+    cout << "Ingrese la cantidad de elementos a ingresar en vector: ";
+    cin >> l;
+    int a[l];
+    leerV(a, l);      // Lectura elementos de vector
+    imprimirV(a, l);  // Imprimir vector
+    intervalos(a, l); // Determinar orden
     return 0;
 }
 
@@ -57,10 +62,6 @@ bool ordenDesc(int a[], int n, int pi, int pf)
             }
         }
     }
-    if (flag)
-    {
-        cout << "Vector descendente" << endl;
-    }
     return flag;
 }
 bool ordenAsc(int a[], int n, int pi, int pf)
@@ -77,10 +78,6 @@ bool ordenAsc(int a[], int n, int pi, int pf)
             flag = false;
             break;
         }
-    }
-    if (flag)
-    {
-        cout << "Vector ascendente" << endl;
     }
     return flag;
 }
@@ -127,10 +124,14 @@ void intervalos(int a[], int n)
                         cout << "Intervalo ascendente: [" << i << ", " << j + 1 << "]" << endl;
                         break;
                     }
-                    if (desc == true)
+                    else
                     {
-                        cout << "Intervalo descendente: [" << i << ", " << j + 1 << "]" << endl;
-                        break;
+
+                        if (desc == true)
+                        {
+                            cout << "Intervalo descendente: [" << i << ", " << j + 1 << "]" << endl;
+                            break;
+                        }
                     }
                 }
             }
@@ -140,14 +141,4 @@ void intervalos(int a[], int n)
     {
         cout << "Los elementos del vector son iguales" << endl;
     }
-}
-void solucion()
-{
-    int l;
-    cout << "Ingrese la cantidad de elementos a ingresar en vector: ";
-    cin >> l;
-    int a[l];
-    leerV(a, l);      // Lectura elementos de vector
-    imprimirV(a, l);  // Imprimir vector
-    intervalos(a, l); // Determinar orden
 }

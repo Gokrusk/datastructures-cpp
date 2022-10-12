@@ -9,11 +9,17 @@ void leerV(int a[], int n);
 void imprimirV(int a[], int n);
 void productoPosiciones(int a[], int n, int &produc);
 void factorial(double a);
-void solucion();
 
 int main()
 {
-    solucion();
+    int l, produc = 1;
+    cout << "Ingrese la cantidad de elementos a ingresar: ";
+    cin >> l;
+    int a[l];
+    leerV(a, l);                      // Lectura elementos de vector
+    imprimirV(a, l);                  // Imprimir vector
+    productoPosiciones(a, l, produc); // Producto posiciones
+    factorial(produc);                // factorial de producto
     return 0;
 }
 
@@ -41,7 +47,7 @@ void imprimirV(int a[], int n) // imprimir vector(array, nelementos)
 void productoPosiciones(int a[], int n, int &produc)
 {
     int ini, fin;
-    do
+    do // control de posiciones
     {
         do
         {
@@ -70,15 +76,4 @@ void factorial(double a) // factorial(n)
     }
 
     cout << "Factorial: " << f << endl;
-}
-void solucion()
-{
-    int l, produc = 1;
-    cout << "Ingrese la cantidad de elementos a ingresar: ";
-    cin >> l;
-    int a[l];
-    leerV(a, l);                      // Lectura elementos de vector
-    imprimirV(a, l);                  // Imprimir vector
-    productoPosiciones(a, l, produc); // Producto posiciones
-    factorial(produc);                // factorial de producto
 }

@@ -9,11 +9,18 @@ using namespace std;
 void leerV(int a[], int n);
 void imprimirV(int a[], int n);
 void elementosDiferentes(int a[], int n);
-void solucion();
 
 int main()
 {
-    solucion();
+    int l;
+    bool repet;
+    cout << "Ingrese la cantidad de elementos a ingresar: ";
+    cin >> l;
+    int a[l];
+    leerV(a, l);     // Lectura elementos de vector
+    imprimirV(a, l); // Imprimir vector
+    cout << "Numeros que no se repiten:" << endl;
+    elementosDiferentes(a, l); // Elemento repetido
     return 0;
 }
 
@@ -54,19 +61,7 @@ void elementosDiferentes(int a[], int n) // buscar elementos diferntes
         }
         if (cont <= 1)
         {
-            cout << "[" << i << "]: " << aux << endl; // posicion y elemento sin repetir
+            cout << "Posicion: [" << i << "] - Elemento: " << aux << endl; // posicion y elemento sin repetir
         }
     }
-}
-void solucion()
-{
-    int l;
-    bool repet;
-    cout << "Ingrese la cantidad de elementos a ingresar: ";
-    cin >> l;
-    int a[l];
-    leerV(a, l);     // Lectura elementos de vector
-    imprimirV(a, l); // Imprimir vector
-    cout << "Numeros que no se repiten:" << endl;
-    elementosDiferentes(a, l); // Elemento repetido
 }

@@ -11,11 +11,20 @@ void imprimirV(int a[], int n);
 void asignarVectorPrimo(int a[], int b[], int n, int npri);
 void asignarVectorComp(int a[], int b[], int n, int ncomp);
 void calcNums(int a[], int n);
-void solucion();
 
 int main()
 {
-    solucion();
+    int l = 0;
+    // Lectura cantidad de elementos
+    cout << "Ingrese la cantidad de elementos a ingresar: ";
+    cin >> l;
+    int a[l];
+    // Lectura elementos de vector
+    leerV(a, l);
+    // Imprimir vector
+    imprimirV(a, l);
+    // Buscar primo
+    calcNums(a, l);
     return 0;
 }
 
@@ -128,18 +137,4 @@ void calcNums(int a[], int n) // calcular cantidad de primos y compuestos (array
     asignarVectorPrimo(a, vectorPrimos, n, contp);
     int vectorComp[contc];
     asignarVectorComp(a, vectorComp, n, contc);
-}
-void solucion()
-{
-    int l = 0;
-    // Lectura cantidad de elementos
-    cout << "Ingrese la cantidad de elementos a ingresar: ";
-    cin >> l;
-    int a[l];
-    // Lectura elementos de vector
-    leerV(a, l);
-    // Imprimir vector
-    imprimirV(a, l);
-    // Buscar primo
-    calcNums(a, l);
 }
