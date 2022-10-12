@@ -75,7 +75,7 @@ void leerV(int a[], int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		cout << "Ingrese un valor entero para la posicion [" << i << "]:" << endl;
+		cout << "Ingrese un valor entero para la posicion [" << i << "]: ";
 		cin >> a[i];
 	}
 	cout << endl;
