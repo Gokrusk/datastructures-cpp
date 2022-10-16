@@ -25,7 +25,7 @@ int main()
 	leerV(v, n);				   // leer vector
 	printV(v, n);				   // imprimir vector
 	// printAlrevez(v, n);	   // imprimir alrevez
-	/*
+
 	calSumVec(v, &acum, n); // suma elementos vector
 	cout << "Ingrese el valor a insertar: ";
 	cin >> val;
@@ -41,8 +41,7 @@ int main()
 
 	cout << "Ingrese elemento a buscar: ";
 	cin >> val;
-	*/
-	/*pos2=buscarElemento(v,n,val);
+	pos2=buscarElemento(v,n,val);
 	if(pos2==-1){
 		cout<<"El valor no existe"<<endl;
 	}else{
@@ -51,20 +50,20 @@ int main()
 	
 	ordenarBubble(v, n);
 	printV(v, n);
-*/
-	// pos2 = busquedaBinaria(v, n, val);
-	// if (pos2 == -1)
-	// {
-	// 	cout << "El valor no existe" << endl;
-	// }
-	// else
-	// {
-	// 	cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
-	// }
+
+	pos2 = busquedaBinaria(v, n, val);
+	if (pos2 == -1)
+	{
+		cout << "El valor no existe" << endl;
+	}
+	else
+	{
+		cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
+	}
 
 	// cout << "Suma de elementos: " << acum << endl;
 
-	// leerV(v, n); // leer vector
+	leerV(v, n); // leer vector
 	ordenarInsercion(v, n);
 	printV(v, n);
 	system("pause");
