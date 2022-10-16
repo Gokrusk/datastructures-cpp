@@ -13,6 +13,8 @@ void insertarElemento(int a[], int *n, int val, int pos);
 void eliminarElemento(int a[], int *n, int pos);
 int buscarElemento(int a[], int n, int x);
 int busquedaBinaria(int a[], int n, int val);
+void ordenarBubble(int a[], int n);
+void ordenarInsercion(int a[], int n);
 
 int main()
 {
@@ -23,6 +25,7 @@ int main()
 	leerV(v, n);				   // leer vector
 	printV(v, n);				   // imprimir vector
 	// printAlrevez(v, n);	   // imprimir alrevez
+	/*
 	calSumVec(v, &acum, n); // suma elementos vector
 	cout << "Ingrese el valor a insertar: ";
 	cin >> val;
@@ -38,24 +41,32 @@ int main()
 
 	cout << "Ingrese elemento a buscar: ";
 	cin >> val;
+	*/
 	/*pos2=buscarElemento(v,n,val);
 	if(pos2==-1){
 		cout<<"El valor no existe"<<endl;
 	}else{
 		cout<<"El elemento "<<val<<" se encuentra en la posicion: "<<pos2<<endl;
 	}
-	*/
-	pos2 = busquedaBinaria(v, n, val);
-	if (pos2 == -1)
-	{
-		cout << "El valor no existe" << endl;
-	}
-	else
-	{
-		cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
-	}
+	
+	ordenarBubble(v, n);
+	printV(v, n);
+*/
+	// pos2 = busquedaBinaria(v, n, val);
+	// if (pos2 == -1)
+	// {
+	// 	cout << "El valor no existe" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
+	// }
 
-	cout << "Suma de elementos: " << acum << endl;
+	// cout << "Suma de elementos: " << acum << endl;
+
+	// leerV(v, n); // leer vector
+	ordenarInsercion(v, n);
+	printV(v, n);
 	system("pause");
 }
 // DEFINICION DE FUNCIONES
@@ -123,8 +134,8 @@ void insertarElemento(int a[], int *n, int val, int pos)
 }
 void eliminarElemento(int a[], int *n, int pos)
 {
-	for (int i = pos; i < *n; i++)
-	{ // ciclo recorrido de valores
+	for (int i = pos; i < *n; i++) // ciclo recorrido de valores
+	{
 		if (i < *n - 1)
 		{
 			a[i] = a[i + 1];
@@ -166,4 +177,35 @@ int busquedaBinaria(int a[], int n, int val)
 		}
 	}
 	return -1;
+}
+void ordenarBubble(int a[], int n)
+{
+	int aux;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n - 1; j++)
+		{
+			if (a[j] > a[j + 1])	//elemento1 > a elemento siguiente se intercambia posiciones
+			{
+				aux = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = aux;
+			}
+		}
+	}
+}
+void ordenarInsercion(int a[], int n)
+{
+	int i, aux, j;
+	for (i = 1; i < n; i++)
+	{
+		aux = a[i];
+		j = i - 1;
+		while (j >= 0 && a[j] > aux)
+		{
+			a[j + 1] = a[j];
+			j = j - 1;
+		}
+		a[j + 1] = aux;
+	}
 }
