@@ -15,6 +15,7 @@ int buscarElemento(int a[], int n, int x);
 int busquedaBinaria(int a[], int n, int val);
 void ordenarBubble(int a[], int n);
 void ordenarInsercion(int a[], int n);
+void ordernarSeleccion(int a[], int n);
 
 int main()
 {
@@ -41,13 +42,16 @@ int main()
 
 	cout << "Ingrese elemento a buscar: ";
 	cin >> val;
-	pos2=buscarElemento(v,n,val);
-	if(pos2==-1){
-		cout<<"El valor no existe"<<endl;
-	}else{
-		cout<<"El elemento "<<val<<" se encuentra en la posicion: "<<pos2<<endl;
+	pos2 = buscarElemento(v, n, val);
+	if (pos2 == -1)
+	{
+		cout << "El valor no existe" << endl;
 	}
-	
+	else
+	{
+		cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
+	}
+
 	ordenarBubble(v, n);
 	printV(v, n);
 
@@ -62,9 +66,13 @@ int main()
 	}
 
 	// cout << "Suma de elementos: " << acum << endl;
-
+	cout<<endl<<"Leer vector: "<<endl;
 	leerV(v, n); // leer vector
 	ordenarInsercion(v, n);
+	printV(v, n);
+	cout<<endl<<"Leer vector: "<<endl;
+	leerV(v, n); // leer vector
+	ordernarSeleccion(v, n);
 	printV(v, n);
 	system("pause");
 }
@@ -184,7 +192,7 @@ void ordenarBubble(int a[], int n)
 	{
 		for (int j = 0; j < n - 1; j++)
 		{
-			if (a[j] > a[j + 1])	//elemento1 > a elemento siguiente se intercambia posiciones
+			if (a[j] > a[j + 1]) // elemento1 > a elemento siguiente se intercambia posiciones
 			{
 				aux = a[j];
 				a[j] = a[j + 1];
@@ -206,5 +214,25 @@ void ordenarInsercion(int a[], int n)
 			j = j - 1;
 		}
 		a[j + 1] = aux;
+	}
+}
+void ordernarSeleccion(int a[], int n)
+{
+	int aux, min;
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (a[j] < a[min])
+			{
+				min = j;
+			}
+			if (min != i)
+			{
+				aux = a[min];
+				a[min] = a[i];
+				a[i] = aux;
+			}
+		}
 	}
 }
