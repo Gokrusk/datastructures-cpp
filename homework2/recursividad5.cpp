@@ -1,0 +1,1 @@
+//5. Determinar si cada número ingresado es un valor primo o compuesto.
