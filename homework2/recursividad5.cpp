@@ -12,7 +12,7 @@ void primComp(int n, int *c);
 
 int main()
 {
-    int n, x, c=0, d=0;
+    int n, x, c = 0, d = 0;
     cout << "Ingrese cuantos numeros a comprobar: ";
     cin >> n;
     leer(n, x, &c, d);
@@ -37,19 +37,19 @@ void contar(int n, int x, int d, int *c)
         contar(n - 1, x, d, c);
     }
     d = x % n;
-    if(d==0)
+    if (d == 0)
     {
-        *c = *c +1;
+        *c = *c + 1;
     }
 }
 void primComp(int n, int *c)
 {
     if (*c == 2)
     {
-        cout << "El numero "<< n << " es primo"<<endl;
+        cout << "El numero " << n << " es primo" << endl;
     }
     else
     {
-        cout << "El numero "<< n << " es compuesto"<<endl;
+        cout << "El numero " << n << " es compuesto" << endl;
     }
 }
