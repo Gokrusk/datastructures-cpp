@@ -4,43 +4,52 @@
 using namespace std;
 #include "utilidades.h"
 // PROTOTIPOS
-void trianguloPascal(int n, int *i);
-void espacios(int r, int n);
-void calculoPascal(int r, int n, int *i);
+void trianguloPascal(int n, int i);
+void pascal(int i, int j);
+int factorial(int n);
+int combinacion(int n, int r);
 
 int main()
 {
-    int n, i = 1;
+    int n, i = 0;
     cout << "Cuantas lineas desea ver del triangulo de pascal: ";
     cin >> n;
-    trianguloPascal(n, &i);
+    n-=1;
+    trianguloPascal(n, i);
     return 0;
 }
 
-void trianguloPascal(int n, int *i)
+void trianguloPascal(int n, int i)
+{
+    pascal(i, 0);
+    if (i < n)
+    {
+        trianguloPascal(n, i + 1);
+    }
+}
+int factorial(int n)
 {
     if (n > 0)
     {
-        trianguloPascal(n - 1, i);
-        espacios(n,n);
-        calculoPascal(n, n, i);
+        return n * factorial(n - 1);
     }
-        cout<<endl;
-}
-void espacios(int r, int n)
-{
-    if (r > 1)
+    else
     {
-        espacios(r-n+1, n);
-        cout << " ";
+        return 1;
     }
 }
-void calculoPascal(int r, int n, int *i)
+int combinacion(int n, int r)
 {
-    if (r <= n)
+    int x = factorial(n);
+    int y = factorial(n - r) * factorial(r);
+    return x / y;
+}
+void pascal(int i, int j)
+{
+    cout << combinacion(i, j) << " ";
+    if (j < i)
     {
-        calculoPascal(r + 1, n, i);
-        cout << *i << " ";
-        *i *= (n - r) / r;
+        pascal(i, j + 1);
     }
+    cout << endl;
 }
