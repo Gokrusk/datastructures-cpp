@@ -8,11 +8,27 @@ private:
 		vec[EXT];
 
 public:
-	Vector() // constructor
+	Vector(); // constructor
+	void leerV();
+	void imprimirV();
+	int buscar(int n);
+	int busquedaBinaria(int val);
+	void ordenarBubble();
+	void ordenarInsercion();
+	void ordernarSeleccion();
+	int buscarMayor();
+	int buscarMenor();
+	void setN(int val); // modifica estado del atributo n
+	void setV(int val, int pos); // modifica estado del atributo vec
+	int getN();
+	int getV(int pos);
+};
+
+Vector::Vector()
 	{
 		setN(0);
 	}
-	void leerV()
+void Vector::leerV()
 	{
 		int aux;						   // var lectura
 		for (int i = 0; (i < getN()); i++) // ciclo recorrido vector
@@ -22,14 +38,14 @@ public:
 			setV(aux, i); // actualizar arreglo
 		}
 	}
-	void imprimirV()
+void Vector::imprimirV()
 	{
 		for (int i = 0; (i < getN()); i++) // ciclo recorrido vector
 		{
 			cout << "Valor almacenado en la posicion [" << i << "] " << getV(i) << endl;
 		}
 	}
-	int buscar(int n)
+int Vector::buscar(int n)
 	{
 		for (int i = 0; (i < getN()); i++) // ciclo recorrido vector
 		{
@@ -40,7 +56,7 @@ public:
 		}
 		return -1;
 	}
-	int busquedaBinaria(int val)
+int Vector::busquedaBinaria(int val)
 	{
 		int i = 0, fin = getN() - 1; // posinicial y posfinal
 
@@ -64,7 +80,7 @@ public:
 		}
 		return -1;
 	}
-	void ordenarBubble()
+void Vector::ordenarBubble()
 	{
 		int aux;
 		for (int i = 0; i < getN(); i++)
@@ -80,7 +96,7 @@ public:
 			}
 		}
 	}
-	void ordenarInsercion()
+void Vector::ordenarInsercion()
 	{
 		int i, aux, j;
 		for (i = 1; i < getN(); i++)
@@ -95,7 +111,7 @@ public:
 			setV(aux, (j + 1));
 		}
 	}
-	void ordernarSeleccion()
+void Vector::ordernarSeleccion()
 	{
 		int aux, min;
 		for (int i = 0; i < getN() - 1; i++)
@@ -115,28 +131,27 @@ public:
 			}
 		}
 	}
-	int buscarMayor()
+int Vector::buscarMayor()
 	{
 		return getV(n-1);
 	}
-	int buscarMenor()
+int Vector::buscarMenor()
 	{
 		return getV(0);
 	}
-	void setN(int val) // modifica estado del atributo n
+void Vector::setN(int val) // modifica estado del atributo n
 	{
 		n = val;
 	}
-	void setV(int val, int pos) // modifica estado del atributo vec
+void Vector::setV(int val, int pos) // modifica estado del atributo vec
 	{
 		vec[pos] = val;
 	}
-	int getN()
+int Vector::getN()
 	{
 		return n;
 	}
-	int getV(int pos)
+int Vector::getV(int pos)
 	{
 		return vec[pos];
 	}
-};
