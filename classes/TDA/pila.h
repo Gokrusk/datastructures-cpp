@@ -43,7 +43,7 @@ int Pila::tamanioPila()
 }
 bool Pila::push(Tipo x)
 {
-	if(pilaVacia())
+	if(!pilaLlena())
 	{
 		setTop(getTop()+1);				//+1 top
 		setVec(x, getTop());
