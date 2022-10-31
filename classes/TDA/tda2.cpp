@@ -9,14 +9,14 @@ int main()
 	int cont=3;
 	Pila p;
 	cout<<" INSERTAR ELEMENTO EN LA PILA "<<endl;
-	for(int i=1;i<=cont;i++)
+	for(int i=0;i<cont;i++)
 	{
 		cout<<"Ingrese datos a insertar: ";
 		cin>>n;
 		p.push(n);
 	}
 	cout<<" ELEMENTOS APILADOS "<<endl;
-	for(int i=1;i<=cont;i++)
+	for(int i=0;i<cont;i++)
 	{
 		cout<<"Valor ingresado: "<<p.pop()<<endl;
 	}
