@@ -82,10 +82,10 @@ bool comparacionPilas(Pila a, Pila b)
 				flag = true;
 			}
 		}
-	}
-	if(!flag)
-	{
-		return false;
+		if(!flag)
+		{
+			return false;
+		}
 	}
 	return true;
 }
