@@ -74,21 +74,7 @@ void ordenarDescPila(Pila *a) // ordenar descendente
 		}
 											//pila <b> se vacia
 		c.push(men);						//valor menor se inserta en pila de respuesta
-		
-	/*	while(!a->pilaVacia())				//ciclo para insertar todos los valores en la pila <b> excepto el valor menor
-		{
-			a1 = a->pop();
-			if(a1 != men)
-			{
-				b.push(a1);
-			}
-		}
-											//pila <b< llena y pila <a> vacia
-		while(!b.pilaVacia())				//ciclo para insertar en pila <a> los valores de pila <b>
-		{
-			a->push(b.pop());
-		}*/
-		a.eliminarElementoPila(men);							//pila <b> vacia y pila <a> llena
+		a->eliminarElementoPila(men);		//pila <b> vacia y pila <a> llena
 	}
 	*a = c;									//asignar valor de pila <respuesta> a pila <a>
 }

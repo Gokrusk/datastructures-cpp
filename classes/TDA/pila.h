@@ -20,6 +20,7 @@ class Pila
 		bool push(Tipo x);				//apila valor y devuelve indicador de exito
 		Tipo pop();						//desapila valor y devuelve elemento
 		Tipo cimaPila();				//retorna valor de la cima de pila
+		void eliminarElementoPila(int x); 	//elimina un elemento de la pila
 };
 Pila::Pila()
 {
@@ -69,6 +70,25 @@ Tipo Pila::cimaPila()
 		return x;
 	}
 		return x;						//valor por defecto
+}
+void Pila::eliminarElementoPila(Tipo x)
+{
+	Tipo a1;
+	Pila b;
+
+	while(!pilaVacia())				//ciclo para insertar todos los valores en la pila <b> excepto el valor a eliminar
+	{
+		a1 = pop();
+		if(a1 != x)
+		{
+			b.push(a1);
+		}
+	}
+										//pila <b< llena y pila <a> vacia
+	while(!b.pilaVacia())				//ciclo para insertar en pila <a> los valores de pila <b>
+	{
+		push(b.pop());
+	}
 }
 void Pila::setVec(Tipo val, int pos)
 {
