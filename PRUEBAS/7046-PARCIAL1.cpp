@@ -83,18 +83,3 @@ void cicloExp(int a, int b, int *p, int *n)		//ciclo de sumas sucesivas segun ex
 		n = 27
 	3 al cubo = 27
 */
-
-// void potencia(int a, int b, int p)
-// {
-// 	int n = 1;
-// 	for (int i = 0; i < b; i++)
-// 	{
-// 		p = 0;
-// 		for (int j = 0; j < a; j++)
-// 		{
-// 			p += n;
-// 		}
-// 		n = p;
-// 	}
-// 	cout<<p<<endl;
-// }

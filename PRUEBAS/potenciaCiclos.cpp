@@ -7,10 +7,11 @@ using namespace std;
 int main()
 {
 	// PROTOTIPOS
-	int calcularProducto(int a, int b);
-	int exponente(int a, int b, int c);
+	void calcularProducto(int a, int b, int *c);
+	void exponente(int a, int b, int *c);
+	int potencia(int a, int b, int p);
 
-	int A, B, P = 0, N = 1, C=0;
+	int A, B, P = 0, C = 0;
 	cout << "Ingrese A: ";
 	A = leerN(0, 32768); // lectura A
 	cout << "Ingrese B: ";
@@ -22,31 +23,25 @@ int main()
 	}
 	else
 	{
-		P = exponente(A,B,C);
-		cout << A << " elevado a " << B << " = " <<P<< endl;
+		C = potencia(A,B,P);
+		cout << A << " elevado a " << B << " = " << C << endl;
 	}
 	return 0;
 }
 
-int  calcularProducto(int a, int b)
+int potencia(int a, int b, int p)
 {
-	int c=0;
-	for(int i=0; i<b;i++)
+	int n = 1;
+	for (int i = 0; i < b; i++)
 	{
-		c+=a;
+		p = 0;
+		for (int j = 0; j < a; j++)
+		{
+			p += n;
+		}
+		n = p;
 	}
-	return c;
+	return p;
 }
 
-int exponente(int a, int b, int c)
-{
-	int ex=0;
-	for(int j=0; j<b;j++)
-	{
-		ex = calcularProducto(a,b);
-		c = calcularProducto(ex,b);
-	}
-	return c;
-}
-
-//3 al cubo : v2(v1(3 * 3) * 3) = v1(3 + 3 + 3) ? v2(9 + 9 + 9) ? v3(27 + 27 + 27)
+// 3 al cubo : v2(v1(3 * 3) * 3) = v1(3 + 3 + 3) ? v2(9 + 9 + 9) ? v3(27 + 27 + 27)
