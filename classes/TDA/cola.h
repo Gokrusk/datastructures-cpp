@@ -14,6 +14,13 @@ class Cola{											//Definicion de clase
 			int getFrente();						//Retorna atributo frente
 			int getFinal();							//Retorna atributo final
 			Tipo getElem(int p);					//Retorna elemento atributo elem
+			void borrarCola();						//Vuelve a inicializar el TDA
+			bool colaVacia();						//Retorna si la cola esta vacia
+			bool colaLlena();						//Retorna si la cola esta lleno
+			int tamanioCola();						//Retorna tamanio cola
+			Tipo extraerVal();						//Extrae y elimina un elemento del TDA
+			void insertarVal(Tipo x);				//Inserta un elemento en el TDA
+			Tipo frenteCola();						//Devuelve elemento del frente de la cola
 };
 
 Cola::Cola()
@@ -45,6 +52,63 @@ Tipo Cola::getElem(int p)
 {
 	return elem[p];
 }
+void Cola::borrarCola()
+{
+	setFrente(0);
+	setFinal(-1);
+}
+
+bool Cola::colaVacia()
+{
+	return (getFinal() < getFrente());
+}
+
+bool Cola::colaLlena()
+{
+	return (getFinal() == EXT-1);
+}
+
+
+int Cola::tamanioCola()
+{
+	return (getFinal() - getFrente() + 1);
+}
+
+Tipo Cola::extraerVal()
+{
+	Tipo x;											//var para contener el valor a devolver
+	if(!colaVacia())
+	{
+		x = getElem(getFrente());
+		setFrente(getFrente()+1);
+		return x;
+	}
+	return x;
+}
+
+void Cola::insertarVal(Tipo x)
+{
+	if(!colaLlena())
+	{
+		setFinal(getFinal()+1);
+		setElem(x,getFinal());
+	}
+}
+
+Tipo Cola::frenteCola()
+{
+	Tipo x;											//var para contener el valor a devolver
+	if(!colaVacia())
+	{
+		x = getElem(getFrente());
+		//return x;
+	}
+	return x;
+}
+
+
+
+
 
 
 
