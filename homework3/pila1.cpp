@@ -7,11 +7,15 @@ using namespace std;
 
 int main()
 {
-    char f;
+    char f[5];
     Pila frase;
     cout << "Ingrese la frase: ";
-
+    cin >> f;
     //Insertar letras mientras escribes, hasta que presione enter.
+    for (int i = 0; i < 5; i++)
+    {
+        cout << f[i] <<endl;
+    }
     
     
 }
