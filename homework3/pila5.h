@@ -1,7 +1,6 @@
 //TDA PILA
-#define EXT 20
-typedef	double Tipo;		//creación de nuevo tipo de datos
-
+#define EXT 3
+typedef	int Tipo;		//creación de nuevo tipo de datos
 class Pila
 {
 	private:			//atributos
@@ -15,7 +14,7 @@ class Pila
 		int getTop();					//retorna el top
 		void limpiarPila();				//vuelve a inicializar la pila
 		bool pilaVacia();				//retorna si pila esta vacia
-		bool pilaLlena();				//retorna si pila esta llena
+		bool pilaLlena();			//retorna si pila esta llena
 		int tamanioPila();				//retorna tamaño pila, cantidad elementos apilados
 		bool push(Tipo x);				//apila valor y devuelve indicador de exito
 		Tipo pop();						//desapila valor y devuelve elemento

@@ -1,6 +1,6 @@
 //TDA PILA
-#define EXT 20
-typedef	double Tipo;		//creación de nuevo tipo de datos
+#define EXT 40
+typedef	char Tipo;		//creación de nuevo tipo de datos
 
 class Pila
 {
