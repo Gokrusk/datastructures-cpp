@@ -10,23 +10,21 @@ using namespace std;
 int main()
 {
     // PROTOTIPOS
-    int lecturaPila(Pila * p);           // Lectura de elementos
-    void imprimirPila(Pila p, int cont); // Impresion de elementos sin desapilar
+    void lecturaPila(Pila * p); // Lectura de elementos
+    void imprimirPila(Pila p); // Impresion de elementos sin desapilar
     Pila a;
-    int cont = 0;
-    cont = lecturaPila(&a);
+    lecturaPila(&a);
     cout << " ELEMENTOS EN PILA " << endl;
-    imprimirPila(a, cont);
+    imprimirPila(a);
     cout << endl
-         << "2. TAMANIO PILA: " << a.tamanioPila() << endl;
+         << " TAMANIO PILA: " << a.tamanioPila() << endl;
     return 0;
     cout << endl;
 }
-int lecturaPila(Pila *p)
+void lecturaPila(Pila *p)
 {
-    double x = 999, d;
-    int cont = 0;
-    Tipo y = EXT * 2;
+    Tipo x = 999, d;
+    int y = 0;
     do
     {
         cout << "Ingrese numero (999 para finalizar): ";
@@ -34,23 +32,13 @@ int lecturaPila(Pila *p)
         if (d != x)
         {
             p->push(d);
-            if (p->pilaLlena())
-            {
-                cout << "Pila llena!" << endl;
-                for (int i = EXT; i < y; i++)
-                {
-                    p->setVec(d, p->getTop() + 1);
-                }
-            }
-            cont++;
         }
     } while (d != x);
-    return cont;
 }
-void imprimirPila(Pila p, int cont)
+void imprimirPila(Pila p)
 {
     cout << "[ ";
-    for (int i = 0; i < cont; i++)
+    for (int i = 0; i <= p.getTop(); i++)
     {
         cout << p.getVec(i) << " ";
     }

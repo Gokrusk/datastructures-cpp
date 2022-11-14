@@ -13,7 +13,7 @@ int main()
     void imprimirPila(Pila p);                       // Impresion de elementos de pila
     int convertEntero(double a);                     // Convertir a entero un numero decimal
     int contarDigitos(int x);                        // Cuenta los digitos de un numero
-    double eliminarElementosCDigitosImpar(Pila * p); // Elimina los elementos con cantidad de digitos impoar
+    void eliminarElementosCDigitosImpar(Pila * p); // Elimina los elementos con cantidad de digitos impoar
     Pila a;
     lecturaNums(&a);
     cout << " ELEMENTOS EN PILA " << endl;
@@ -27,7 +27,7 @@ int main()
 }
 void lecturaNums(Pila *p)
 {
-    double x = 999, d;
+    Tipo x = 999, d;
     do
     {
         cout << "Ingrese numero (999 para finalizar): ";
@@ -69,7 +69,7 @@ int contarDigitos(int x)
     }
     return cont;
 }
-double eliminarElementosCDigitosImpar(Pila *p)
+void eliminarElementosCDigitosImpar(Pila *p)
 {
     Pila b = *p;
     int aux, dig;
@@ -84,5 +84,4 @@ double eliminarElementosCDigitosImpar(Pila *p)
             p->eliminarElementoPila(aux2);
         }
     }
-    return -1;
 }
