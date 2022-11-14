@@ -1,7 +1,7 @@
 // Programa que utilice una pila para determinar si cada una de las frases ingresadas por el usuario
 // es un palíndromo (frase cuya lectura directa e indirecta es igual: ana, alila, etc).
 #include <iostream>
-#include <curses.h>
+// #include <curses.h>                                              //Descomentar si se compila en linux
 #include <cstring>
 using namespace std;
 #include "pila1.h"
@@ -9,11 +9,11 @@ using namespace std;
 int main()
 {
     // PROTOTIPOS
-    void leerFrase(char a[EXT]);                                    //Lectura de frase
-    void apilarFrase(Pila * b, char a[EXT], int tamanio);           //Apilar cada caracter en una pila
-    void imprimirPila(Pila c);                                      //Imrpimir la pila
-    Pila desapilarFrase(Pila a);                                    //Desapilar elementos de <pila a> y apilar en <pila b>
-    bool comprobarPalindromo(Pila a, Pila b, int t);                //Comprobar igualdad
+    void leerFrase(char a[EXT]);                          // Lectura de frase
+    void apilarFrase(Pila * b, char a[EXT], int tamanio); // Apilar cada caracter en una pila
+    void imprimirPila(Pila c);                            // Imrpimir la pila
+    Pila desapilarFrase(Pila a);                          // Desapilar elementos de <pila a> y apilar en <pila b>
+    bool comprobarPalindromo(Pila a, Pila b, int t);      // Comprobar igualdad
     Pila frase, frase2;
     char f[EXT];
     int t = 0, n, i = 0;
@@ -23,19 +23,19 @@ int main()
     while (i < n)
     {
         leerFrase(f);
-        t = strlen(f);                                               //Longitud de cadena
+        t = strlen(f); // Longitud de cadena
         apilarFrase(&frase, f, t);
         imprimirPila(frase);
-        frase2 = desapilarFrase(frase);                              //Desapilar elementos de <pila a> y apilar en <pila b>
-        comp = comprobarPalindromo(frase, frase2, t);                //Comprobacion de igualdad
-        if (comp == true)
+        frase2 = desapilarFrase(frase);               // Desapilar elementos de <pila a> y apilar en <pila b>
+        comp = comprobarPalindromo(frase, frase2, t); // Comprobacion de igualdad
+        if (comp)
         {
             cout << f << " es palindromo" << endl;
         }
         else
             cout << f << " no es palindromo" << endl;
         i++;
-        while(!frase.pilaVacia())
+        while (!frase.pilaVacia())
         {
             frase.pop();
         }
@@ -50,10 +50,10 @@ void leerFrase(char a[EXT])
 }
 void apilarFrase(Pila *b, char a[EXT], int tamanio)
 {
-        for (int i = 0; i < tamanio; i++)
-        {
-            b->push(a[i]);
-        }
+    for (int i = 0; i < tamanio; i++)
+    {
+        b->push(a[i]);
+    }
 }
 void imprimirPila(Pila c)
 {
@@ -67,7 +67,7 @@ void imprimirPila(Pila c)
 Pila desapilarFrase(Pila a)
 {
     Pila b;
-    char aux;
+    Tipo aux;
     while (!a.pilaVacia())
     {
         aux = a.pop();
@@ -78,18 +78,18 @@ Pila desapilarFrase(Pila a)
 bool comprobarPalindromo(Pila a, Pila b, int t)
 {
     Pila c = b;
-    char aux, aux2;
+    Tipo aux, aux2;
     int cont = 0;
     while (!a.pilaVacia())
     {
         aux = a.pop();
         aux2 = b.pop();
-        if (aux == aux2)                                                //Cuenta las igualdades
+        if (aux == aux2) // Cuenta las igualdades
         {
             cont++;
         }
     }
-    if (cont == t)                                                      //Son iguales si la cantidad de igualdades es igual a 
+    if (cont == t) // Son iguales si la cantidad de igualdades es igual a
     {
         return true;
     }

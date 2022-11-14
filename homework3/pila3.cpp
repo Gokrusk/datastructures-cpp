@@ -3,7 +3,7 @@
 // El carácter & es el separador.
 
 #include <iostream>
-#include <curses.h>
+// #include <curses.h>                                              //Descomentar si se compila en linux
 #include <cstring>
 #include "stdio.h"
 using namespace std;
@@ -12,18 +12,25 @@ using namespace std;
 int main()
 {
     // PROTOTIPOS
-    void leerFrase(char a[EXT]);                          // Lectura de frase
-    void apilarFrase(Pila * b, char a[EXT], int tamanio); // Apilar cada caracter en una pila
-    void imprimirPila(Pila c);                            // Imrpimir la pila
-    Pila a,b;
+    void leerFrase(char a[EXT]);                                    // Lectura de frase
+    void apilarFrase(Pila * a, Pila * b, char c[EXT], int tamanio); // Apilar cada caracter en una pila
+    void imprimirPila(Pila c);                                      // Imrpimir la pila
+    bool comprobarInversa(Pila a, Pila b);                          // Comprobar inversa
+    Pila a, b;
     int t = 0;
-    char frase[EXT];
+    bool comp;
+    Tipo frase[EXT];
     leerFrase(frase);
-    t = strlen(frase);                                     //Longitud de cadena
-    //cout<<t<<endl;
-    cout<<frase[7]<<endl;
-    //apilarFrase(&a, frase, t);
-    //imprimirPila(a);
+    t = strlen(frase); // Longitud de cadena
+    apilarFrase(&a, &b, frase, t);
+    imprimirPila(a);
+    imprimirPila(b);
+    comp = comprobarInversa(a, b);
+    if (comp)
+    {
+        cout << "La secuencia es de la forma X & Y" << endl;
+    }else
+        cout << "La secuencia no es de la forma X & Y" << endl;
     return 0;
 }
 
@@ -32,12 +39,58 @@ void leerFrase(char a[EXT])
     cout << "Ingrese la frase: ";
     gets(a);
 }
-void apilarFrase(Pila *b, char a[EXT], int tamanio)
+void apilarFrase(Pila *a, Pila *b, char c[EXT], int tamanio)
 {
-    for (int i = 0; i < tamanio; i++)
+    int x = 0, y = 0;
+    for (int i = 0; i < tamanio; i++) // Encontrar posición de separador
     {
-        b->push(a[i]);
+        if (c[i] == ' ')
+        {
+            x = i;
+        }
     }
+    do // Apilar primera cadena
+    {
+        a->push(c[y]);
+        y++;
+    } while (y < x);
+    y += 1;
+    do // Apilar segunda cadena
+    {
+        b->push(c[y]);
+        y++;
+    } while (y < tamanio);
+}
+bool comprobarInversa(Pila a, Pila b) // Comprobar inversa
+{
+    Pila c;
+    Tipo x;
+    int cont = 0;
+    int t = a.tamanioPila();
+    while(!a.pilaVacia())
+    {
+        c.push(a.pop());
+    }
+    if (c.tamanioPila() == b.tamanioPila())
+    {
+        while (!c.pilaVacia())
+        {
+            x = c.pop();
+            if (x == b.pop())
+            {
+                cont++;
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+    if (cont == t) // Son iguales si la cantidad de igualdades es igual a el tamanio de cadena
+    {
+        return true;
+    }
+    return false;
 }
 void imprimirPila(Pila c)
 {
