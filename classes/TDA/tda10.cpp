@@ -9,7 +9,8 @@ int main()
     // PROTOTIPOS
     void ingresarCola(Cola * a, Tipo x, Tipo fin); // Funcion para insertar valores en la cola
     void imprimirElementos(Cola a);                // Funcion para imprimir valores de la cola
-    void eliminarElementosRepetidos(Cola * a);     // Funcion para eliminar elementos repetidos
+    bool revisarRepetidos(Cola a, Tipo x);
+    void eliminarElementosRepetidos(Cola * a); // Funcion para eliminar elementos repetidos
 
     Cola c; // Instancia del TDA Cola
     Tipo val = 0, fin = 999;
@@ -26,7 +27,7 @@ int main()
     eliminarElementosRepetidos(&c);
     cout << " ELEMENTOS IN QUEUE " << endl;
     cout << "[ ";
-    // imprimirElementos(c);
+    imprimirElementos(c);
     cout << "]" << endl;
     system("pause");
 }
@@ -50,6 +51,24 @@ void imprimirElementos(Cola a)
         imprimirElementos(a);
     }
 }
+bool revisarRepetidos(Cola a, Tipo x)
+{
+    int cont = 0;
+    Tipo aux;
+    while (!a.colaVacia())
+    {
+        aux = a.extraerVal();
+        if (x == aux)
+        {
+            cont++;
+        }
+    }
+    if (cont > 1)
+    {
+        return true;
+    }
+    return false;
+}
 void eliminarElementosRepetidos(Cola *a) // Funcion para eliminar elementos repetidos
 {
     Cola b, c;
@@ -57,38 +76,27 @@ void eliminarElementosRepetidos(Cola *a) // Funcion para eliminar elementos repe
     int cont;
     //b = *a;
     c = *a;
-    while (!c.colaVacia())
+    do
     {
-        b = *a;
-        x = c.extraerVal();
-        while (!b.colaVacia())
+        while (!c.colaVacia())
         {
-        cont = 0;
-            aux = b.extraerVal();
-            if (x == aux)
+            b = *a;
+            aux = c.extraerVal();
+            if (revisarRepetidos(b, aux))
             {
-                cont++;
-                cout<<aux<<endl;
+                while (!a->colaVacia())
+                {
+                    a->extraerVal();
+                }
+                while (!b.colaVacia())
+                {
+                    aux2 = b.extraerVal();
+                    if (aux2 != aux)
+                    {
+                        a->insertarVal(aux2);
+                    }
+                }
             }
         }
-    }
-    //cout<<cont<<endl;
-    if (cont > 1)
-    {
-        aux2 = aux;
-    }
-    cout << aux2 << endl;
-    // while (!a->colaVacia())
-    // {
-    //     a->extraerVal();
-    // }
-    // b = c;
-    // while (!a->colaLlena())
-    // {
-    //     aux = b.extraerVal();
-    //     if (aux != aux2)
-    //     {
-    //         a->insertarVal(aux);
-    //     }
-    // }
+    } while (revisarRepetidos(b, aux));
 }
