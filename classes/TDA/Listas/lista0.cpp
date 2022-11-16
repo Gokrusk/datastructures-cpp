@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    Nodo n;
-    
+    Nodo n;                                         //Declaracion de objeto de tipo nodo
+    n.setDato(15);
     return 0;
 }
