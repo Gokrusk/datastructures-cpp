@@ -7,13 +7,12 @@ int main()
     //PROTOTIPOS
     void leerDatoNodo(Nodo *a);                                 //funcion que permite ingreso de dato para un nodo
     void imprimirNodo(Nodo a);                                  //funcion que permite visualizar los valores almacenados en un nodo
-    Nodo n;
-    Nodo n1(100,&n); // Declaracion de objeto de tipo nodo
+    Nodo n2;
+    Nodo n1(100,&n2); // Declaracion de objeto de tipo nodo
     Tipo aux;
-    leerDatoNodo(&n);
-    //leerDatoNodo(&n1);
-    imprimirNodo(n);
+    leerDatoNodo(&n2);
     imprimirNodo(n1);
+    imprimirNodo(n2);
     
     return 0;
 }

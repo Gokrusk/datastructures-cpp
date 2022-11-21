@@ -36,6 +36,6 @@ void imprimirElementos(ColaCircular a)
     if (!a.colaVacia())
     {
         cout << a.extraerVal() << " ";
-        imprimirElementos(a);zzzzzz
+        imprimirElementos(a);
     }
 }
