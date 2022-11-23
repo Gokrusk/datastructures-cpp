@@ -10,9 +10,10 @@ public:                              // metodos
     Lista();                         // constructor
     void setPrimero(Nodo *x);        // actualizar el estado del atributo primero
     void insertarNodoInicio(Tipo x); // inserta un nuevo valor como primer nodo de la lista
-    Nodo *ultimoNodo(); //devuelve la direccion del ultimo nodo
-    void anular();  // metodo que vuelve a inicializar una lista
-    bool esVacia(); // devuelve la lista esta vacia
+    void insertarNodoFinal(Tipo x);  // inserta un nuevo valor como ultimo nodo de la lista
+    Nodo *ultimoNodo();              // devuelve la direccion del ultimo nodo
+    void anular();                   // metodo que vuelve a inicializar una lista
+    bool esVacia();                  // devuelve la lista esta vacia
     Nodo *getPrimero();
 };
 
@@ -36,6 +37,21 @@ void Lista::insertarNodoInicio(Tipo x)
     Nodo *nuevo; //  var para almacenar direccion de memoria de nuevos nodos a crear
     nuevo = new Nodo(x, getPrimero());
     setPrimero(nuevo);
+}
+void Lista::insertarNodoFinal(Tipo x)
+{
+    Nodo *nuevo, //  var para almacenar direccion de memoria de nuevos nodos a crear
+        *ultimo; // var para almacenar direccion de memoria del ultimo nodo de la lista
+    nuevo = new Nodo(x);
+    if (esVacia()) // la lista no tiene nodos
+    {
+        setPrimero(nuevo); // el apuntador primero apunte a nuevo
+    }
+    else
+    {                          // sino que el ultimo nodo apunte al nuevo nodo
+        ultimo = ultimoNodo(); // asigna la direccion de memoria del ultimo nodo
+        ultimo->setPunt(nuevo);
+    }
 }
 
 bool Lista::esVacia() // devuelve la lista esta vacia

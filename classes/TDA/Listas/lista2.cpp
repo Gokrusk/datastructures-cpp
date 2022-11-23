@@ -1,25 +1,19 @@
+//Programa que permite insertar elementos al final de una lista
 #include "lista.h"
 using namespace std;
 
 int main()
 {
-    void imprimirLista(Lista a); // presenta los valores contenidos en los nodos de una lista
+    //PROTOTIPOS
     void leerLista(Lista * a);   // insertar datos en una lista
-    Lista l;                     // creacion del objeto lista
-    cout << endl
-         << "La lista " << (l.esVacia() ? "si " : "no ") << " esta vacia" << endl;
+    void imprimirLista(Lista a); // presenta los valores contenidos en los nodos de una lista
+    Lista l;
     leerLista(&l);
-    cout << endl
-         << "La lista " << (l.esVacia() ? "si " : "no ") << " esta vacia" << endl;
     imprimirLista(l);
     cout << "Primer valor contenido en la lista es: " << l.getPrimero()->getDato() << endl;
     cout << "Ultimo valor contenido en la lista es: " << l.ultimoNodo()->getDato() << endl;
-    l.anular();
-    cout << endl
-         << "La lista " << (l.esVacia() ? "si " : "no ") << " esta vacia" << endl;
     return 0;
 }
-
 void leerLista(Lista *a) // insertar datos en una lista
 {
     Tipo x, fin = 999;
@@ -29,7 +23,7 @@ void leerLista(Lista *a) // insertar datos en una lista
         cin >> x;
         if (x != fin)
         {
-            a->insertarNodoInicio(x);
+            a->insertarNodoFinal(x);
         }
     } while (x != fin);
 }
