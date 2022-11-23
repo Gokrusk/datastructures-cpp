@@ -1,6 +1,7 @@
 // ARCHIVO DE CABECERA QUE CONTIENE LA IMPLEMENTACION DEL TDA LISTA
 #include "nodo.h" //inclusion de la definicion de nodos
 #include <iostream>
+using namespace std;
 
 class Lista // definicion del TDA Lista
 {
@@ -11,6 +12,8 @@ public:                              // metodos
     void setPrimero(Nodo *x);        // actualizar el estado del atributo primero
     void insertarNodoInicio(Tipo x); // inserta un nuevo valor como primer nodo de la lista
     void insertarNodoFinal(Tipo x);  // inserta un nuevo valor como ultimo nodo de la lista
+    Nodo *buscarElemento(Tipo x);    // metodo que indica si un valor existe en la lista
+    void eliminarNodo(Tipo x);       // metodo que elimina un nodo de la lista
     Nodo *ultimoNodo();              // devuelve la direccion del ultimo nodo
     void anular();                   // metodo que vuelve a inicializar una lista
     bool esVacia();                  // devuelve la lista esta vacia
@@ -74,4 +77,26 @@ Nodo *Lista::ultimoNodo()
         actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
     }
     return actual;
+}
+
+Nodo *Lista::buscarElemento(Tipo x) // metodo que indica si un valor existe en la lista
+{
+    Nodo *actual;                                    // referencia a nodo actual de la lista
+    actual = getPrimero();                           // almacena temporalmente la posicion del primer nodo
+    while (actual != NULL && actual->getDato() != x) // repetir mientras no se alcance el final de la lista
+    {
+        actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
+    }
+    return actual;
+}
+
+void Lista::eliminarNodo(Tipo x)       // metodo que elimina un nodo de la lista
+{
+    Nodo *pos;                          //apuntador a la direccion del nodo que contiene el valor a eliminar
+    pos = buscarElemento(x);
+    if(pos != NULL)
+    {
+        cout<<"Eliminando...";
+        
+    }
 }
