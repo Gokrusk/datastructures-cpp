@@ -17,10 +17,16 @@ int main()
     Pila p;
     Tipo val;
     ingresarCola(&c);
+    cout << endl
+         << " COLA INGRESADA " << endl;
     imprimirCola(c);
     cout << endl;
     buscarPares(c, &b, p);
+    cout << " PARES INVERTIDOS " << endl;
+    imprimirCola(b);
     insertarParesInvertidos(&c, &b);
+    cout << endl
+         << " COLA CON PARES INVERTIDOS " << endl;
     imprimirCola(c);
 }
 
