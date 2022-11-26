@@ -28,6 +28,7 @@ int main()
     cout << endl
          << " COLAS FUSIONADAS " << endl;
     fusionarColas(a, b, &c);
+    ordernarCola(&c);
     imprimirCola(c);
     cout << endl;
     return 0;
@@ -117,5 +118,5 @@ void fusionarColas(Cola a, Cola b, Cola *c) // metodo para fusionar colas
 
 void ordernarCola(Cola *a) // metodo para ordenar elementos de cola
 {
-    cout << endl;
+    
 }
