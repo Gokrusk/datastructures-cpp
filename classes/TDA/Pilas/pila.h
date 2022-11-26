@@ -20,7 +20,7 @@ class Pila
 		bool push(Tipo x);				//apila valor y devuelve indicador de exito
 		Tipo pop();						//desapila valor y devuelve elemento
 		Tipo cimaPila();				//retorna valor de la cima de pila
-		void eliminarElementoPila(int x); 	//elimina un elemento de la pila
+		void eliminarElementoPila(Tipo x); 	//elimina un elemento de la pila
 };
 Pila::Pila()
 {
