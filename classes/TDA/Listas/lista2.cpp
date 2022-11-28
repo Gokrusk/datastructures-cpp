@@ -8,6 +8,7 @@ int main()
     void leerLista(Lista * a);     // insertar datos en una lista
     void imprimirLista(Lista a);   // presenta los valores contenidos en los nodos de una lista
     void eliminarValor(Lista a); // eliminar valor de una lista
+    void insertarUnValorEnLista(Lista a);	//funcion que inserta un elemento en medio de una lista
     Lista l;
     Tipo x;
     leerLista(&l);
@@ -17,7 +18,12 @@ int main()
     cout << "Valor a buscar: ";
     cin >> x;
     cout << "El valor " << (l.buscarElemento(x) != NULL ? "si existe" : "no existe") << " en la lista" << endl;
-    eliminarValor(l);
+    cout<< "Ingrese valor a eliminar: ";
+    cin>>x;
+    l.eliminarNodo(x);
+    imprimirLista(l);
+    insertarUnValorEnLista(l);
+    imprimirLista(l);
     return 0;
 }
 void leerLista(Lista *a) // insertar datos en una lista
@@ -54,4 +60,16 @@ void eliminarValor(Lista a) // eliminar valor de una lista
     cout<<"Ingrese valor para eliminar: ";
     cin>>x;
     a.eliminarNodo(x);
+}
+
+void insertarUnValorEnLista(Lista a)	//funcion que inserta un elemento en medio de una lista
+{
+    Tipo x, ant;						//var de lectura
+	
+	cout << endl << "INSERTAR UN VALOR EN MEDIO DE UNA LISTA";
+	cout << endl << "Ingrese el valor a insertar: ";
+	cin >> x;
+	cout << endl << "Ingrese el valor anterior al valor a insertar: ";
+	cin >> ant;
+	a.insertarUnNodo(x,a.buscarElemento(ant));	
 }
