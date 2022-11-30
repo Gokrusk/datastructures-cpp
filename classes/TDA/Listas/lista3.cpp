@@ -9,7 +9,6 @@ int main()
     void imprimirLista(Lista a);                  // presenta los valores contenidos en los nodos de una lista
     void nElementosRepetidos(Lista a, Lista * c); // indica la cantidad de elementos repetidos
     Lista l, m;
-    Tipo x;
     leerLista(&l);
     imprimirLista(l);
     nElementosRepetidos(l, &m);
