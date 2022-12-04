@@ -1,0 +1,1 @@
+// Eliminar N nodos a partir de una posición específica de la lista.
