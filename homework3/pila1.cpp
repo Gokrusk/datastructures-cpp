@@ -2,6 +2,8 @@
 // es un palíndromo (frase cuya lectura directa e indirecta es igual: ana, alila, etc).
 #include <iostream>
 // #include <curses.h>                                              //Descomentar si se compila en linux
+#include <string.h>
+#include<conio.h>
 #include <cstring>
 using namespace std;
 #include "pila1.h"
@@ -46,7 +48,7 @@ int main()
 void leerFrase(char a[EXT])
 {
     cout << "Ingrese la frase: ";
-    cin >> a;
+    cin.getline(a,EXT,'\n');
 }
 void apilarFrase(Pila *b, char a[EXT], int tamanio)
 {
