@@ -11,10 +11,10 @@ using namespace std;
 int main()
 {
     // PROTOTIPOS
-    void leerFrase(char a[EXT]);                              // Lectura de frase
-    void separarPalabras(char a[EXT], int tamanio, Lista *l); // separa las palabras de la frase y las guarda en una lista alfabeticamente
-    void imprimirPalabras(Lista l);                           // imprime las palabras de la lista
-    void imprimirPalabras2(Lista l[]);                        // imprime las palabras de la lista
+    void leerFrase(char a[EXT]);                                   // Lectura de frase
+    void separarPalabras(char a[EXT], int tamanio, Lista *l);      // separa las palabras de la frase y las guarda en una lista alfabeticamente
+    void imprimirPalabras(Lista l);                                // imprime las palabras de la lista
+    void imprimirPalabras2(Lista l[]);                             // imprime las palabras de la lista
     void formarListasAlfabeticas(Lista l, Lista1 alfb, Lista m[]); // genera las listas de palabras por inicial
     void inicialesListasAlfabeticas(Lista m[], Lista1 alfb);       // crea listas con cada letra del abecedario
     int contarElementosLista(Lista l);                             // cuenta elementos de la lista
@@ -107,6 +107,7 @@ int contarElementosLista(Lista l) // cuenta elementos de la lista
 void imprimirPalabras2(Lista a[])
 {
     string s, t;
+    bool flag = false;
     cout << "De que letra inicial desea conocer las palabras: ";
     cin >> s;
     // recorrido de la lista
@@ -124,16 +125,16 @@ void imprimirPalabras2(Lista a[])
             actual = actual->getPunt(); // para no imprimir las letras iniciales
             while (actual != NULL)      // repetir mientras no se alcance el final de la lista
             {
-                cout << "> " << actual->getDato() << endl;  //muestra las palabras
-                actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
+                cout << "> " << actual->getDato() << endl; // muestra las palabras
+                actual = actual->getPunt();                // desplaza el puntero actual al siguiente nodo de la lista
             }
             cout << endl;
+            flag = true;
         }
-        else
-        {
-            cout << "No hay palabras con esa inicial" << endl;
-            break;
-        }
+    }
+    if(!flag)
+    {
+        cout<<"No se encontraron palabras con esa inicial"<<endl;
     }
 }
 
