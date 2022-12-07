@@ -108,6 +108,7 @@ int contarElementosLista(Lista l) // cuenta elementos de la lista
 void imprimirPalabras2(Lista a[])
 {
     string s, t;
+    bool flag = false;
     cout << "De que letra inicial desea conocer las palabras: ";
     cin >> s;
     // recorrido de la lista
@@ -120,21 +121,21 @@ void imprimirPalabras2(Lista a[])
         t = a[i].getPrimero()->getDato();
         if (t == s && contarElementosLista(a[i]) > 1) // si la letra inicial coincide y tiene mas de un elemento (elemento 1 es letra inicial)
         {
-            cout << "Lista " << i << endl;
             actual = a[i].getPrimero(); // almacena temporalmente la posicion del primer nodo
             actual = actual->getPunt(); // para no imprimir las letras iniciales
             while (actual != NULL)      // repetir mientras no se alcance el final de la lista
             {
-                cout << "> " << actual->getDato() << endl;  //muestra las palabras
-                actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
+                cout << "> " << actual->getDato() << endl; // muestra las palabras
+                actual = actual->getPunt();                // desplaza el puntero actual al siguiente nodo de la lista
             }
             cout << endl;
+            flag = true;
         }
-        else
-        {
-            cout << "No hay palabras con esa inicial" << endl;
-            break;
-        }
+    }
+    if(!flag)
+    {
+        cout<<"No se encontraron palabras con esa inicial"<<endl;
+    }
     }
 
     // for (int i = 0; i <= 51; i++)
