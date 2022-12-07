@@ -120,7 +120,6 @@ void imprimirPalabras2(Lista a[])
         t = a[i].getPrimero()->getDato();
         if (t == s && contarElementosLista(a[i]) > 1) // si la letra inicial coincide y tiene mas de un elemento (elemento 1 es letra inicial)
         {
-            cout << "Lista " << i << endl;
             actual = a[i].getPrimero(); // almacena temporalmente la posicion del primer nodo
             actual = actual->getPunt(); // para no imprimir las letras iniciales
             while (actual != NULL)      // repetir mientras no se alcance el final de la lista
