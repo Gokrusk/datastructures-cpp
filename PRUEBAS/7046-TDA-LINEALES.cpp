@@ -15,6 +15,7 @@ int main()
     void separarPalabras(char a[EXT], int tamanio, Lista *l); // separa las palabras de la frase y las guarda en una lista alfabeticamente
     void imprimirPalabras(Lista l);                           // imprime las palabras de la lista
     void imprimirPalabras2(Lista l[]);                        // imprime las palabras de la lista
+    // void imprimirPalabras3(Lista1 l);                              // imprime las palabras de la lista
     void formarListasAlfabeticas(Lista l, Lista1 alfb, Lista m[]); // genera las listas de palabras por inicial
     void inicialesListasAlfabeticas(Lista m[], Lista1 alfb);       // crea listas con cada letra del abecedario
     int contarElementosLista(Lista l);                             // cuenta elementos de la lista
@@ -135,7 +136,48 @@ void imprimirPalabras2(Lista a[])
             break;
         }
     }
+
+    // for (int i = 0; i <= 51; i++)
+    // {
+    //     if (!a[i].esVacia() && contarElementosLista(a[i]) > 1) // si no esta vacia y tiene mas de un elemento, (el primer elemento es la letra inicial)
+    //     {
+    //         cout << "Lista " << i << endl;
+    //         actual = a[i].getPrimero(); // almacena temporalmente la posicion del primer nodo
+    //         actual = actual->getPunt(); // para no imprimir las letras iniciales
+    //         while (actual != NULL)      // repetir mientras no se alcance el final de la lista
+    //         {
+    //             cout << "> " << actual->getDato() << endl;
+    //             actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
+    //         }
+    //         cout << endl;
+    //     }
+    // }
 }
+
+// void imprimirPalabras3(Lista1 a)
+// {
+//     // recorrido de la lista
+//     Nodo1 *actual; // referencia a nodo actual de la lista
+//     cout << endl
+//          << " PALABRAS ALMACENADAS EN LA LISTA " << endl;
+//     actual = a.getPrimero(); // almacena temporalmente la posicion del primer nodo
+//     while (actual != NULL)   // repetir mientras no se alcance el final de la lista
+//     {
+//         cout << "> " << actual->getDato() << endl;
+//         actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
+//     }
+//     cout << endl;
+// }
+
+// int convertToASCII(string s)
+// {
+//     int x;
+//     for (int i = 0; i < s.length(); i++)
+//     {
+//         x = (int)s[i];
+//     }
+//     return x;
+// }
 
 string convertToString(int x)
 {
