@@ -13,6 +13,8 @@ private:
 
 public:
     NodoBinario();
+    NodoBinario(Tipo v);
+    NodoBinario(Tipo v, NodoBinario* i, NodoBinario *d);
     void setDato(Tipo v);                 // metodo que actualiza el atributo dato
     void setNodoBinarioI(NodoBinario *v); // metodo que actualiza atributo de nodo izquierdo
     void setNodoBinarioD(NodoBinario *v); // metodo que actualiza atributo de nodo derecho
@@ -25,6 +27,18 @@ NodoBinario::NodoBinario()
 {
     setNodoBinarioI(NULL);
     setNodoBinarioD(NULL);
+}
+NodoBinario::NodoBinario(Tipo v)
+{
+    setDato(v);
+    setNodoBinarioI(NULL);
+    setNodoBinarioD(NULL);
+}
+NodoBinario::NodoBinario(Tipo v, NodoBinario* i, NodoBinario *d)
+{
+    setDato(v);
+    setNodoBinarioI(i);
+    setNodoBinarioD(d);
 }
 void NodoBinario::setDato(Tipo v) // metodo que actualiza el atributo dato
 {

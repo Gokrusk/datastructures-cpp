@@ -2,6 +2,7 @@
 #ifndef _ARBOL_BINARIO_H
 #define _ARBOL_BINARIO_H
 #include "nodobinario.h" //aceder a metodos de nodos
+using namespace std;
 
 class ArbolBinario
 {
@@ -13,6 +14,7 @@ public:
     NodoBinario *getRaiz();           // metodo que devuelve el atributo nodo raiz
     bool esVacio();                   // metodo que determina si el arbol binario carece de nodos
     NodoBinario *construirAB(Tipo d, NodoBinario *izq, NodoBinario *der);
+    void imprimirArbol(NodoBinario *p); // metodo que imprime un arbol
 };
 
 ArbolBinario::ArbolBinario() // constructor
@@ -34,5 +36,15 @@ bool ArbolBinario::esVacio()
 NodoBinario *ArbolBinario::construirAB(Tipo d, NodoBinario *izq, NodoBinario *der)
 {
     return new NodoBinario(d,izq,der);  // construye un nuevo nodo con los parametros y devuelve
+}
+void ArbolBinario::imprimirArbol(NodoBinario *p)    // metodo que imprime un arbol
+{
+    if (p != NULL)
+    {
+        cout << " > " << p->getDato() << endl;
+        imprimirArbol(p->getIzq());
+        imprimirArbol(p->getDer());
+    }
+    return;
 }
 #endif
