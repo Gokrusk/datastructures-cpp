@@ -15,6 +15,7 @@ public:
     bool esVacio();                   // metodo que determina si el arbol binario carece de nodos
     NodoBinario *construirAB(Tipo d, NodoBinario *izq, NodoBinario *der);
     void imprimirArbol(NodoBinario *p); // metodo que imprime un arbol
+    int contarNodos(NodoBinario *p);
 };
 
 ArbolBinario::ArbolBinario() // constructor
@@ -35,9 +36,9 @@ bool ArbolBinario::esVacio()
 }
 NodoBinario *ArbolBinario::construirAB(Tipo d, NodoBinario *izq, NodoBinario *der)
 {
-    return new NodoBinario(d,izq,der);  // construye un nuevo nodo con los parametros y devuelve
+    return new NodoBinario(d, izq, der); // construye un nuevo nodo con los parametros y devuelve
 }
-void ArbolBinario::imprimirArbol(NodoBinario *p)    // metodo que imprime un arbol
+void ArbolBinario::imprimirArbol(NodoBinario *p) // metodo que imprime un arbol
 {
     if (p != NULL)
     {
@@ -46,5 +47,15 @@ void ArbolBinario::imprimirArbol(NodoBinario *p)    // metodo que imprime un arb
         imprimirArbol(p->getDer());
     }
     return;
+}
+int ArbolBinario::contarNodos(NodoBinario *p)
+{
+    if (p != NULL)
+    {
+        return 1 + contarNodos(p->getIzq());
+        return 1 + contarNodos(p->getDer());
+    }
+    else
+        return 0;
 }
 #endif
