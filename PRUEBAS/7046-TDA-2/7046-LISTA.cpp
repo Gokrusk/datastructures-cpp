@@ -122,38 +122,36 @@ void alterarLista(Lista *a, int x) // altera el orden de los elementos de la lis
     Nodo *actual, *actual1;
     int cont = 0, cont1 = 0, aux = x;
     actual = a->getPrimero();
-    while (actual != NULL && cont <= x)
+    while (actual != NULL && cont <= x) //mientras no se llegue al final de la lista y cont no llegue al total de elementos
     {
-        if(aux >= 3)
+        if(aux >= 3)    // mientras la cantidad de elementos sea mayor igual a 3 
         {
             cont1 = cont + 3;
         }else{
-            cont1 = cont + aux;
+            cont1 = cont + aux; // sino se suma la cantidad disponible
         }
         while (cont < cont1)
         {
-            b.insertarNodoFinal(actual->getDato());
-            a->eliminarNodo(actual->getDato());
+            b.insertarNodoFinal(actual->getDato()); //inserta 3 o los elementos disponibles
             cont++;
             aux--;
             actual = actual->getPunt();
         }
-        if(aux >= 3)
+        if(aux >= 3)    // mientras la cantidad de elementos sea mayor igual a 3 
         {
             cont1 = cont + 3;
         }else{
-            cont1 = cont + aux;
+            cont1 = cont + aux; // sino se suma la cantidad disponible
         }
-        while (cont < cont1)
+        while (cont < cont1)    // lista auxiliar para insertar de forma descendente
         {
-            c.insertarNodoInicio(actual->getDato());
-            a->eliminarNodo(actual->getDato());
+            c.insertarNodoInicio(actual->getDato());    //inserta 3 o los elementos disponibles
             cont++;
             aux--;
             actual = actual->getPunt();
         }
         actual1 = c.getPrimero();
-        while (actual1 != NULL)
+        while (actual1 != NULL) // inserta los elementos de la lista auxiliar en la lista que se esta usando
         {
             b.insertarNodoFinal(actual1->getDato());
             actual1 = actual1->getPunt();
