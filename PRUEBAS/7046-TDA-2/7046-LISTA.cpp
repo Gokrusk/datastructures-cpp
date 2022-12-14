@@ -73,49 +73,6 @@ void ordenarLista(Lista *a)
     *a = b; // reasigna a lista principal
 }
 
-// void alterarLista(Lista *a, int x) // altera el orden de los elementos de la lista
-// {
-//     Lista b, c, d;
-//     Nodo *actual, *actual1;
-//     int cont = 0, cont1 = 0;
-//     actual = a->getPrimero();
-//     while (actual != NULL && cont <= x)
-//     {
-
-//         cont1 = cont + 3;
-
-//         while (cont < cont1)
-//         {
-//             b.insertarNodoFinal(actual->getDato());
-//             a->eliminarNodo(actual->getDato());
-//             cont++;
-//             actual = actual->getPunt();
-//         }
-
-//         cont1 = cont + 3;
-
-//         while (cont < cont1)
-//         {
-//             c.insertarNodoInicio(actual->getDato());
-//             a->eliminarNodo(actual->getDato());
-//             cont++;
-
-//             actual = actual->getPunt();
-//         }
-//         actual1 = c.getPrimero();
-
-//         cont1 = cont + 3;
-
-//         while (cont < cont1)
-//         {
-//             b.insertarNodoFinal(actual1->getDato());
-//             cont++;
-//             actual1 = actual1->getPunt();
-//         }
-//         c = d;
-//     }
-//     *a = b; // reasigna a lista principal
-// }
 void alterarLista(Lista *a, int x) // altera el orden de los elementos de la lista
 {
     Lista b,c, d;
