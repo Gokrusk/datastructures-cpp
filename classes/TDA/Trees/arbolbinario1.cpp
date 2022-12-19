@@ -1,7 +1,7 @@
 // Implementa un arbol binario basico
 #include <iostream>
 using namespace std;
-#include "arbolbinario.h"
+#include "arbolbinario2.h"
 
 int main()
 {
