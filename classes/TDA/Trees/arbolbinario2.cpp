@@ -4,7 +4,6 @@
 #include "ArbolBinario.h"
 
 int main(){					//programa principal
-	system("color f0");
 	ArbolBinario a;			//declara un Arbol binario
 	
 	void leerAB(ArbolBinario *b);			//prototipo de funcion ingreso AB
@@ -13,19 +12,33 @@ int main(){					//programa principal
 	void verHojasAB(ArbolBinario a);		//visualizar los nodos hoja del Ab
 	void recorrerAB(ArbolBinario a);		//protipo de la funcion que implementa los diversos recorridos de un AB
 	void buscarNodoEnABB(ArbolBinario a);	//prototipo de la funcion que realiza la busqueda de un nodo en un ABB
+	void arbolEquilibrado(ArbolBinario a);
 	
 	leerAB(&a);								//llamado a funcion de ingreso AB
 	verDatosAB(a);							//llamado a impresion datos generales AB
 	imprimirAB(a);							//llamado a funcion que imprime un AB
 	verHojasAB(a);							//llamado a impresion de nodos hoja del AB
-	recorrerAB(a);							//llamado a recorrido del AB
-	buscarNodoEnABB(a);						//llamado a la funcion que realiza la busqueda de un nodo en un ABB
+	arbolEquilibrado(a);
+	// recorrerAB(a);							//llamado a recorrido del AB
+	// buscarNodoEnABB(a);						//llamado a la funcion que realiza la busqueda de un nodo en un ABB
 	
 	cout << endl;
 	system("pause");
 }
 
 //==================================================================================================
+
+void arbolEquilibrado(ArbolBinario a)
+{
+	cout<<endl;
+	int cizq = a.contarNodos(a.getRaiz()->getIzq());
+	int cder = a.contarNodos(a.getRaiz()->getDer());
+	if(cizq == cder)
+	{
+		cout<<"Arbol equilibrado"<<endl;
+	}else
+		cout<<"Arbol no equilibrado"<<endl;
+}
 
 void leerAB(ArbolBinario *b){
 	cout << endl << "LECTURA DE ARBOL BINARIO" << endl << endl;

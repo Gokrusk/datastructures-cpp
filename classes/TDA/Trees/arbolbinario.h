@@ -4,7 +4,7 @@
 #ifndef _ARBOL_BINARIO_H
 #define _ARBOL_BINARIO_H
 
-#include "NodoBinario.h"				//acceder a metodos de nodos
+#include "nodobinario.h"				//acceder a metodos de nodos
 using namespace std;					//permite acceder a consola
 
 class ArbolBinario{						//definicion de la clase
@@ -35,10 +35,10 @@ private:								//atributos
 		   p = construirAB(aux, NULL, NULL);  	//construye nuevo nodo solo con dato
 		   imprimirEsp(margen);			//imprimir espacios
 		   cout << "--- SUBARBOL IZQUIERDO ---";
-		   p -> setIzq(leerNodo(margen+1)) ;	//puntero izq recibe direccion nuevo nodo ingresado
+		   p -> setNodoBinarioI(leerNodo(margen+1)) ;	//puntero izq recibe direccion nuevo nodo ingresado
 		   imprimirEsp(margen);			//imprimir espacios
 		   cout << "--- SUBARBOL DERECHO ---";
-		   p -> setDer(leerNodo(margen+1)) ;	//puntero der recive direccion nuevo nodo ingresado
+		   p -> setNodoBinarioD(leerNodo(margen+1)) ;	//puntero der recive direccion nuevo nodo ingresado
 		   return p;					//devuelve direccion nuevo nodo creado
 		} else {						//ingreso marcador final de lectura
 			return NULL;				//no se creo el nodo
@@ -47,7 +47,7 @@ private:								//atributos
 
 //==================================================================================================
 
-	void preorden(NodoBinario *r) {		//implementa Recorrido de un árbol binario en preorden
+	void preorden(NodoBinario *r) {		//implementa Recorrido de un ï¿½rbol binario en preorden
 		if (r != NULL) {
 			cout << " " << r->getDato();
 			preorden (r->getIzq());
@@ -57,7 +57,7 @@ private:								//atributos
 
 //==================================================================================================
 
-	void inorden(NodoBinario *r) {		//implementa Recorrido de un árbol binario en inorden
+	void inorden(NodoBinario *r) {		//implementa Recorrido de un ï¿½rbol binario en inorden
 		if (r != NULL) {
 			inorden (r->getIzq());
 			cout << " " << r->getDato();
@@ -67,7 +67,7 @@ private:								//atributos
 
 //==================================================================================================
 
-	void postorden(NodoBinario *r) {	//implementa Recorrido de un árbol binario en postorden
+	void postorden(NodoBinario *r) {	//implementa Recorrido de un ï¿½rbol binario en postorden
 		if (r != NULL) 	{
 			postorden (r->getIzq());
 			postorden (r->getDer());
@@ -77,19 +77,19 @@ private:								//atributos
 
 //==================================================================================================
 
-	NodoBinario* insertar(NodoBinario* rSub, Tipo v) {		//implementa la inserción de un nodo en AB
+	NodoBinario* insertar(NodoBinario* rSub, Tipo v) {		//implementa la inserciï¿½n de un nodo en AB
 		if (rSub == NULL) {									//no hay nodos en arbol
 			rSub = new NodoBinario(v);						//crea nuevo nodo y lo apunta desde rsub
 		} else {											//si hay nodos en el arbol
 			if (v < rSub->getDato()) {						//valor a insertar es menor que valor del nodo actual
 				NodoBinario* iz = insertar(rSub->getIzq(), v);	//tratar de insertar a la izq del nodo actual
-				rSub->setIzq(iz);							//actualiza apuntador
+				rSub->setNodoBinarioI(iz);							//actualiza apuntador
 			} else {										//valor a insertar no es menor que valor nodo actual
 				if (v > rSub->getDato()) {					//valor a insertar es mayor que valor nodo actual
 					NodoBinario* dr = insertar(rSub->getDer(), v);	//tratar de insertar a derecha del nodo actual
-					rSub->setDer(dr);						//actualiza apuntador
+					rSub->setNodoBinarioD(dr);						//actualiza apuntador
 				} else {									//valor a insertar ya existe en arbol
-					return NULL; 							//Nodo duplicado tratamiento de repetición
+					return NULL; 							//Nodo duplicado tratamiento de repeticiï¿½n
 				}			
 			} 
 		} 
@@ -104,13 +104,13 @@ private:								//atributos
 		} else {											//arbol si tiene nodos
 			if (v < rSub->getDato()){						//valor buscado es menor que valor de nodo actual
 				NodoBinario* iz = eliminar(rSub->getIzq(), v);	//tratar de eliminar en subarbol izquierdo
-				rSub->setIzq(iz);							//actualiza rama izq del nodo raiz
+				rSub->setNodoBinarioI(iz);							//actualiza rama izq del nodo raiz
 			} else {										//valor buscado no es menor que valor nodo actual
 				if (v > rSub->getDato()){					//valor buscado es mayor que valor del nodo actual
 					NodoBinario* dr = eliminar(rSub->getDer(), v);	//tratar de eliminar en subarbol derecho
-					rSub->setDer(dr);						//actualiza rama derecha del nodo raiz
+					rSub->setNodoBinarioD(dr);						//actualiza rama derecha del nodo raiz
 				} else { 									//Nodo encontrado con valor buscado
-					NodoBinario* q = rSub; 					// nodo a quitar del árbol
+					NodoBinario* q = rSub; 					// nodo a quitar del ï¿½rbol
 					if (q->getIzq() == NULL) {				//ramal izquierdo de este nodo es NULL
 						rSub = q->getDer(); 				//se toma ramal derecho
 					} else {								//si hay nodo apuntado en ramal izquierdo
@@ -129,7 +129,7 @@ private:								//atributos
 
 //==================================================================================================
 
-	NodoBinario* reemplazar(NodoBinario* act) {				//sustituye un nodo por otro en AB (parte de eliminación)
+	NodoBinario* reemplazar(NodoBinario* act) {				//sustituye un nodo por otro en AB (parte de eliminaciï¿½n)
 		NodoBinario *a, *p;
 		p = act;
 		a = act->getIzq();									// rama de nodos menores
@@ -140,16 +140,16 @@ private:								//atributos
 		
 		act->setDato(a->getDato());							// copia en act el valor del nodo apuntado por a
 		if (p == act) { 									// a es el hijo izquierdo de act
-			p->setIzq(a->getIzq());							// enlaza subarbol izquierdo
+			p->setNodoBinarioI(a->getIzq());							// enlaza subarbol izquierdo
 		} else {											//a no es hijo izq de act
-			p->setDer(a->getIzq()); 						//se enlaza subarbol derecho
+			p->setNodoBinarioD(a->getIzq()); 						//se enlaza subarbol derecho
 		}
 		return a;											//devuelve apuntador a nodo actual
 	}	
 
 //==================================================================================================
 
-	NodoBinario* buscar(NodoBinario* rSub, Tipo v) {		//implementa búsqueda de un nodo en el AB
+	NodoBinario* buscar(NodoBinario* rSub, Tipo v) {		//implementa bï¿½squeda de un nodo en el AB
 		if (rSub == NULL) {									//no existen nodos
 			return NULL;									//no encontro: devuelve apuntador a NULL
 		} else {											//si hay nodos
@@ -321,7 +321,7 @@ void ArbolBinario::verHojas(NodoBinario *r){						//metodo de recorrido de nodos
 //==================================================================================================
 
 NodoBinario* ArbolBinario::buscarNodo(Tipo v){					//permite buscar y encontrar un nodo con valor v en un arbol binario
-	return buscar(getRaiz(), v);								//llama a metodo interno de búsqueda
+	return buscar(getRaiz(), v);								//llama a metodo interno de bï¿½squeda
 }
 
 //==================================================================================================
