@@ -63,13 +63,18 @@ bool visualizacion(ArbolBinario a)
 void modificarArbol(ArbolBinario *a)
 {
 	NodoBinario *p;
-	Tipo v;
+	Tipo v,aux;
 	cout<<"Que valor desea modificar: ";
-	cin>>v;
-	if(visualizacion(*a))
+	cin>>aux;
+	if(a->buscarNodo(aux))
 	{
 		cout<<"Ingrese nuevo valor: ";
 		cin>>v;
+		if((aux < a->getRaiz()->getDato() && v > a->getRaiz()->getDato()) || (aux > a->getRaiz()->getDato() && v < a->getRaiz()->getDato()))
+		{
+			a->eliminarNodo(aux);
+			a->insertarNodo(v);
+		}
 		cout<<"Replace"<<endl;
 		
 	}else{
