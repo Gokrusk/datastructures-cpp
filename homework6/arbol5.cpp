@@ -1,0 +1,1 @@
+//Determinar si un ABB está equiponderado (es equiponderado cuando para todo nodo el peso del subárbol izquierdo es igual al peso del subárbol derecho). El AB vacío está equiponderado por definición. Llamamos peso de un árbol a la suma de todos sus elementos.
