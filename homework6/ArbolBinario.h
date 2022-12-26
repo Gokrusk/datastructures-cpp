@@ -21,6 +21,15 @@ private:								//atributos
 
 //==================================================================================================
 
+	void imprimirEsp2(int c, NodoBinario *p){			//metodo privado para imprimir espacios
+		for (int i = 1; i <= c; i++){	//ciclo impresion espacios
+			cout << "   ";
+	    }
+		cout<<"\n"<<p->getDato();
+	}
+
+//==================================================================================================
+
 	NodoBinario* leerNodo(int margen){	//metodo privado para ingresar AB por nodos
 		Tipo aux;						//var de lectura
 		Tipo fin = 99999;				//marca de fin de lectura
@@ -179,6 +188,7 @@ public:									//metodos publicos
 	void leer();						//metodo que permite el ingreso de los nodos de un AB
 	void imprimirABSimple(NodoBinario* p);	//metodo que imprime un AB simple (sin formato jerarquico)	
 	void imprimirABJerarquia(NodoBinario *p, int n); //metodo que imprime un AB con formato jerarquico
+	void imprimirABJerarquiaEspecular(NodoBinario *p, int n); //reflejo respecto al eje vertical
 
 	int contarNodos(NodoBinario *r);				//determina la cantidad de nodos que posee un arbol
 	int calcularAltura(NodoBinario *r);				//determina la altura de un arbol
@@ -258,6 +268,17 @@ void ArbolBinario::imprimirABJerarquia(NodoBinario *p, int n){		//visualiza el a
     imprimirEsp(n);								//espaciar la impresion
     cout << p -> getDato() << endl;				//visualiza el valor almacenado en el nodo
     imprimirABJerarquia(p -> getIzq(), n+1); 	//llamado recursivo pasando subarbol izq
+}
+
+//==================================================================================================
+
+void ArbolBinario::imprimirABJerarquiaEspecular(NodoBinario *p, int n){		//visualiza el abb 90@ a la izquierda
+    if(p == NULL){	//no apunta a ningun nodo
+       return;
+	}
+    imprimirABJerarquiaEspecular(p -> getDer(), n);	//llamado recursivo pasando subarbol derecho
+    imprimirEsp2(n+1,p);								//espaciar la impresion
+    imprimirABJerarquiaEspecular(p -> getIzq(), n); 	//llamado recursivo pasando subarbol izq
 }
 
 //==================================================================================================
