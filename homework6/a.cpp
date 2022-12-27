@@ -23,7 +23,7 @@ void espacio(int n)
 {
     if (n > 0)
     {
-        cout << "  ";
+        cout << " ";
         espacio(n - 1);
     }
 }
