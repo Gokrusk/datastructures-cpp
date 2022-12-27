@@ -8,7 +8,6 @@ int main()
     // PROTOTIPOS
     void leerLista(Lista * a);     // insertar datos en una lista
     void imprimirLista(Lista a[]); // presenta los valores contenidos en los nodos de una lista
-    // void generarListas(Lista a); // genera listas en base al ultimo digito de los elementos
     void generarListas(Lista a[], Lista m); // genera listas en base al ultimo digito de los elementos
     Lista l[9];
     Lista m;
@@ -48,8 +47,8 @@ void imprimirLista(Lista a[])
                 cout << "> " << actual->getDato() << endl;
                 actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo de la lista
             }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
@@ -70,7 +69,6 @@ void generarListas(Lista a[], Lista m) // genera listas en base al ultimo digito
         {
         case 0:
             a[0].insertarEnOrden(actual->getDato());
-            // b = New Lista.insertarEnOrden(actual->getDato());
             break;
         case 1:
             a[1].insertarEnOrden(actual->getDato());
