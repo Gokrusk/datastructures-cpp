@@ -1,15 +1,18 @@
 // Obtener la imagen especular de un ABB previamente ingresado (reflejo respecto al eje vertical)
-
 #include "ArbolBinario.h"
+#include "lista.h"
 
 int main()
 {					// programa principal
 	ArbolBinario a; // declara un Arbol binario
-
-	void leerAB(ArbolBinario * b);	 // prototipo de funcion ingreso AB
-	void imprimirAB(ArbolBinario a); // prototipo de funcion que imprime AB
-	leerAB(&a);						 // llamado a funcion de ingreso AB
-	imprimirAB(a);					 // llamado a funcion que imprime un AB
+	Lista l;
+	void leerAB(ArbolBinario * b); // prototipo de funcion ingreso AB
+	leerAB(&a); // llamado a funcion de ingreso AB
+	cout << endl;
+	cout<<" ARBOL INGRESADO "<<endl;
+	a.imprimirABJerarquia(a.getRaiz(),0);
+	cout<<" IMAGEN ESPECULAR "<<endl;
+	a.imprimirABJerarquiaEspecular(a.getRaiz(),0);
 	cout << endl;
 	system("pause");
 }
@@ -18,7 +21,7 @@ int main()
 
 void leerAB(ArbolBinario *b)
 {
-	Tipo v;
+	int v;
 	cout << endl
 		 << "LECTURA DE ARBOL BINARIO" << endl
 		 << endl;
@@ -29,16 +32,3 @@ void leerAB(ArbolBinario *b)
 		leerAB(b);
 	}
 }
-
-//==================================================================================================
-
-void imprimirAB(ArbolBinario a)
-{
-	cout << endl
-		 << "IMPRESION DE ARBOL BINARIO" << endl
-		 << endl;
-	// a.imprimirABJerarquia(a.getRaiz(), 0); // llama a metodo impresion con formato jerarquico de AB
-	a.imprimirABJerarquia(a.getRaiz(), 0);
-}
-
-//==================================================================================================
