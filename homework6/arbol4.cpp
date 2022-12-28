@@ -1,14 +1,28 @@
-//Determinar el número de nodos que se encuentran en un nivel X de un ABB
+// Determinar el número de nodos que se encuentran en un nivel X de un ABB
 #include "ArbolBinario.h"
 
 int main()
 {					// programa principal
 	ArbolBinario a; // declara un Arbol binario
 
-	void leerAB(ArbolBinario * b);	 // prototipo de funcion ingreso AB
-	void imprimirAB(ArbolBinario a); // prototipo de funcion que imprime AB
-	leerAB(&a);						 // llamado a funcion de ingreso AB
-	imprimirAB(a);					 // llamado a funcion que imprime un AB
+	void leerAB(ArbolBinario * b); // prototipo de funcion ingreso AB
+	void nodosPorNivel(NodoBinario * p, int n, int nv, int *nodos);
+	leerAB(&a); // llamado a funcion de ingreso AB
+	int n = 0, nodos = 0;
+	cout << " ARBOL INGRESADO " << endl;
+	a.imprimirABJerarquia(a.getRaiz(), 0);
+	cout << endl;
+	do
+	{
+		cout << "Ingrese en que nivel desea contar los nodos: ";
+		cin >> n;
+		if (n < 0)
+		{
+			cout << "Ingrese numero positivo!" << endl;
+		}
+	} while (n < 0);
+	nodosPorNivel(a.getRaiz(),n,0,&nodos);
+	cout<<"Cantidad de nodos en el nivel "<<n<<": "<<nodos;
 	cout << endl;
 	system("pause");
 }
@@ -31,13 +45,16 @@ void leerAB(ArbolBinario *b)
 
 //==================================================================================================
 
-void imprimirAB(ArbolBinario a)
+void nodosPorNivel(NodoBinario *p, int n, int nv, int *nodos)
 {
-	cout << endl
-		 << "IMPRESION DE ARBOL BINARIO" << endl
-		 << endl;
-	// a.imprimirABJerarquia(a.getRaiz(), 0); // llama a metodo impresion con formato jerarquico de AB
-	a.imprimirABJerarquia(a.getRaiz(), 0);
+	if (p == NULL)
+	{
+		return;
+	}
+	if (n == nv)
+	{
+		*nodos = *nodos + 1;
+	}
+	nodosPorNivel(p->getIzq(), n, nv + 1, nodos);
+	nodosPorNivel(p->getDer(), n, nv + 1, nodos);
 }
-
-//==================================================================================================

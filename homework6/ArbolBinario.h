@@ -21,15 +21,6 @@ private:								//atributos
 
 //==================================================================================================
 
-	void imprimirEsp2(int c, NodoBinario *p){			//metodo privado para imprimir espacios
-		for (int i = 1; i <= c; i++){	//ciclo impresion espacios
-			cout << "   ";
-	    }
-		cout<<"\n"<<p->getDato();
-	}
-
-//==================================================================================================
-
 	NodoBinario* leerNodo(int margen){	//metodo privado para ingresar AB por nodos
 		Tipo aux;						//var de lectura
 		Tipo fin = 99999;				//marca de fin de lectura
@@ -276,9 +267,10 @@ void ArbolBinario::imprimirABJerarquiaEspecular(NodoBinario *p, int n){		//visua
     if(p == NULL){	//no apunta a ningun nodo
        return;
 	}
-    imprimirABJerarquiaEspecular(p -> getDer(), n);	//llamado recursivo pasando subarbol derecho
-    imprimirEsp2(n+1,p);								//espaciar la impresion
-    imprimirABJerarquiaEspecular(p -> getIzq(), n); 	//llamado recursivo pasando subarbol izq
+    imprimirABJerarquiaEspecular(p -> getIzq(), n+1); 	//llamado recursivo pasando subarbol izq
+    imprimirEsp(n);								//espaciar la impresion
+    cout << p -> getDato() << endl;				//visualiza el valor almacenado en el nodo
+    imprimirABJerarquiaEspecular(p -> getDer(), n+1);	//llamado recursivo pasando subarbol derecho
 }
 
 //==================================================================================================

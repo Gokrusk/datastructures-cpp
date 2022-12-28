@@ -3,18 +3,19 @@
 #include "lista.h"
 
 int main()
-{                   // programa principal
-    ArbolBinario a; // declara un Arbol binario
-
+{
     void leerAB(ArbolBinario * b);   // prototipo de funcion ingreso AB
-    void imprimirAB(ArbolBinario a); // prototipo de funcion que imprime AB
     void listaOrden(NodoBinario *p,Lista *l);   // prototipo de funcion que enlista los elementos del arbol
+    ArbolBinario a; // declara un Arbol binario
     Lista l;
     leerAB(&a);    // llamado a funcion de ingreso AB
-    imprimirAB(a); // llamado a funcion que imprime un AB
+    cout<<" ARBOL INGRESADO "<<endl;
+	a.imprimirABJerarquia(a.getRaiz(),0);
     listaOrden(a.getRaiz(),&l);
     a.eliminarNodo(l.ultimoNodo()->getDato());  // eliminando nodo mayor
-    imprimirAB(a); // llamado a funcion que imprime un AB
+    cout<<endl;
+    cout<<" ARBOL CON EL VALOR MAYOR ELIMINADO "<<endl;
+	a.imprimirABJerarquia(a.getRaiz(),0);
     cout << endl;
     system("pause");
 }
@@ -44,17 +45,6 @@ void listaOrden(NodoBinario *p,Lista *l)
         listaOrden(p -> getIzq(),l);
 		listaOrden(p -> getDer(),l);
 	}
-}
-
-//==================================================================================================
-
-void imprimirAB(ArbolBinario a)
-{
-    cout << endl
-         << "IMPRESION DE ARBOL BINARIO" << endl
-         << endl;
-    // a.imprimirABSimple(a.getRaiz());	//llama metodo impresion simple de AB
-    a.imprimirABJerarquia(a.getRaiz(), 0); // llama a metodo impresion con formato jerarquico de AB
 }
 
 //==================================================================================================

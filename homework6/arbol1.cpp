@@ -1,12 +1,10 @@
 // Obtener la imagen especular de un ABB previamente ingresado (reflejo respecto al eje vertical)
 #include "ArbolBinario.h"
-#include "lista.h"
 
 int main()
-{					// programa principal
-	ArbolBinario a; // declara un Arbol binario
-	Lista l;
+{
 	void leerAB(ArbolBinario * b); // prototipo de funcion ingreso AB
+	ArbolBinario a; // declara un Arbol binario
 	leerAB(&a); // llamado a funcion de ingreso AB
 	cout << endl;
 	cout<<" ARBOL INGRESADO "<<endl;
