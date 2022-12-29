@@ -1,7 +1,7 @@
 // Implementa un arbol binario basico
 #include <iostream>
 using namespace std;
-#include "arbolbinario2.h"
+#include "ArbolBinario.h"
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
     ArbolBinario a;
     leerAB(&a);
     cout << "El arbol " << (a.esVacio() ? "si" : "no") << " esta vacio" << endl;
-    a.imprimirArbol(a.getRaiz());
+    a.imprimirABJerarquia(a.getRaiz(),0);
     
     cout << "Cantidad de nodos: " << a.contarNodos(a.getRaiz()) << endl;
     return 0;
@@ -20,7 +20,7 @@ int main()
 void leerAB(ArbolBinario *a)
 {
     NodoBinario *leerNodo(int margen);
-    a->setNodoRaiz(leerNodo(0));
+    a->setRaiz(leerNodo(0));
 }
 
 NodoBinario *leerNodo(int margen)
