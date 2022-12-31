@@ -51,10 +51,10 @@ void nodosPorNivel(NodoBinario *p, int n, int nv, int *nodos)
 	{
 		return;
 	}
-	if (n == nv)
+	if (n == nv)	// si el nivel en el que se encuentra la recursion es el ingresado suma 1
 	{
 		*nodos = *nodos + 1;
 	}
-	nodosPorNivel(p->getIzq(), n, nv + 1, nodos);
-	nodosPorNivel(p->getDer(), n, nv + 1, nodos);
+	nodosPorNivel(p->getIzq(), n, nv + 1, nodos);	// sino sigue avanzando en subarbol izq
+	nodosPorNivel(p->getDer(), n, nv + 1, nodos);	// sino sigue avanzando en subarbol der
 }
