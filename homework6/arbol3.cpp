@@ -50,8 +50,8 @@ void listaPreOrden(NodoBinario *p,Lista *l)
 {
     if(p != NULL){
         l->insertarNodoFinal(p->getDato());   // insertar los elementos del arbol
-        listaPreOrden(p -> getIzq(),l);
-		listaPreOrden(p -> getDer(),l);
+        listaPreOrden(p -> getIzq(),l); // recorre subarbol izq
+		listaPreOrden(p -> getDer(),l); // recorre subarbol der
 	}
 }
 
@@ -60,9 +60,9 @@ void listaPreOrden(NodoBinario *p,Lista *l)
 void listaInOrden(NodoBinario *p,Lista *l)
 {
     if(p != NULL){
-        listaInOrden(p -> getIzq(),l);
+        listaInOrden(p -> getIzq(),l);  // recorre subarbol izq
         l->insertarNodoFinal(p->getDato());   // insertar los elementos del arbol
-		listaInOrden(p -> getDer(),l);
+		listaInOrden(p -> getDer(),l);  // recorre subarbol der
 	}
 }
 
@@ -71,8 +71,8 @@ void listaInOrden(NodoBinario *p,Lista *l)
 void listaPostOrden(NodoBinario *p,Lista *l)
 {
     if(p != NULL){
-        listaPostOrden(p -> getIzq(),l);
-		listaPostOrden(p -> getDer(),l);
+        listaPostOrden(p -> getIzq(),l);    // recorre subarbol izq
+		listaPostOrden(p -> getDer(),l);    // recorre subarbol der
         l->insertarNodoFinal(p->getDato());   // insertar los elementos del arbol
 	}
 }
@@ -82,13 +82,13 @@ void listaPostOrden(NodoBinario *p,Lista *l)
 void imprimirList(Lista l)
 {
     Nodo *actual;
-    actual = l.getPrimero();
+    actual = l.getPrimero();    // apuntador temporal a primr elemento de lista
     cout<<"[";
-    while (actual != NULL)
+    while (actual != NULL)  //  recorrido de lista
     {
-        cout<<actual->getDato();
+        cout<<actual->getDato();    // imprime dato del apuntador
         cout<<" ";
-        actual = actual->getPunt();
+        actual = actual->getPunt(); // avanza al valor que apunta
     }
     cout<<"]"<<endl;
 }

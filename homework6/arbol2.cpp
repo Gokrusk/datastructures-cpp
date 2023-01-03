@@ -42,8 +42,8 @@ void listaOrden(NodoBinario *p,Lista *l)
 {
     if(p != NULL){
         l->insertarEnOrden(p->getDato());   // insertar en orden los elementos del arbol
-        listaOrden(p -> getIzq(),l);
-		listaOrden(p -> getDer(),l);
+        listaOrden(p -> getIzq(),l);    //inserta valores subarbol izq
+		listaOrden(p -> getDer(),l);    //inserta valores subarbol der
 	}
 }
 

@@ -7,7 +7,7 @@
 int main()
 {
 	void leerAB(ArbolBinario * b); // prototipo de funcion ingreso AB
-    void pesoSubarbol(NodoBinario *p, int *h);
+    void pesoSubarbol(NodoBinario *p, int *h);	// prototipo de funcion que calcula el peso de un arbol
     void verificarEquiponderacion(NodoBinario *p);
 	ArbolBinario a; // declara un Arbol binario
 	leerAB(&a); // llamado a funcion de ingreso AB
@@ -41,15 +41,15 @@ void pesoSubarbol(NodoBinario *p, int *h)
     {
         return;
     }
-    pesoSubarbol(p->getIzq(),h);
-    *h += p->getDato();
-    pesoSubarbol(p->getDer(),h);
+    pesoSubarbol(p->getIzq(),h);	// verifica peso izq
+    *h += p->getDato();	//	suma los valores
+    pesoSubarbol(p->getDer(),h);	// verifica peso der
 }
 
 void verificarEquiponderacion(NodoBinario *p)
 {
     int iz=0, dr =0;
-    pesoSubarbol(p->getIzq(),&iz);
-    pesoSubarbol(p->getDer(),&dr);
+    pesoSubarbol(p->getIzq(),&iz);	// calcula pesosubAB izq
+    pesoSubarbol(p->getDer(),&dr);	// calcula pesosubAB izq
     cout<<"El arbol "<< (iz == dr ? "si" : "no") <<" es equiponderado"<<endl;
 }

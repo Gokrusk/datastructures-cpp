@@ -263,7 +263,7 @@ void ArbolBinario::imprimirABJerarquia(NodoBinario *p, int n){		//visualiza el a
 
 //==================================================================================================
 
-void ArbolBinario::imprimirABJerarquiaEspecular(NodoBinario *p, int n){		//visualiza el abb 90@ a la izquierda
+void ArbolBinario::imprimirABJerarquiaEspecular(NodoBinario *p, int n){		//reflejo respecto al eje vertical
     if(p == NULL){	//no apunta a ningun nodo
        return;
 	}
