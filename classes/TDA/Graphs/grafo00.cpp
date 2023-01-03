@@ -5,7 +5,6 @@
 #include "utilidades.h"
 
 int main(){
-	system("color fc");
 	Vertice* v;									//arreglo de vertices
 	int n;										//variable indicadora de cantidad de vertices
 	
@@ -52,7 +51,7 @@ void buscarVerticesPorNombre(Vertice* v1, int n1){		//funcion que busca un valor
 	bool enc;									//var bandera indicadora de valor encontrado
 	
 	cout << endl << "BUSQUEDA DE VERTICES POR NOMBRES INGRESADOS";
-	cout << endl << "CANTIDAD DE VALORES A BUSCAR";
+	cout << endl << "CANTIDAD DE VALORES A BUSCAR\n";
 	n = leerN(1,100);	
 
 	for (int i=1; i <= n; i++){					//ciclo de lectura de valores a buscar
