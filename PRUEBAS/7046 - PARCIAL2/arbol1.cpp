@@ -2,11 +2,10 @@
 // de enteros positivos, y proceda a presentar un listado ordenado descendentemente de los niveles del mismo,
 // en base a la suma de valores de nodos.
 
-// Implementa un arbol binario basico
 #include <iostream>
 using namespace std;
 #include "arbolbinario.h"
-
+#include "lista.h"
 int main()
 {
     // PROTOTIPOS
@@ -15,9 +14,12 @@ int main()
     int contarNodosIzquierdos(NodoBinario * p);
     int contarNodosDerechos(NodoBinario * p);
     void nivelArbol(int *nivel, int cont1, int cont2);
-    int sumarNiveles(NodoBinario * p, int nivel);
+    void sumarNiveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]);
+    void impresionNiveles(Lista a[], int n);
     int cont = 0, cont1 = 0, cont2 = 0, nivel = 0;
     ArbolBinario a;
+    Lista l;
+    int aux=0;
     leerAB(&a);
     cout << endl
          << "ARBOL BINARIO" << endl;
@@ -28,7 +30,10 @@ int main()
     cout << endl
          << "Nivel del arbol: " << nivel << endl
          << endl;
-    cout << sumarNiveles(a.getRaiz(), nivel) << endl;
+    Lista *m;
+    m = new Lista[nivel];
+    sumarNiveles(a.getRaiz(), 0, 0, aux, m);
+    impresionNiveles(m,nivel);
     return 0;
 }
 
@@ -104,13 +109,37 @@ void nivelArbol(int *nivel, int cont1, int cont2)
     else
         *nivel = cont2;
 }
-int sumarNiveles(NodoBinario *p, int nivel)
+void sumarNiveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
 {
-    if (nivel > 0)
+    aux = 0;
+    if (p == NULL)
     {
-        cout << " > " << p->getDato() << ", ";
-        return sumarNiveles(p->getIzq(), nivel-1) + sumarNiveles(p->getDer(), nivel-1);
-        cout << ">" << p->getDato();
+        return;
+    }
+    if (nivel == nivelaux)
+    {
+        aux += p->getDato();
+        l[nivel].insertarEnOrden(aux);
+        sumarNiveles(p->getIzq(), nivel + 1, nivelaux + 1, aux, l);
+        sumarNiveles(p->getDer(), nivel + 1, nivelaux + 1, aux, l);
+    }
+}
+void impresionNiveles(Lista a[], int n)
+{
+    cout << endl;
+    // recorrido de la lista
+    Nodo *actual; // referencia a nodo actual de la lista
+    for (int i = 0; i < n; i++)
+    {
+        cout << "NIVEL " << i << ":" << endl;
+        actual = a[i].getPrimero(); // almacena temporalmente la posicion del primer nodo
+        cout << "[ ";
+        while (actual != NULL)
+        {
+            cout << actual->getDato() << " ";
+            actual = actual->getPunt();
+        }
+        cout << "]" << endl;
     }
 }
 /*EJEMPLO
