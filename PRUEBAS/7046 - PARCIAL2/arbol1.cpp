@@ -2,6 +2,7 @@
 // de enteros positivos, y proceda a presentar un listado ordenado descendentemente de los niveles del mismo,
 // en base a la suma de valores de nodos.
 
+    //impresion de niveles con una lista con la suma e imprimir los niveles si su suma coincida con los elementos de la lista suma
 #include <iostream>
 using namespace std;
 #include "arbolbinario.h"
@@ -14,12 +15,12 @@ int main()
     int contarNodosIzquierdos(NodoBinario * p);
     int contarNodosDerechos(NodoBinario * p);
     void nivelArbol(int *nivel, int cont1, int cont2);
-    void sumarNiveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]);
+    void niveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]);
+    void sumarNivel(Lista l);
     void impresionNiveles(Lista a[], int n);
     int cont = 0, cont1 = 0, cont2 = 0, nivel = 0;
     ArbolBinario a;
-    Lista l;
-    int aux=0;
+    int aux = 0;
     leerAB(&a);
     cout << endl
          << "ARBOL BINARIO" << endl;
@@ -32,8 +33,13 @@ int main()
          << endl;
     Lista *m;
     m = new Lista[nivel];
-    sumarNiveles(a.getRaiz(), 0, 0, aux, m);
-    impresionNiveles(m,nivel);
+    niveles(a.getRaiz(), 0, 0, aux, m);
+    for (int i = 0; i < nivel; i++)
+    {
+        sumarNivel(m[i]);
+    }
+    // sumarNivel(m);
+    impresionNiveles(m, nivel);
     return 0;
 }
 
@@ -109,7 +115,7 @@ void nivelArbol(int *nivel, int cont1, int cont2)
     else
         *nivel = cont2;
 }
-void sumarNiveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
+void niveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
 {
     aux = 0;
     if (p == NULL)
@@ -120,9 +126,21 @@ void sumarNiveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
     {
         aux += p->getDato();
         l[nivel].insertarEnOrden(aux);
-        sumarNiveles(p->getIzq(), nivel + 1, nivelaux + 1, aux, l);
-        sumarNiveles(p->getDer(), nivel + 1, nivelaux + 1, aux, l);
+        niveles(p->getIzq(), nivel + 1, nivelaux + 1, aux, l);
+        niveles(p->getDer(), nivel + 1, nivelaux + 1, aux, l);
     }
+}
+void sumarNivel(Lista l)
+{
+    Nodo *actual;
+    int aux = 0;
+    actual = l.getPrimero();
+    while (actual != NULL)
+    {
+        aux += actual->getDato();
+        actual = actual->getPunt();
+    }
+    l.insertarNodoFinal(aux);
 }
 void impresionNiveles(Lista a[], int n)
 {
