@@ -1,7 +1,7 @@
 // GESTIONA UN GRAFO CON MATRIZ DE ADYACENCIA
 // FILA: VERTICE SALIDA	- GRADO SALIDA
 // COLUMNA: VERTICE DE LLEGADA	- GRADO ENTRADA
-#include "GrafoMatriz.h"
+#include "Grafo.h"
 #include "utilidades.h"
 
 int main()

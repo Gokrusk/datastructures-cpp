@@ -145,6 +145,8 @@ class GrafoMatriz : public Grafo                //definicion de herencia de clas
 	bool adyacente(string a, string b);				//determina si dos vertices son adyacentes recibiendo sus nombres
 };
 
+GrafoMatriz::GrafoMatriz():Grafo(){}
+
 GrafoMatriz::GrafoMatriz(int v):Grafo(v) {					//constructor conociendo cantidad maxima de v�rtices
 	setMaxVerts(v);									//actualiza cantidad maxima de vertices con el par�metro
 	setNumVerts(0);									//actualiza numero de vertices del grafo con 0 (no existen vertices aun)
@@ -243,6 +245,8 @@ class GrafoLista : public Grafo                //definicion de herencia de clase
 	bool adyacente(string a, string b);				//determina si dos vertices son adyacentes recibiendo sus nombres
     ListaG listaAdyacencia(int v);					//metodo que devuelve la lista de adyacencia del vertice v
 };
+
+GrafoLista::GrafoLista():Grafo(){}
 
 GrafoLista::GrafoLista(int v):Grafo(v) {
 	setMaxVerts(v);									//cantidad maxima de vertices por defecto

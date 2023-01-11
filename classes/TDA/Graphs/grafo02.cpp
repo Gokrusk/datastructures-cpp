@@ -1,6 +1,6 @@
 //GESTIONA UN GRAFO CON LISTA DE ADYACENCIA
 
-#include "GrafoLista.h"
+#include "Grafo.h"
 #include "utilidades.h"
 
 int main(){
@@ -79,7 +79,7 @@ void ingresarArcosValor(GrafoLista *g){			//funcion que ingresa los datos de los
 		for (int j = 0; (j < na); j++){
 			cout << endl << "Identificador del Vertice Destino: ";
 			getline(cin, aux);
-			cout << endl << "PESO DEL ARCO";
+			cout << endl << "PESO DEL ARCO"<<endl;
 			peso = leerN(0, 100);
 			cin.ignore();
 			g -> setArco(x.getNombre(), aux, peso);
