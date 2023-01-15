@@ -305,15 +305,16 @@ void GrafoMatriz::ordenTopologico()
 		}
 	}
 	Cola d = c;
-	while(!d.colaVacia())
+	while (!d.colaVacia())
 	{
 		d.extraerVal();
 		cont++;
 	}
-	if(cont <=1)
+	if (cont <= 1)
 	{
 		cout << "El grafo tiene un ciclo" << endl;
-	}else
+	}
+	else
 	{
 		cout << "[ ";
 		while (!c.colaVacia()) // recorrido de cola
@@ -378,119 +379,126 @@ void GrafoMatriz::caminoMasCorto(string a, string b) // Muestra el camino más c
 {
 	int va = getNumVertice(a);
 	int vb = getNumVertice(b);
-	if (va < 0 && vb < 0)
+	if (gradosEntrada(vb) == 0)
 	{
-		cout << "El vertice no existe" << endl;
+		cout << "El vertice no es accesible" << endl;
 	}
 	else
 	{
-		int nv = getNumVerts();
-		int matAdy[nv][nv];
+		if (va < 0 && vb < 0)
+		{
+			cout << "El vertice no existe" << endl;
+		}
+		else
+		{
+			int nv = getNumVerts();
+			int matAdy[nv][nv];
 
-		for (int i = 0; i < nv; i++) // generacion de matriz de adyacencia
-		{
-			for (int j = 0; j < nv; j++)
+			for (int i = 0; i < nv; i++) // generacion de matriz de adyacencia
 			{
-				if (adyacente(i, j)) // si es adyacente se guardan los pesos en la matriz
+				for (int j = 0; j < nv; j++)
 				{
-					matAdy[i][j] = matAd[i][j];
-				}
-				else
-				{
-					matAdy[i][j] = 0; // sino se ponen 0
-				}
-			}
-		}
-		// impresion de matriz de adyacencia
-		cout << "     ";
-		for (int i = 0; i < nv; i++)
-		{
-			cout << setw(5) << verts[i].getNombre();
-		}
-		cout << endl;
-		for (int i = 0; i < nv; i++)
-		{
-			cout << setw(5) << verts[i].getNombre();
-			for (int j = 0; j < nv; j++)
-			{
-				cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
-			}
-		}
-
-		int vi = va;	   // vertice inicial
-		int vf = vb;	   // vertice final
-		int actual = 0;	   // vertice actual
-		int distancia = 0; // distancia
-		// Tabla
-		// 0 : visitado
-		// 1 : distancia
-		// 2 : vertice anterior
-		int tabla[nv][3];
-		for (int i = 0; i < nv; i++) // inicializar tabla
-		{
-			tabla[i][0] = 0;
-			tabla[i][1] = 0xFFFF;
-			tabla[i][2] = 0;
-		}
-		tabla[vi][1] = 0;
-		cout << endl;
-		for (int i = 0; i < nv; i++)
-		{
-			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
-		}
-		cout << endl;
-		actual = vi; // vertice actual = inicial
-		do
-		{
-			tabla[actual][0] = 1;
-			for (int i = 0; i < nv; i++)
-			{
-				if (adyacente(actual, i))	// si los vertices son adyacente
-				{
-					distancia = matAd[actual][i] + tabla[actual][1];	// distancia = al peso del arco
-					if (distancia < tabla[i][1])
+					if (adyacente(i, j)) // si es adyacente se guardan los pesos en la matriz
 					{
-						tabla[i][1] = distancia;	// asignar distancia si la distancia actual es menor a la anterior
-						tabla[i][2] = actual;	// asignar el vertice actual al campo de vertice anterior 
+						matAdy[i][j] = matAd[i][j];
+					}
+					else
+					{
+						matAdy[i][j] = 0; // sino se ponen 0
 					}
 				}
 			}
-			int iMenor = -1;
-			int distanciaMenor = 0xFFFF;
+			// impresion de matriz de adyacencia
+			cout << "     ";
 			for (int i = 0; i < nv; i++)
 			{
-				if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0)	// si la distancia es menor a la distancia actual && el vertice aun no ha sido visitado
+				cout << setw(5) << verts[i].getNombre();
+			}
+			cout << endl;
+			for (int i = 0; i < nv; i++)
+			{
+				cout << setw(5) << verts[i].getNombre();
+				for (int j = 0; j < nv; j++)
 				{
-					iMenor = i;
-					distanciaMenor = tabla[i][1];
+					cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
 				}
 			}
-			actual = iMenor;
-		} while (actual != -1);
-		cout << endl;
-		for (int i = 0; i < nv; i++)	// impresion de tablas con valores 
-		{
-			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
-		}
-		cout << endl;
 
-		Vertice v;
-		ListaG ruta;
-		int nod = vf;
-		while (nod != vi)	// insercion de vertices en lista 
-		{
-			ruta.insertarAlInicio(nod);
-			nod = tabla[nod][2];
-		}
-		ruta.insertarAlInicio(vi);
-		// recorrido de lista
-		NodoG *act = ruta.getPrimero();
-		cout << "CAMINO MÁS CORTO DESDE " << a << " hacia " << b << endl;
-		while (act != NULL)
-		{
-			v = getVertice(act->getDato());
-			cout << v.getNombre() << "->";
-			act = act->getPunt();
+			int vi = va;	   // vertice inicial
+			int vf = vb;	   // vertice final
+			int actual = 0;	   // vertice actual
+			int distancia = 0; // distancia
+			// Tabla
+			// 0 : visitado
+			// 1 : distancia
+			// 2 : vertice anterior
+			int tabla[nv][3];
+			for (int i = 0; i < nv; i++) // inicializar tabla
+			{
+				tabla[i][0] = 0;
+				tabla[i][1] = 0xFFFF;
+				tabla[i][2] = 0;
+			}
+			tabla[vi][1] = 0;
+			cout << endl;
+			for (int i = 0; i < nv; i++)
+			{
+				cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+			}
+			cout << endl;
+			actual = vi; // vertice actual = inicial
+			do
+			{
+				tabla[actual][0] = 1;
+				for (int i = 0; i < nv; i++)
+				{
+					if (adyacente(actual, i)) // si los vertices son adyacente
+					{
+						distancia = matAd[actual][i] + tabla[actual][1]; // distancia = al peso del arco
+						if (distancia < tabla[i][1])
+						{
+							tabla[i][1] = distancia; // asignar distancia si la distancia actual es menor a la anterior
+							tabla[i][2] = actual;	 // asignar el vertice actual al campo de vertice anterior
+						}
+					}
+				}
+				int iMenor = -1;
+				int distanciaMenor = 0xFFFF;
+				for (int i = 0; i < nv; i++)
+				{
+					if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0) // si la distancia es menor a la distancia actual && el vertice aun no ha sido visitado
+					{
+						iMenor = i;
+						distanciaMenor = tabla[i][1];
+					}
+				}
+				actual = iMenor;
+			} while (actual != -1);
+			cout << endl;
+			for (int i = 0; i < nv; i++) // impresion de tablas con valores
+			{
+				cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+			}
+			cout << endl;
+
+			Vertice v;
+			ListaG ruta;
+			int nod = vf;
+			while (nod != vi) // insercion de vertices en lista
+			{
+				ruta.insertarAlInicio(nod);
+				nod = tabla[nod][2];
+			}
+			ruta.insertarAlInicio(vi);
+			// recorrido de lista
+			NodoG *act = ruta.getPrimero();
+			cout << "CAMINO MÁS CORTO DESDE " << a << " hacia " << b << endl;
+			while (act != NULL)
+			{
+				v = getVertice(act->getDato());
+				cout << v.getNombre() << "->";
+				act = act->getPunt();
+			}
 		}
 	}
 }
@@ -670,15 +678,16 @@ void GrafoLista::ordenTopologico()
 		}
 	}
 	Cola d = c;
-	while(!d.colaVacia())
+	while (!d.colaVacia())
 	{
 		d.extraerVal();
 		cont++;
 	}
-	if(cont <=1)
+	if (cont <= 1)
 	{
 		cout << "El grafo tiene un ciclo" << endl;
-	}else
+	}
+	else
 	{
 		cout << "[ ";
 		while (!c.colaVacia()) // recorrido de cola
@@ -743,119 +752,126 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 {
 	int va = getNumVertice(a);
 	int vb = getNumVertice(b);
-	if (va < 0 && vb < 0)
+	if (gradosEntrada(vb) == 0)
 	{
-		cout << "El vertice no existe" << endl;
+		cout << "El vertice no es accesible" << endl;
 	}
 	else
 	{
-		int nv = getNumVerts();
-		int matAdy[nv][nv];
+		if (va < 0 && vb < 0)
+		{
+			cout << "El vertice no existe" << endl;
+		}
+		else
+		{
+			int nv = getNumVerts();
+			int matAdy[nv][nv];
 
-		for (int i = 0; i < nv; i++) // generacion de matriz de adyacencia
-		{
-			for (int j = 0; j < nv; j++)
+			for (int i = 0; i < nv; i++) // generacion de matriz de adyacencia
 			{
-				if (adyacente(i, j)) // si es adyacente se guardan los pesos en la matriz
+				for (int j = 0; j < nv; j++)
 				{
-					matAdy[i][j] = arcos[i]->buscarValorEnLista(j)->getPeso();
-				}
-				else
-				{
-					matAdy[i][j] = 0; // sino se ponen 0
-				}
-			}
-		}
-		// impresion de matriz de adyacencia
-		cout << "     ";
-		for (int i = 0; i < nv; i++)
-		{
-			cout << setw(5) << verts[i].getNombre();
-		}
-		cout << endl;
-		for (int i = 0; i < nv; i++)
-		{
-			cout << setw(5) << verts[i].getNombre();
-			for (int j = 0; j < nv; j++)
-			{
-				cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
-			}
-		}
-
-		int vi = va;	   // vertice inicial
-		int vf = vb;	   // vertice final
-		int actual = 0;	   // vertice actual
-		int distancia = 0; // distancia
-		// Tabla
-		// 0 : visitado
-		// 1 : distancia
-		// 2 : vertice anterior
-		int tabla[nv][3];
-		for (int i = 0; i < nv; i++) // inicializar tabla
-		{
-			tabla[i][0] = 0;
-			tabla[i][1] = 0xFFFF;
-			tabla[i][2] = 0;
-		}
-		tabla[vi][1] = 0;
-		cout << endl;
-		for (int i = 0; i < nv; i++)
-		{
-			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
-		}
-		cout << endl;
-		actual = vi; // vertice actual = inicial
-		do
-		{
-			tabla[actual][0] = 1;
-			for (int i = 0; i < nv; i++)
-			{
-				if (adyacente(actual, i))	// si los vertices son adyacente
-				{
-					distancia = arcos[actual]->buscarValorEnLista(i)->getPeso() + tabla[actual][1];	// distancia = al peso del arco
-					if (distancia < tabla[i][1])
+					if (adyacente(i, j)) // si es adyacente se guardan los pesos en la matriz
 					{
-						tabla[i][1] = distancia;	// asignar distancia si la distancia actual es menor a la anterior
-						tabla[i][2] = actual;	// asignar el vertice actual al campo de vertice anterior 
+						matAdy[i][j] = arcos[i]->buscarValorEnLista(j)->getPeso();
+					}
+					else
+					{
+						matAdy[i][j] = 0; // sino se ponen 0
 					}
 				}
 			}
-			int iMenor = -1;
-			int distanciaMenor = 0xFFFF;
+			// impresion de matriz de adyacencia
+			cout << "     ";
 			for (int i = 0; i < nv; i++)
 			{
-				if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0)	// si la distancia es menor a la distancia actual && el vertice aun no ha sido visitado
+				cout << setw(5) << verts[i].getNombre();
+			}
+			cout << endl;
+			for (int i = 0; i < nv; i++)
+			{
+				cout << setw(5) << verts[i].getNombre();
+				for (int j = 0; j < nv; j++)
 				{
-					iMenor = i;
-					distanciaMenor = tabla[i][1];
+					cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
 				}
 			}
-			actual = iMenor;
-		} while (actual != -1);
-		cout << endl;
-		for (int i = 0; i < nv; i++)	// impresion de tablas con valores 
-		{
-			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
-		}
-		cout << endl;
 
-		Vertice v;
-		ListaG ruta;
-		int nod = vf;
-		while (nod != vi)	// insercion de vertices en lista 
-		{
-			ruta.insertarAlInicio(nod);
-			nod = tabla[nod][2];
-		}
-		ruta.insertarAlInicio(vi);
-		// recorrido de lista
-		NodoG *act = ruta.getPrimero();
-		cout << "CAMINO MÁS CORTO DESDE " << a << " hacia " << b << endl;
-		while (act != NULL)
-		{
-			v = getVertice(act->getDato());
-			cout << v.getNombre() << "->";
-			act = act->getPunt();
+			int vi = va;	   // vertice inicial
+			int vf = vb;	   // vertice final
+			int actual = 0;	   // vertice actual
+			int distancia = 0; // distancia
+			// Tabla
+			// 0 : visitado
+			// 1 : distancia
+			// 2 : vertice anterior
+			int tabla[nv][3];
+			for (int i = 0; i < nv; i++) // inicializar tabla
+			{
+				tabla[i][0] = 0;
+				tabla[i][1] = 0xFFFF;
+				tabla[i][2] = 0;
+			}
+			tabla[vi][1] = 0;
+			cout << endl;
+			for (int i = 0; i < nv; i++)
+			{
+				cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+			}
+			cout << endl;
+			actual = vi; // vertice actual = inicial
+			do
+			{
+				tabla[actual][0] = 1;
+				for (int i = 0; i < nv; i++)
+				{
+					if (adyacente(actual, i)) // si los vertices son adyacente
+					{
+						distancia = arcos[actual]->buscarValorEnLista(i)->getPeso() + tabla[actual][1]; // distancia = al peso del arco
+						if (distancia < tabla[i][1])
+						{
+							tabla[i][1] = distancia; // asignar distancia si la distancia actual es menor a la anterior
+							tabla[i][2] = actual;	 // asignar el vertice actual al campo de vertice anterior
+						}
+					}
+				}
+				int iMenor = -1;
+				int distanciaMenor = 0xFFFF;
+				for (int i = 0; i < nv; i++)
+				{
+					if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0) // si la distancia es menor a la distancia actual && el vertice aun no ha sido visitado
+					{
+						iMenor = i;
+						distanciaMenor = tabla[i][1];
+					}
+				}
+				actual = iMenor;
+			} while (actual != -1);
+			cout << endl;
+			for (int i = 0; i < nv; i++) // impresion de tablas con valores
+			{
+				cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+			}
+			cout << endl;
+
+			Vertice v;
+			ListaG ruta;
+			int nod = vf;
+			while (nod != vi) // insercion de vertices en lista
+			{
+				ruta.insertarAlInicio(nod);
+				nod = tabla[nod][2];
+			}
+			ruta.insertarAlInicio(vi);
+			// recorrido de lista
+			NodoG *act = ruta.getPrimero();
+			cout << "CAMINO MÁS CORTO DESDE " << a << " hacia " << b << endl;
+			while (act != NULL)
+			{
+				v = getVertice(act->getDato());
+				cout << v.getNombre() << "->";
+				act = act->getPunt();
+			}
 		}
 	}
 }

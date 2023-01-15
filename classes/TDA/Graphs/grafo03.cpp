@@ -152,12 +152,19 @@ void imprimirLista(GrafoLista g){				//funcion que presenta los datos del grafo
 		cout << endl << "Vertice No. " << x.getNumero()+1 << " - " << x.getNombre() << " - ";
 
 		ListaG vlista = g.listaAdyacencia(i);
-		actual = vlista.getPrimero();		//copiar la direccion del primer nodo de la lista
-		y = actual->getDato();
-		while (actual != NULL){			//repetir el ciclo mientras haya nodos en la lista
-			cout << endl << "> " << y << " > " << actual->getPeso();	//visualiza el contenido del nodo actual de la lista
-			actual = actual->getPunt();					//apuntador actual avanza al siguiente nodo
-		}
+        if(!vlista.esVacia())
+        {
+            actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
+            y = actual->getDato();  //nodo actual
+            while (actual != NULL)
+            { // repetir el ciclo mientras haya nodos en la lista
+                cout << endl
+                    << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
+                actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
+            }
+        }else{
+            cout<<"No tiene vertices de salida"<<endl;
+        }
 	}
 }
 void imprimirGrafo2(GrafoLista g)
@@ -174,7 +181,6 @@ void imprimirGrafo2(GrafoLista g)
 			 << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - "
 			 << "\nGrados Entrada: " << calcularGradosEntrada(g, i);
 		;
-
 		for (int j = 0; (j < nv); j++)
 		{
 			if (g.adyacente(j, i))

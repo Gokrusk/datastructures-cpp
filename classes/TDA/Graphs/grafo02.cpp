@@ -24,8 +24,8 @@ int main(){
 	ingresarArcosValor(&g);				//llamado a la funcion que ingresa los arcos valorados del grafo
 	imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
 	//imprimirLista(g);
-	//verticeAccede(g, 3);
-	imprimirGrafo2(g);
+	verticeAccede(g, 3);
+	//imprimirGrafo2(g);
 	cout << endl;
 	system("pause");
 }
@@ -134,12 +134,18 @@ void imprimirLista(GrafoLista g){				//funcion que presenta los datos del grafo
 		cout << endl << "Vertice No. " << x.getNumero()+1 << " - " << x.getNombre() << " - ";
 
 		ListaG vlista = g.listaAdyacencia(i);
-		actual = vlista.getPrimero();		//copiar la direccion del primer nodo de la lista
-
-		while (actual != NULL){			//repetir el ciclo mientras haya nodos en la lista
-			cout << endl << "> " << actual->getDato() << " > " << actual->getPeso();	//visualiza el contenido del nodo actual de la lista
-			actual = actual->getPunt();					//apuntador actual avanza al siguiente nodo
-		}
+        if(!vlista.esVacia())
+        {
+            actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
+            while (actual != NULL)
+            { // repetir el ciclo mientras haya nodos en la lista
+                cout << endl
+                    << "> " << actual->getDato() << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
+                actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
+            }
+        }else{
+            cout<<"No tiene vertices de salida"<<endl;
+        }
 	}
 }
 void imprimirGrafo2(GrafoLista g)

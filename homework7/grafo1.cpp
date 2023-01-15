@@ -24,7 +24,7 @@ int main()
     g = ingresarVertices(n); // llamado a funcion de ingreso de los datos referentes al grafo
     //ingresarArcos(&g);					//llamado a la funcion que ingresa los arcos del grafo
     ingresarArcosValor(&g); // llamado a la funcion que ingresa los arcos valorados del grafo
-    // imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
+    //imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
     imprimirLista(g);
     cout << endl;
     cout<<endl<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
@@ -155,13 +155,18 @@ void imprimirLista(GrafoLista g)
              << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - ";
 
         ListaG vlista = g.listaAdyacencia(i);
-        actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
-        y = actual->getDato();  //nodo actual
-        while (actual != NULL)
-        { // repetir el ciclo mientras haya nodos en la lista
-            cout << endl
-                 << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
-            actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
+        if(!vlista.esVacia())
+        {
+            actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
+            y = actual->getDato();  //nodo actual
+            while (actual != NULL)
+            { // repetir el ciclo mientras haya nodos en la lista
+                cout << endl
+                    << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
+                actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
+            }
+        }else{
+            cout<<"No tiene vertices de salida"<<endl;
         }
     }
 }
