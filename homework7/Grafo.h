@@ -37,8 +37,8 @@ public:			  // m�todos p�blicos de la clase GrafoMatriz
 	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
 	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
 	void ordenTopologico();					 // Ordenamiento topologico
-	void matrizDeCaminos();					 // Matriz de caminos
-	void caminoMasCorto();					 // Muestra el camino más corto entre dos vertices alcanzables
+	void matrizDeCaminos();					 // Matriz de caminos, algoritmo warshall
+	void caminoMasCorto(string a, string b); // Muestra el camino más corto entre dos vertices alcanzables, algoritmo dijkstra
 	bool getArco(int va, int vb);			 // devuelve el valor de un arco recibiendo numeros de vertices
 	bool getArco(string a, string b);		 // devuelve el valor de un arco recibiendo nombres de vertices
 
@@ -177,7 +177,8 @@ public:
 	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
 	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
 	void ordenTopologico();					 // Ordenamiento topologico
-	void matrizDeCaminos();					 // Matriz de caminos
+	void matrizDeCaminos();					 // Matriz de caminos, algoritmo warshall
+	void caminoMasCorto(string a, string b); // Muestra el camino más corto entre dos vertices alcanzables, algoritmo dijkstra
 };
 
 GrafoMatriz::GrafoMatriz() : Grafo() {}
@@ -331,6 +332,39 @@ void GrafoMatriz::ordenTopologico()
 
 void GrafoMatriz::matrizDeCaminos() // Matriz de caminos
 {
+	int nv = getNumVerts();
+	int matAdy[nv][nv];
+	for (int i = 0; i < nv; i++)
+	{
+		for (int j = 0; j < nv; j++)
+		{
+			(adyacente(i, j)) ? matAdy[i][j] = 1 : matAdy[i][j] = 0;
+		}
+	}
+	for (int k = 0; k < nv; k++)
+	{
+		for (int i = 0; i < nv; i++)
+		{
+			for (int j = 0; j < nv; j++)
+			{
+				matAdy[i][j] = min(matAdy[i][j] + matAdy[i][k] * matAdy[k][j], 1);
+			}
+		}
+	}
+	cout << "     ";
+	for (int i = 0; i < nv; i++)
+	{
+		cout << setw(5) << verts[i].getNombre();
+	}
+	cout << endl;
+	for (int i = 0; i < nv; i++)
+	{
+		cout << setw(5) << verts[i].getNombre();
+		for (int j = 0; j < nv; j++)
+		{
+			cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
+		}
+	}
 }
 
 bool GrafoMatriz::adyacente(int va, int vb)
@@ -380,7 +414,8 @@ public:
 	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
 	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
 	void ordenTopologico();					 // Ordenamiento topologico
-	void matrizDeCaminos();					 // Matriz de caminos
+	void matrizDeCaminos();					 // Matriz de caminos, algoritmo warshall
+	void caminoMasCorto(string a, string b); // Muestra el camino más corto entre dos vertices alcanzables, algoritmo dijkstra
 };
 
 GrafoLista::GrafoLista() : Grafo() {}
@@ -565,6 +600,125 @@ void GrafoLista::matrizDeCaminos() // Matriz de caminos
 		for (int j = 0; j < nv; j++)
 		{
 			cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
+		}
+	}
+}
+
+void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más corto entre dos vertices alcanzables, algoritmo dijkstra
+{
+	int va = getNumVertice(a);
+	int vb = getNumVertice(b);
+	if (va <= 0 && vb <= 0)
+	{
+		cout << "El vertice no existe" << endl;
+	}
+	else
+	{
+		int nv = getNumVerts();
+		int matAdy[nv][nv];
+
+		for (int i = 0; i < nv; i++)
+		{
+			for (int j = 0; j < nv; j++)
+			{
+				if (adyacente(i, j))
+				{
+					matAdy[i][j] = arcos[i]->buscarValorEnLista(j)->getPeso();
+				}
+				else
+				{
+					matAdy[i][j] = 0;
+				}
+			}
+		}
+		cout << "     ";
+		for (int i = 0; i < nv; i++)
+		{
+			cout << setw(5) << verts[i].getNombre();
+		}
+		cout << endl;
+		for (int i = 0; i < nv; i++)
+		{
+			cout << setw(5) << verts[i].getNombre();
+			for (int j = 0; j < nv; j++)
+			{
+				cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
+			}
+		}
+
+		int vi = va;
+		int vf = vb;
+		int actual = 0;
+		int distancia = 0;
+		// Tabla
+		// 0 : visitado
+		// 1 : distancia
+		// 2 : vertice anterior
+		int tabla[nv][3];
+		for (int i = 0; i < nv; i++)
+		{
+			tabla[i][0] = 0;
+			tabla[i][1] = 0xFFFF;
+			tabla[i][2] = 0;
+		}
+		tabla[vi][1] = 0;
+		cout << endl;
+		for (int i = 0; i < nv; i++)
+		{
+			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+		}
+		cout << endl;
+		actual = vi;
+		do
+		{
+			tabla[actual][0] = 1;
+			for (int i = 0; i < nv; i++)
+			{
+				if (adyacente(actual, i))
+				{
+					distancia = arcos[actual]->buscarValorEnLista(i)->getPeso() + tabla[actual][1];
+					if (distancia < tabla[i][1])
+					{
+						tabla[i][1] = distancia;
+						tabla[i][2] = actual;
+					}
+				}
+			}
+			int iMenor = -1;
+			int distanciaMenor = 0xFFFF;
+			for (int i = 0; i < nv; i++)
+			{
+				if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0)
+				{
+					iMenor = i;
+					distanciaMenor = tabla[i][1];
+				}
+			}
+			actual = iMenor;
+		} while (actual != -1);
+		cout << endl;
+		for (int i = 0; i < nv; i++)
+		{
+			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
+		}
+		cout << endl;
+
+		Vertice v;
+		ListaG ruta;
+		int nod = vf;
+		while (nod != vi)
+		{
+			ruta.insertarAlInicio(nod);
+			nod = tabla[nod][2];
+		}
+		ruta.insertarAlInicio(vi);
+		NodoG *act = ruta.getPrimero();
+		cout<<"CAMINO MÁS CORTO DESDE "<<a<<" hacia "<<b<<endl;
+		while (act != NULL)
+		{
+			v = getVertice(act->getDato());
+			cout << v.getNombre() << "->";
+			act = act->getPunt();
 		}
 	}
 }

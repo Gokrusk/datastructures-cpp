@@ -144,7 +144,7 @@ void imprimirGrafo(GrafoLista g){				//funcion que presenta los datos del grafo
 void imprimirLista(GrafoLista g){				//funcion que presenta los datos del grafo
 	int nv = g.getNumVerts();
 	NodoG* actual;					//apunta al nodo actual de la lista
-
+	int y = 0;
 	cout << endl << "ELEMENTOS CONTENIDOS EN LA LISTA";
 
 	for (int i = 0; (i < nv); i++){
@@ -153,9 +153,9 @@ void imprimirLista(GrafoLista g){				//funcion que presenta los datos del grafo
 
 		ListaG vlista = g.listaAdyacencia(i);
 		actual = vlista.getPrimero();		//copiar la direccion del primer nodo de la lista
-
+		y = actual->getDato();
 		while (actual != NULL){			//repetir el ciclo mientras haya nodos en la lista
-			cout << endl << "> " << actual->getDato() << " > " << actual->getPeso();	//visualiza el contenido del nodo actual de la lista
+			cout << endl << "> " << y << " > " << actual->getPeso();	//visualiza el contenido del nodo actual de la lista
 			actual = actual->getPunt();					//apuntador actual avanza al siguiente nodo
 		}
 	}

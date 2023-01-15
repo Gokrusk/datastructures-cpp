@@ -14,12 +14,7 @@ int main()
     void ingresarArcosValor(GrafoLista * g);        // a�ade arcos => grafos valorados
     void imprimirGrafo(GrafoLista g);               // prototipo de la funcion que presenta los vertices del grafo
     void imprimirLista(GrafoLista g);               // prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
-    int calcularGradoSalida(GrafoLista g, int i);   // Calcula grados de salida de un vertice
-    int calcularGradosEntrada(GrafoLista g, int i); // Calcula grados de entrada de un vertice
-    ListaG verticeAislado(GrafoLista g);            // Devuelve una lista con los vertices aislados
-    ListaG verticeSumidero(GrafoLista g);           // Devuelve una lista con los vertices sumideros
-    void imprimirLista2(ListaG l, GrafoLista g);    // Imprime listas
-    void imprimirGrafo2(GrafoLista g);              // Imprime un grafo con losgrados de entrada de cada vertice y los vertices que llegan a el
+    void dijkstra(GrafoLista g);    //Calcula los caminos mínimos entre dos vértices
 
     cout << endl
          << "CANTIDAD DE VERTICES DEL GRAFO" << endl;
@@ -27,16 +22,17 @@ int main()
     cin.ignore();
 
     g = ingresarVertices(n); // llamado a funcion de ingreso de los datos referentes al grafo
-    ingresarArcos(&g);					//llamado a la funcion que ingresa los arcos del grafo
-    //ingresarArcosValor(&g); // llamado a la funcion que ingresa los arcos valorados del grafo
+    //ingresarArcos(&g);					//llamado a la funcion que ingresa los arcos del grafo
+    ingresarArcosValor(&g); // llamado a la funcion que ingresa los arcos valorados del grafo
     // imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
     //  imprimirGrafo2(g);
     //imprimirLista(g);
     cout << endl;
-    cout<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
-    g.ordenTopologico();
-    cout<<endl<<endl<<"M A T R I Z   D E   C A M I N O S"<<endl;
-    g.matrizDeCaminos();
+    // cout<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
+    // g.ordenTopologico();
+    // cout<<endl<<endl<<"M A T R I Z   D E   C A M I N O S"<<endl;
+    // g.matrizDeCaminos();
+    dijkstra(g);
     cout << endl;
     system("pause");
 }
@@ -170,78 +166,15 @@ void imprimirLista(GrafoLista g)
         }
     }
 }
-void imprimirGrafo2(GrafoLista g)
-{ // funcion que presenta los datos del grafo con vertices de entrada
-    int nv = g.getNumVerts();
-    cout << endl
-         << "===============================================";
-    cout << endl
-         << "L I S T A    D E    A D Y A C E N C I A VERTICES DE ENTRADA";
 
-    for (int i = 0; (i < nv); i++)
-    {
-        Vertice x = g.getVertice(i);
-        cout << endl
-             << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - "
-             << "\nGrados Entrada: " << g.gradosEntrada(i);
-        ;
-
-        for (int j = 0; (j < nv); j++)
-        {
-            if (g.adyacente(j, i))
-            {
-                Vertice x = g.getVertice(j);
-                cout << endl
-                     << "\t\t--->" << x.getNombre();
-            }
-        }
-    }
-    cout << endl
-         << "===============================================";
-    cout << endl;
-}
-
-ListaG verticeAislado(GrafoLista g)
+void dijkstra(GrafoLista g)    //Calcula los caminos mínimos entre dos vértices
 {
-    int nv = g.getNumVerts();
-    ListaG l;
-    for (int i = 0; (i < nv); i++)
-    {
-        Vertice x = g.getVertice(i);
-        if (g.gradosEntrada(i) == 0 && g.gradoSalida(i) == 0)
-        {
-            l.insertarAlFinal(x.getNumero());
-        }
-    }
-    return l;
-}
-
-ListaG verticeSumidero(GrafoLista g)
-{
-    cout << endl;
-    int nv = g.getNumVerts();
-    ListaG l;
-    for (int i = 0; (i < nv); i++)
-    {
-        Vertice x = g.getVertice(i);
-        if (g.gradosEntrada(i) == nv - 1 && g.gradoSalida(i) >= 0)
-        {
-            l.insertarAlFinal(x.getNumero());
-        }
-    }
-    return l;
-}
-
-void imprimirLista2(ListaG l, GrafoLista g)
-{
-    cout << endl;
-    NodoG *actual;
-    actual = l.getPrimero();
-    while (actual != NULL)
-    {
-        Vertice x = g.getVertice(actual->getDato());
-        cout << "Vertice: ";
-        cout << x.getNombre() << endl;
-        actual = actual->getPunt();
-    }
+    string a,b;
+    cout<<"Ingrese vertice inicial: ";
+    cin>>a;
+    cin.ignore();
+    cout<<"Ingrese vertice final: ";
+    cin>>b;
+    cout<<endl;
+    g.caminoMasCorto(a,b);
 }
