@@ -139,12 +139,20 @@ void imprimirGrafo(GrafoMatriz g)
 
 void dijkstra(GrafoMatriz g)    //Calcula los caminos mínimos entre dos vértices
 {
-    string a,b;
-    cout<<"Ingrese vertice inicial: ";
-    cin>>a;
-    cin.ignore();
-    cout<<"Ingrese vertice final: ";
-    cin>>b;
-    cout<<endl;
-    g.caminoMasCorto(a,b);
+    string a, b, x = "xxxx";
+    while (a != "xxxx")
+    {
+        cout << endl
+             << "FINALIZAR : xxxx" << endl;
+        cout << "Ingrese vertice inicial: ";
+        cin >> a;
+        if (a != x)
+        {
+            cin.ignore();
+            cout << "Ingrese vertice final: ";
+            cin >> b;
+            cout << endl;
+            g.caminoMasCorto(a, b);
+        }
+    }
 }

@@ -10,11 +10,11 @@ int main()
     int n;        // cantidad de vertices a crear
 
     GrafoLista ingresarVertices(int n1);
-    void ingresarArcos(GrafoLista *g);			//añade arcos => grafos no valorados
-    void ingresarArcosValor(GrafoLista * g);        // a�ade arcos => grafos valorados
-    void imprimirGrafo(GrafoLista g);               // prototipo de la funcion que presenta los vertices del grafo
-    void imprimirLista(GrafoLista g);               // prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
-    void dijkstra(GrafoLista g);    //Calcula los caminos mínimos entre dos vértices
+    void ingresarArcos(GrafoLista * g);      // añade arcos => grafos no valorados
+    void ingresarArcosValor(GrafoLista * g); // a�ade arcos => grafos valorados
+    void imprimirGrafo(GrafoLista g);        // prototipo de la funcion que presenta los vertices del grafo
+    void imprimirLista(GrafoLista g);        // prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
+    void dijkstra(GrafoLista g);             // Calcula los caminos mínimos entre dos vértices
 
     cout << endl
          << "CANTIDAD DE VERTICES DEL GRAFO" << endl;
@@ -22,14 +22,17 @@ int main()
     cin.ignore();
 
     g = ingresarVertices(n); // llamado a funcion de ingreso de los datos referentes al grafo
-    //ingresarArcos(&g);					//llamado a la funcion que ingresa los arcos del grafo
+    // ingresarArcos(&g);					//llamado a la funcion que ingresa los arcos del grafo
     ingresarArcosValor(&g); // llamado a la funcion que ingresa los arcos valorados del grafo
-    //imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
+    // imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
     imprimirLista(g);
     cout << endl;
-    cout<<endl<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
+    cout << endl
+         << "O R D E N A C I O N   T O P O L O G I C A" << endl;
     g.ordenTopologico();
-    cout<<endl<<endl<<"M A T R I Z   D E   C A M I N O S"<<endl;
+    cout << endl
+         << endl
+         << "M A T R I Z   D E   C A M I N O S" << endl;
     g.matrizDeCaminos();
     dijkstra(g);
     cout << endl;
@@ -155,30 +158,40 @@ void imprimirLista(GrafoLista g)
              << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - ";
 
         ListaG vlista = g.listaAdyacencia(i);
-        if(!vlista.esVacia())
+        if (!vlista.esVacia())
         {
             actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
-            y = actual->getDato();  //nodo actual
+            y = actual->getDato();        // nodo actual
             while (actual != NULL)
             { // repetir el ciclo mientras haya nodos en la lista
                 cout << endl
-                    << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
+                     << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
                 actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
             }
-        }else{
-            cout<<"No tiene vertices de salida"<<endl;
+        }
+        else
+        {
+            cout << "No tiene vertices de salida" << endl;
         }
     }
 }
 
-void dijkstra(GrafoLista g)    //Calcula los caminos mínimos entre dos vértices
+void dijkstra(GrafoLista g) // Calcula los caminos mínimos entre dos vértices
 {
-    string a,b;
-    cout<<"Ingrese vertice inicial: ";
-    cin>>a;
-    cin.ignore();
-    cout<<"Ingrese vertice final: ";
-    cin>>b;
-    cout<<endl;
-    g.caminoMasCorto(a,b);
+    string a, b, x = "xxxx";
+    while (a != "xxxx")
+    {
+        cout << endl
+             << "FINALIZAR : xxxx" << endl;
+        cout << "Ingrese vertice inicial: ";
+        cin >> a;
+        if (a != x)
+        {
+            cin.ignore();
+            cout << "Ingrese vertice final: ";
+            cin >> b;
+            cout << endl;
+            g.caminoMasCorto(a, b);
+        }
+    }
 }
