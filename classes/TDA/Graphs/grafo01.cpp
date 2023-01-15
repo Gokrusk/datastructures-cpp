@@ -13,7 +13,6 @@ int main()
 	void ingresarArcos(GrafoMatriz * g);				  // a�ade arcos => grafos no valorados
 	void ingresarArcosValor(GrafoMatriz * g);			  // a�ade arcos => grafos valorados
 	void imprimirGrafo(GrafoMatriz g);					  // prototipo de la funcion que presenta los vertices del grafo
-	int calcularGradoSalida(GrafoMatriz g, int i, int j); // prototipo de funcion que permite calcular grado
 	void imprimirGrafo2(GrafoMatriz g);
 
 	cout << endl
@@ -102,33 +101,6 @@ void ingresarArcosValor(GrafoMatriz *g)
 	}
 }
 
-int calcularGradoSalida(GrafoMatriz g, int i) // prototipo de funcion que permite calcular grado
-{
-	int cont = 0;
-	int nv = g.getNumVerts();
-	cont = 0;
-	for (int j = 0; (j < nv); j++)
-	{
-		if (g.adyacente(i, j))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
-int calcularGradosEntrada(GrafoMatriz g, int i) {					//retorna el valor del arco almacenado en la matriz de adyacencia para dos numeros de v�rtices que recibe como par�metro por numero
-	int cont = 0;
-	int nv = g.getNumVerts();
-	cont = 0;
-	for (int j = 0; (j < nv); j++)
-	{
-		if (g.adyacente(j, i))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
 void imprimirGrafo(GrafoMatriz g)
 { // funcion que presenta los datos del grafo con vertices de salida
 	int nv = g.getNumVerts();
@@ -142,8 +114,8 @@ void imprimirGrafo(GrafoMatriz g)
 		Vertice x = g.getVertice(i);
 		cout << endl
 			 << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - "
-			 << "Grados Salida: " << calcularGradoSalida(g, i)
-			 << "\nGrados Entrada: " << calcularGradosEntrada(g, i);
+			 << "Grados Salida: " << g.gradoSalida(i)
+			 << "\nGrados Entrada: " << g.gradosEntrada(i);
 		;
 
 		for (int j = 0; (j < nv); j++)
@@ -174,8 +146,8 @@ void imprimirGrafo2(GrafoMatriz g)
 		Vertice x = g.getVertice(i);
 		cout << endl
 			 << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - "
-			 << "Grados Salida: " << calcularGradoSalida(g, i)
-			 << "\nGrados Entrada: " << calcularGradosEntrada(g, i);
+			 << "Grados Salida: " << g.gradoSalida(i)
+			 << "\nGrados Entrada: " << g.gradosEntrada(i);
 		;
 
 		for (int j = 0; (j < nv); j++)

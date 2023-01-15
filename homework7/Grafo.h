@@ -1,5 +1,4 @@
 // Grafo.h
-// Definicion de TDA Grafo implementado con Lista de Adyacencia
 
 #ifndef _GRAFO_H
 #define _GRAFO_H
@@ -9,6 +8,8 @@ typedef int *pint; // para el dimensionamiento de la matriz
 #include "Vertice.h"
 #include "ListaG.h"
 #include "cola.h"
+#include <algorithm>
+#include <iomanip>
 
 class Grafo
 {					// definicion de la clase
@@ -29,15 +30,17 @@ public:			  // m�todos p�blicos de la clase GrafoMatriz
 	void setArco(int va, int vb, int v);	 // actualiza valor de arco recibiendo numeros de vertices
 	void setArco(string a, string b);		 // actualiza valor de arco recibiendo nombres de vertices en grafos no valorados
 	void setArco(string a, string b, int v); // actualiza valor de arco recibiendo nombres de vertices en grafos no valorados
-	int getMaxVerts();			  // devuelve numero maximo de vertices
-	int getNumVerts();			  // devuelve cantidad de vertices existentes en grafo
-	Vertice getVertice(int va);	  // devuelve atributos de un vertice, conociendo su numero
-	Vertice getVertice(string a); // devuelve atributos de un vertice, conociendo su nombre
-	int gradosEntrada(int i);	// Calcula grados de entrada de un vertice
-	int gradoSalida(int i);	//Calcula grados de salida de un vertice
-	void ordenTopologico();
-	bool getArco(int va, int vb);	  // devuelve el valor de un arco recibiendo numeros de vertices
-	bool getArco(string a, string b); // devuelve el valor de un arco recibiendo nombres de vertices
+	int getMaxVerts();						 // devuelve numero maximo de vertices
+	int getNumVerts();						 // devuelve cantidad de vertices existentes en grafo
+	Vertice getVertice(int va);				 // devuelve atributos de un vertice, conociendo su numero
+	Vertice getVertice(string a);			 // devuelve atributos de un vertice, conociendo su nombre
+	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
+	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
+	void ordenTopologico();					 // Ordenamiento topologico
+	void matrizDeCaminos();					 // Matriz de caminos
+	void caminoMasCorto();					 // Muestra el camino más corto entre dos vertices alcanzables
+	bool getArco(int va, int vb);			 // devuelve el valor de un arco recibiendo numeros de vertices
+	bool getArco(string a, string b);		 // devuelve el valor de un arco recibiendo nombres de vertices
 
 	int getNumVertice(string v); // devuelve el numero de vertice conociendo su nombre
 	void nuevoVertice(string v); // crea un nuevo vertice recibiendo su nombre
@@ -96,40 +99,6 @@ int Grafo::getNumVerts()
 { // devuelve cantidad de vertices
 	return numVerts;
 }
-
-// void Grafo::ordenTopologico()
-// {
-// 	Cola c;
-// 	Vertice v; 
-// 	int grado[getNumVerts()];
-// 	for (int i = 0; i < getNumVerts(); i++)
-// 	{
-// 		grado[i] = gradosEntrada(getNumVertice(verts[i].getNombre()));
-// 		if(grado[i] == 0)
-// 		{
-// 			c.insertarVal(verts[i]);
-// 		}
-// 	}
-// 	cout<<"[ ";
-// 	while (!c.colaVacia())
-// 	{
-// 		v = c.extraerVal();
-// 		cout<<v.getNombre()<<" ";
-// 		for (int i = 0; i < getNumVerts(); i++)
-// 		{
-// 			if(adyacente(v.getNumero(),i))
-// 			{
-// 				grado[i]--;
-// 				if(grado[i] == 0)
-// 				{
-// 					c.insertarVal(verts[i]);
-// 				}
-// 			}
-// 		}
-// 	}
-// 	cout<<"]";
-	
-// }
 
 Vertice Grafo::getVertice(int va)
 { // retorna todos los atributos del v�rtice, si existe en el grafo, conociendo su numero
@@ -205,9 +174,10 @@ public:
 	int getArco(string a, string b);		 // devuelve el valor de un arco recibiendo nombres de vertices
 	bool adyacente(int va, int vb);			 // determina si dos vertices son adyacentes recibiendo numeros de vertices
 	bool adyacente(string a, string b);		 // determina si dos vertices son adyacentes recibiendo sus nombres
-	void ordenTopologico();
-	int gradoSalida(int i);
-	int gradosEntrada(int i);
+	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
+	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
+	void ordenTopologico();					 // Ordenamiento topologico
+	void matrizDeCaminos();					 // Matriz de caminos
 };
 
 GrafoMatriz::GrafoMatriz() : Grafo() {}
@@ -296,61 +266,71 @@ int GrafoMatriz::getArco(string a, string b)
 int GrafoMatriz::gradosEntrada(int i)
 {
 	int cont = 0;
-		for (int j = 0; (j < getNumVerts()); j++)
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(j, i))
 		{
-			if (adyacente(j, i))
-			{
-				cont++;
-			}
+			cont++;
 		}
+	}
 	return cont;
 }
 
 int GrafoMatriz::gradoSalida(int i)
 {
 	int cont = 0;
-		for (int j = 0; (j < getNumVerts()); j++)
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(i, j))
 		{
-			if (adyacente(i, j))
-			{
-				cont++;
-			}
+			cont++;
 		}
+	}
 	return cont;
 }
 
 void GrafoMatriz::ordenTopologico()
 {
 	Cola c;
-	Vertice v; 
+	Vertice v;
 	int grado[getNumVerts()];
 	for (int i = 0; i < getNumVerts(); i++)
 	{
 		grado[i] = gradosEntrada(getNumVertice(verts[i].getNombre()));
-		if(grado[i] == 0)
+		if (grado[i] == 0)
 		{
 			c.insertarVal(verts[i]);
 		}
 	}
-	cout<<"[ ";
-	while (!c.colaVacia())
+	if (c.colaVacia())
 	{
-		v = c.extraerVal();
-		cout<<v.getNombre()<<" ";
-		for (int i = 0; i < getNumVerts(); i++)
+		cout << "El grafo tiene un ciclo" << endl;
+	}
+	else
+	{
+		cout << "[ ";
+		while (!c.colaVacia())
 		{
-			if(adyacente(v.getNumero(),i))
+			v = c.extraerVal();
+			cout << v.getNombre() << " ";
+			for (int i = 0; i < getNumVerts(); i++)
 			{
-				grado[i]--;
-				if(grado[i] == 0)
+				if (adyacente(v.getNumero(), i))
 				{
-					c.insertarVal(verts[i]);
+					grado[i]--;
+					if (grado[i] == 0)
+					{
+						c.insertarVal(verts[i]);
+					}
 				}
 			}
 		}
+		cout << "]";
 	}
-	cout<<"]";
-	
+}
+
+void GrafoMatriz::matrizDeCaminos() // Matriz de caminos
+{
 }
 
 bool GrafoMatriz::adyacente(int va, int vb)
@@ -397,9 +377,10 @@ public:
 	bool adyacente(int va, int vb);			 // determina si dos vertices son adyacentes recibiendo numeros de vertices
 	bool adyacente(string a, string b);		 // determina si dos vertices son adyacentes recibiendo sus nombres
 	ListaG listaAdyacencia(int v);			 // metodo que devuelve la lista de adyacencia del vertice v
-	int gradosEntrada(int i);	// Calcula grados de entrada de un vertice
-	int gradoSalida(int i);	//Calcula grados de salida de un vertice
-	void ordenTopologico();
+	int gradosEntrada(int i);				 // Calcula grados de entrada de un vertice
+	int gradoSalida(int i);					 // Calcula grados de salida de un vertice
+	void ordenTopologico();					 // Ordenamiento topologico
+	void matrizDeCaminos();					 // Matriz de caminos
 };
 
 GrafoLista::GrafoLista() : Grafo() {}
@@ -488,60 +469,104 @@ bool GrafoLista::adyacente(int va, int vb)
 int GrafoLista::gradosEntrada(int i)
 {
 	int cont = 0;
-		for (int j = 0; (j < getNumVerts()); j++)
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(j, i))
 		{
-			if (adyacente(j, i))
-			{
-				cont++;
-			}
+			cont++;
 		}
+	}
 	return cont;
 }
 
 int GrafoLista::gradoSalida(int i)
 {
 	int cont = 0;
-		for (int j = 0; (j < getNumVerts()); j++)
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(i, j))
 		{
-			if (adyacente(i, j))
-			{
-				cont++;
-			}
+			cont++;
 		}
+	}
 	return cont;
 }
 
 void GrafoLista::ordenTopologico()
 {
 	Cola c;
-	Vertice v; 
+	Vertice v;
 	int grado[getNumVerts()];
 	for (int i = 0; i < getNumVerts(); i++)
 	{
 		grado[i] = gradosEntrada(getNumVertice(verts[i].getNombre()));
-		if(grado[i] == 0)
+		if (grado[i] == 0)
 		{
 			c.insertarVal(verts[i]);
 		}
 	}
-	cout<<"[ ";
-	while (!c.colaVacia())
+	if (c.colaVacia())
 	{
-		v = c.extraerVal();
-		cout<<v.getNombre()<<" ";
-		for (int i = 0; i < getNumVerts(); i++)
+		cout << "El grafo tiene un ciclo" << endl;
+	}
+	else
+	{
+		cout << "[ ";
+		while (!c.colaVacia())
 		{
-			if(adyacente(v.getNumero(),i))
+			v = c.extraerVal();
+			cout << v.getNombre() << " ";
+			for (int i = 0; i < getNumVerts(); i++)
 			{
-				grado[i]--;
-				if(grado[i] == 0)
+				if (adyacente(v.getNumero(), i))
 				{
-					c.insertarVal(verts[i]);
+					grado[i]--;
+					if (grado[i] == 0)
+					{
+						c.insertarVal(verts[i]);
+					}
 				}
 			}
 		}
+		cout << "]";
 	}
-	cout<<"]";
+}
+
+void GrafoLista::matrizDeCaminos() // Matriz de caminos
+{
+	int nv = getNumVerts();
+	int matAdy[nv][nv];
+	for (int i = 0; i < nv; i++)
+	{
+		for (int j = 0; j < nv; j++)
+		{
+			(adyacente(i, j)) ? matAdy[i][j] = 1 : matAdy[i][j] = 0;
+		}
+	}
+	for (int k = 0; k < nv; k++)
+	{
+		for (int i = 0; i < nv; i++)
+		{
+			for (int j = 0; j < nv; j++)
+			{
+				matAdy[i][j] = min(matAdy[i][j] + matAdy[i][k] * matAdy[k][j], 1);
+			}
+		}
+	}
+	cout << "     ";
+	for (int i = 0; i < nv; i++)
+	{
+		cout << setw(5) << verts[i].getNombre();
+	}
+	cout << endl;
+	for (int i = 0; i < nv; i++)
+	{
+		cout << setw(5) << verts[i].getNombre();
+		for (int j = 0; j < nv; j++)
+		{
+			cout << setw(5) << matAdy[i][j] << " \n"[j == nv - 1];
+		}
+	}
 }
 
 bool GrafoLista::adyacente(string a, string b)

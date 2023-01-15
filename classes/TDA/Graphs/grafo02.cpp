@@ -12,7 +12,6 @@ int main(){
 	void ingresarArcosValor(GrafoLista *g);		//a�ade arcos => grafos valorados
 	void imprimirGrafo(GrafoLista g);			//prototipo de la funcion que presenta los vertices del grafo
 	void imprimirLista(GrafoLista g);			//prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
-	int calcularGradoSalida(GrafoLista g, int i);
 	void verticeAccede(GrafoLista g, int i);
 	void imprimirGrafo2(GrafoLista g);
 	
@@ -87,20 +86,6 @@ void ingresarArcosValor(GrafoLista *g){			//funcion que ingresa los datos de los
 	}
 }
 
-int calcularGradoSalida(GrafoLista g, int i) // prototipo de funcion que permite calcular grado
-{
-	int cont = 0;
-	int nv = g.getNumVerts();
-	cont = 0;
-	for (int j = 0; (j < nv); j++)
-	{
-		if (g.adyacente(i, j))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
 void verticeAccede(GrafoLista g, int i) {					//retorna el valor del arco almacenado en la matriz de adyacencia para dos numeros de v�rtices que recibe como par�metro por numero
 	int nv = g.getNumVerts();
 	int x = 0;
@@ -115,19 +100,7 @@ void verticeAccede(GrafoLista g, int i) {					//retorna el valor del arco almace
 	
 	}
 }
-int calcularGradosEntrada(GrafoLista g, int i) {					//retorna el valor del arco almacenado en la matriz de adyacencia para dos numeros de v�rtices que recibe como par�metro por numero
-	int cont = 0;
-	int nv = g.getNumVerts();
-	cont = 0;
-	for (int j = 0; (j < nv); j++)
-	{
-		if (g.adyacente(j, i))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
+
 void imprimirGrafo(GrafoLista g){				//funcion que presenta los datos del grafo
 	int nv = g.getNumVerts();
 	int na;
@@ -137,7 +110,7 @@ void imprimirGrafo(GrafoLista g){				//funcion que presenta los datos del grafo
 
 	for (int i = 0; (i < nv); i++){
 		Vertice x = g.getVertice(i);
-		cout << endl << "Vertice No. " << x.getNumero()+1 << " - " << x.getNombre() << " - "<<"GRADO SALIDA: "<<calcularGradoSalida(g,i);
+		cout << endl << "Vertice No. " << x.getNumero()+1 << " - " << x.getNombre() << " - "<<"GRADO SALIDA: "<<g.gradoSalida(i);
 	
 		for (int j = 0; (j < nv); j++){
 			if (g.adyacente(i,j)){
@@ -181,7 +154,7 @@ void imprimirGrafo2(GrafoLista g)
 		Vertice x = g.getVertice(i);
 		cout << endl
 			 << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - "
-			 << "\nGrados Entrada: " << calcularGradosEntrada(g, i);
+			 << "\nGrados Entrada: " << g.gradosEntrada(i);
 		;
 
 		for (int j = 0; (j < nv); j++)
