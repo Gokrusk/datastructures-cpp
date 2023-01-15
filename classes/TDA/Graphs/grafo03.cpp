@@ -8,15 +8,15 @@ int main()
 	int n;								//cantidad de vertices a crear
 	
 	GrafoLista ingresarVertices(int n1);
-	void ingresarArcos(GrafoLista *g);			//a�ade arcos => grafos no valorados
 	void ingresarArcosValor(GrafoLista *g);		//a�ade arcos => grafos valorados
 	void imprimirGrafo(GrafoLista g);			//prototipo de la funcion que presenta los vertices del grafo
 	void imprimirLista(GrafoLista g);			//prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
-	int calcularGradoSalida(GrafoLista g, int i);
-    ListaG verticeAislado(GrafoLista g);
-    ListaG verticeSumidero(GrafoLista g);
-    void imprimirLista(ListaG l, GrafoLista g);
-	void imprimirGrafo2(GrafoLista g);
+	int calcularGradoSalida(GrafoLista g, int i);   //Calcula grados de salida de un vertice
+    int calcularGradosEntrada(GrafoLista g, int i); //Calcula grados de entrada de un vertice
+    ListaG verticeAislado(GrafoLista g);    //Devuelve una lista con los vertices aislados
+    ListaG verticeSumidero(GrafoLista g);   //Devuelve una lista con los vertices sumideros
+    void imprimirLista2(ListaG l, GrafoLista g);    // Imprime listas
+	void imprimirGrafo2(GrafoLista g);  //Imprime un grafo con losgrados de entrada de cada vertice y los vertices que llegan a el
 	
 	cout << endl << "CANTIDAD DE VERTICES DEL GRAFO"<<endl;
 	n = leerN(1,20);					//lectura de cantidad de vertices del grafo
@@ -29,9 +29,9 @@ int main()
 	// imprimirGrafo2(g);
     cout<<endl;
     cout<<"VERTICES AISLADOS";
-    imprimirLista(verticeAislado(g),g);
+    imprimirLista2(verticeAislado(g),g);
     cout<<endl<<"VERTICES SUMIDEROS";
-    imprimirLista(verticeSumidero(g),g);
+    imprimirLista2(verticeSumidero(g),g);
 	cout << endl;
 	system("pause");
 }
@@ -221,7 +221,7 @@ ListaG verticeSumidero(GrafoLista g)
     return l;
 }
 
-void imprimirLista(ListaG l, GrafoLista g)
+void imprimirLista2(ListaG l, GrafoLista g)
 {
     cout<<endl;
     NodoG* actual;
