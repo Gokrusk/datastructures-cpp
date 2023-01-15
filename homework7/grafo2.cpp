@@ -25,7 +25,7 @@ int main()
     ingresarArcosValor(&g); // llamado a la funcion que ingresa los arcos valorados del grafo
     imprimirGrafo(g);					//llamado a la funcion que imprime la matriz de adyacencia
     cout << endl;
-    cout<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
+    cout<<endl<<"O R D E N A C I O N   T O P O L O G I C A"<<endl;
     g.ordenTopologico();
     cout<<endl<<endl<<"M A T R I Z   D E   C A M I N O S"<<endl;
     g.matrizDeCaminos();

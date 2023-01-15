@@ -294,6 +294,7 @@ void GrafoMatriz::ordenTopologico()
 {
 	Cola c;
 	Vertice v;
+	int cont = 0;
 	int grado[getNumVerts()]; // vector para guardar grados de entrada
 	for (int i = 0; i < getNumVerts(); i++)
 	{
@@ -303,11 +304,16 @@ void GrafoMatriz::ordenTopologico()
 			c.insertarVal(verts[i]);
 		}
 	}
-	if (c.colaVacia()) // si la cola está vacia es porque hay un ciclo en el grafo
+	Cola d = c;
+	while(!d.colaVacia())
+	{
+		d.extraerVal();
+		cont++;
+	}
+	if(cont <=1)
 	{
 		cout << "El grafo tiene un ciclo" << endl;
-	}
-	else
+	}else
 	{
 		cout << "[ ";
 		while (!c.colaVacia()) // recorrido de cola
@@ -653,34 +659,40 @@ void GrafoLista::ordenTopologico()
 {
 	Cola c;
 	Vertice v;
-	int grado[getNumVerts()];
+	int cont = 0;
+	int grado[getNumVerts()]; // vector para guardar grados de entrada
 	for (int i = 0; i < getNumVerts(); i++)
 	{
 		grado[i] = gradosEntrada(getNumVertice(verts[i].getNombre()));
-		if (grado[i] == 0)
+		if (grado[i] == 0) // si el grado de entrada del vertice es 0 se encola
 		{
 			c.insertarVal(verts[i]);
 		}
 	}
-	if (c.colaVacia())
+	Cola d = c;
+	while(!d.colaVacia())
+	{
+		d.extraerVal();
+		cont++;
+	}
+	if(cont <=1)
 	{
 		cout << "El grafo tiene un ciclo" << endl;
-	}
-	else
+	}else
 	{
 		cout << "[ ";
-		while (!c.colaVacia())
+		while (!c.colaVacia()) // recorrido de cola
 		{
 			v = c.extraerVal();
-			cout << v.getNombre() << " ";
+			cout << v.getNombre() << " "; // impresion de vertice
 			for (int i = 0; i < getNumVerts(); i++)
 			{
-				if (adyacente(v.getNumero(), i))
+				if (adyacente(v.getNumero(), i)) // si los vertices son adyacentes
 				{
-					grado[i]--;
+					grado[i]--; // se reduce el grado de entrada por la adyacencia
 					if (grado[i] == 0)
 					{
-						c.insertarVal(verts[i]);
+						c.insertarVal(verts[i]); // si el grado es 0 se encola
 					}
 				}
 			}
@@ -693,14 +705,14 @@ void GrafoLista::matrizDeCaminos() // Matriz de caminos
 {
 	int nv = getNumVerts();
 	int matAdy[nv][nv];
-	for (int i = 0; i < nv; i++)
+	for (int i = 0; i < nv; i++) // se llena la matriz de adyacencia con 1 o 0 según la adyacencia de vertices
 	{
 		for (int j = 0; j < nv; j++)
 		{
 			(adyacente(i, j)) ? matAdy[i][j] = 1 : matAdy[i][j] = 0;
 		}
 	}
-	for (int k = 0; k < nv; k++)
+	for (int k = 0; k < nv; k++) // generación de matriz de caminos
 	{
 		for (int i = 0; i < nv; i++)
 		{
@@ -710,10 +722,11 @@ void GrafoLista::matrizDeCaminos() // Matriz de caminos
 			}
 		}
 	}
+	// impresion de matriz de caminos
 	cout << "     ";
 	for (int i = 0; i < nv; i++)
 	{
-		cout << setw(5) << verts[i].getNombre();
+		cout << setw(5) << verts[i].getNombre(); // impresion de encabezado de matriz
 	}
 	cout << endl;
 	for (int i = 0; i < nv; i++)
@@ -739,20 +752,21 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 		int nv = getNumVerts();
 		int matAdy[nv][nv];
 
-		for (int i = 0; i < nv; i++)
+		for (int i = 0; i < nv; i++) // generacion de matriz de adyacencia
 		{
 			for (int j = 0; j < nv; j++)
 			{
-				if (adyacente(i, j))
+				if (adyacente(i, j)) // si es adyacente se guardan los pesos en la matriz
 				{
 					matAdy[i][j] = arcos[i]->buscarValorEnLista(j)->getPeso();
 				}
 				else
 				{
-					matAdy[i][j] = 0;
+					matAdy[i][j] = 0; // sino se ponen 0
 				}
 			}
 		}
+		// impresion de matriz de adyacencia
 		cout << "     ";
 		for (int i = 0; i < nv; i++)
 		{
@@ -768,16 +782,16 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 			}
 		}
 
-		int vi = va;
-		int vf = vb;
-		int actual = 0;
-		int distancia = 0;
+		int vi = va;	   // vertice inicial
+		int vf = vb;	   // vertice final
+		int actual = 0;	   // vertice actual
+		int distancia = 0; // distancia
 		// Tabla
 		// 0 : visitado
 		// 1 : distancia
 		// 2 : vertice anterior
 		int tabla[nv][3];
-		for (int i = 0; i < nv; i++)
+		for (int i = 0; i < nv; i++) // inicializar tabla
 		{
 			tabla[i][0] = 0;
 			tabla[i][1] = 0xFFFF;
@@ -790,19 +804,19 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
 		}
 		cout << endl;
-		actual = vi;
+		actual = vi; // vertice actual = inicial
 		do
 		{
 			tabla[actual][0] = 1;
 			for (int i = 0; i < nv; i++)
 			{
-				if (adyacente(actual, i))
+				if (adyacente(actual, i))	// si los vertices son adyacente
 				{
-					distancia = arcos[actual]->buscarValorEnLista(i)->getPeso() + tabla[actual][1];
+					distancia = arcos[actual]->buscarValorEnLista(i)->getPeso() + tabla[actual][1];	// distancia = al peso del arco
 					if (distancia < tabla[i][1])
 					{
-						tabla[i][1] = distancia;
-						tabla[i][2] = actual;
+						tabla[i][1] = distancia;	// asignar distancia si la distancia actual es menor a la anterior
+						tabla[i][2] = actual;	// asignar el vertice actual al campo de vertice anterior 
 					}
 				}
 			}
@@ -810,7 +824,7 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 			int distanciaMenor = 0xFFFF;
 			for (int i = 0; i < nv; i++)
 			{
-				if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0)
+				if (tabla[i][1] < distanciaMenor && tabla[i][0] == 0)	// si la distancia es menor a la distancia actual && el vertice aun no ha sido visitado
 				{
 					iMenor = i;
 					distanciaMenor = tabla[i][1];
@@ -819,7 +833,7 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 			actual = iMenor;
 		} while (actual != -1);
 		cout << endl;
-		for (int i = 0; i < nv; i++)
+		for (int i = 0; i < nv; i++)	// impresion de tablas con valores 
 		{
 			cout << i << " -> " << tabla[i][0] << setw(5) << tabla[i][1] << setw(5) << tabla[i][2] << endl;
 		}
@@ -828,12 +842,13 @@ void GrafoLista::caminoMasCorto(string a, string b) // Muestra el camino más co
 		Vertice v;
 		ListaG ruta;
 		int nod = vf;
-		while (nod != vi)
+		while (nod != vi)	// insercion de vertices en lista 
 		{
 			ruta.insertarAlInicio(nod);
 			nod = tabla[nod][2];
 		}
 		ruta.insertarAlInicio(vi);
+		// recorrido de lista
 		NodoG *act = ruta.getPrimero();
 		cout << "CAMINO MÁS CORTO DESDE " << a << " hacia " << b << endl;
 		while (act != NULL)
