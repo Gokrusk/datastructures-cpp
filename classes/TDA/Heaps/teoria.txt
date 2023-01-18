@@ -1,0 +1,5 @@
+raiz: (i+1)/2-1
+izquierdo: 2*i+1
+derecho: (2*1+1)+1
+no hay nodo izquierdo ni derecho si 2*i+1>=n
+no hay hijo derecho si (2*1+1)+1 >=n
