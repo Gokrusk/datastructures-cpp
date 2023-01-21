@@ -20,12 +20,12 @@ int main(){											//programa principal
 	leerMonticulo(&m, n);							//llamada a ingreso de monticulo
 	imprimirMonticulo(m, n);						//llamada a impresion de monticulo
 
-	imprimirMinimo(m);
+	//imprimirMinimo(m);
 
-	eliminarMinimo(&m);
-	imprimirMonticulo(m, n);
+	//eliminarMinimo(&m);
+	//imprimirMonticulo(m, n);
 
-	ordenacionVectorHeaps();						//llama a funcion demostrativa de ordenamiento vectores => metodo 1
+	//ordenacionVectorHeaps();						//llama a funcion demostrativa de ordenamiento vectores => metodo 1
 	
 	cout << endl;
 	system("pause");
