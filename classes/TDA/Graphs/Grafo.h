@@ -261,32 +261,6 @@ int GrafoMatriz::getArco(string a, string b)
 	}
 }
 
-int GrafoMatriz::gradosEntrada(int i)
-{
-	int cont = 0;
-	for (int j = 0; (j < getNumVerts()); j++)
-	{
-		if (adyacente(j, i))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
-
-int GrafoMatriz::gradoSalida(int i)
-{
-	int cont = 0;
-	for (int j = 0; (j < getNumVerts()); j++)
-	{
-		if (adyacente(i, j))
-		{
-			cont++;
-		}
-	}
-	return cont;
-}
-
 bool GrafoMatriz::adyacente(int va, int vb)
 { // determina si dos vertices forman un arco conociendo su numero
 	if ((va >= 0) && (vb >= 0) && (va < getNumVerts()) && (vb < getNumVerts()))
@@ -313,6 +287,32 @@ bool GrafoMatriz::adyacente(string a, string b)
 	{				  // vertices no existentes
 		return false; // como no existen vertices, devuelve falso
 	}
+}
+
+int GrafoMatriz::gradosEntrada(int i)
+{
+	int cont = 0;
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(j, i))
+		{
+			cont++;
+		}
+	}
+	return cont;
+}
+
+int GrafoMatriz::gradoSalida(int i)
+{
+	int cont = 0;
+	for (int j = 0; (j < getNumVerts()); j++)
+	{
+		if (adyacente(i, j))
+		{
+			cont++;
+		}
+	}
+	return cont;
 }
 
 class GrafoLista : public Grafo // definicion de herencia de clase Grafo

@@ -1,23 +1,23 @@
 // grafomatriz.h
 // Definicion de TDA Grafo implementado con Matriz de Adyacencia
 
-#ifndef _GRAFOMATRIZ_H
-#define _GRAFOMATRIZ_H
+// #ifndef _GRAFOMATRIZ_H
+// #define _GRAFOMATRIZ_H
 
 typedef int * pint; 							//para el dimensionamiento de la matriz
 
-#include "Vertice.h"							//archivo de cabecera para definición de vértices
+#include "Vertice.h"							//archivo de cabecera para definiciï¿½n de vï¿½rtices
 
-class GrafoMatriz {								//definición de la clase
-private:										//definición de atributos
-	int maxVerts; 								//máximo numero de vértices
-	int numVerts; 								//número de vértices que contiene el grafo
-	Vertice* verts; 							//vector de vértices
+class GrafoMatriz {								//definiciï¿½n de la clase
+private:										//definiciï¿½n de atributos
+	int maxVerts; 								//mï¿½ximo numero de vï¿½rtices
+	int numVerts; 								//nï¿½mero de vï¿½rtices que contiene el grafo
+	Vertice* verts; 							//vector de vï¿½rtices
 	int** matAd; 								//matriz de adyacencia
 
-public:												//métodos públicos
-	GrafoMatriz();									//constructor sin parámetros
-	GrafoMatriz(int v);								//constructor conociendo cantidad máxima de vértices
+public:												//mï¿½todos pï¿½blicos
+	GrafoMatriz();									//constructor sin parï¿½metros
+	GrafoMatriz(int v);								//constructor conociendo cantidad mï¿½xima de vï¿½rtices
 													//metodos que actualizan atributos
 	void setMaxVerts(int n);	 					//actualiza numero maximo de vertices
 	void setNumVerts(int n);	 					//actualiza numero de vertices existentes en grafo
@@ -42,15 +42,15 @@ public:												//métodos públicos
 	bool adyacente(string a, string b);				//determina si dos vertices son adyacentes recibiendo sus nombres
 };
 
-GrafoMatriz::GrafoMatriz() {						//constructor por defecto (sin parámetros)
+GrafoMatriz::GrafoMatriz() {						//constructor por defecto (sin parï¿½metros)
 	setMaxVerts(1);									//cantidad maxima de vertices por defecto
 	setNumVerts(getMaxVerts());						//cantidad de vertices del grafo tomado de max.Num.Vertices
 }
 
-GrafoMatriz::GrafoMatriz(int v) {					//constructor conociendo cantidad maxima de vértices
-	setMaxVerts(v);									//actualiza cantidad maxima de vertices con el parámetro
+GrafoMatriz::GrafoMatriz(int v) {					//constructor conociendo cantidad maxima de vï¿½rtices
+	setMaxVerts(v);									//actualiza cantidad maxima de vertices con el parï¿½metro
 	setNumVerts(0);									//actualiza numero de vertices del grafo con 0 (no existen vertices aun)
-	verts = new Vertice[v] ; 						//inicializa vector de vértices con v elementos
+	verts = new Vertice[v] ; 						//inicializa vector de vï¿½rtices con v elementos
 	matAd = new pint[v]; 							//inicializa //recorre filas de matriz de adyacenciamatriz de adyacencia con v filas
 	for (int i = 0; i < v; i++){					
 		matAd[i] = new int [v]; 					//crea v elementos asociados a este elemento de la matriz de adyacenciar inicializa cada elemento vector (fila) de matriz de adyacencia con "v" posibles arcos
@@ -120,27 +120,27 @@ int GrafoMatriz::getNumVerts(){						//devuelve cantidad de vertices
 	return numVerts;
 }
 
-Vertice GrafoMatriz::getVertice(int va) {					//retorna todos los atributos del vértice, si existe en el grafo, conociendo su numero
+Vertice GrafoMatriz::getVertice(int va) {					//retorna todos los atributos del vï¿½rtice, si existe en el grafo, conociendo su numero
 	if ((va < 0) || (va >= getNumVerts())) {				//numero de vertice incorrecto
 		Vertice x;
-		return x;											//como Vértice no existe, devuelve vertice vacío
+		return x;											//como Vï¿½rtice no existe, devuelve vertice vacï¿½o
 	} else {												//numero de vertice existente en el grafo
  		return verts[va];									//devuelve atributos del vertice
 	}
 }
 
-Vertice GrafoMatriz::getVertice(string a) {					//retorna todos los atributos del vértice si está almacenado en el grafo, conociendo su nombre
+Vertice GrafoMatriz::getVertice(string a) {					//retorna todos los atributos del vï¿½rtice si estï¿½ almacenado en el grafo, conociendo su nombre
 	int va;													//variable para contener numero de vertice
 	va = getNumVertice(a);										//calcula numero de vertice del primer nombre recibido
 	if ((va < 0) || (va >= numVerts)) {						//numero de vertice incorrecto
 		Vertice x;
-		return x;											//como Vértice no existe, devuelve vertice vacío
+		return x;											//como Vï¿½rtice no existe, devuelve vertice vacï¿½o
 	} else {												//numero de vertice existente en el grafo
  		return verts[va];									//devuelve atributos del vertice
 	}
 }
 
-int GrafoMatriz::getArco( int va, int vb) {					//retorna el valor del arco almacenado en la matriz de adyacencia para dos numeros de vértices que recibe como parámetro por numero
+int GrafoMatriz::getArco( int va, int vb) {					//retorna el valor del arco almacenado en la matriz de adyacencia para dos numeros de vï¿½rtices que recibe como parï¿½metro por numero
 	if ((va >= 0) && (vb >= 0) && (va < getNumVerts()) && (vb < getNumVerts())){	//comprueba existencia de los dos vertices
 		return matAd[va][vb];								//devuelve el valor del arco almacenado en la matriz de adyacencia para estos vertices
 	} else {												//alguno de los vertices no existe
@@ -148,7 +148,7 @@ int GrafoMatriz::getArco( int va, int vb) {					//retorna el valor del arco alma
 	}
 }
 
-int GrafoMatriz::getArco(string a, string b) {				//retorna el valor del arco almacenado en la matriz de adyacencia para dos vértices que recibe como parámetro por nombre
+int GrafoMatriz::getArco(string a, string b) {				//retorna el valor del arco almacenado en la matriz de adyacencia para dos vï¿½rtices que recibe como parï¿½metro por nombre
 	int va, vb;												//variables para contener numeros de los vertices recibidos por nombre
 	va = getNumVertice(a);									//calcula numero de vertice correspondiente al primer nombre recibido
 	vb = getNumVertice(b);									//calcula numero de vertice correspondiente al segundo nombre recibido
@@ -166,7 +166,7 @@ int GrafoMatriz::getNumVertice(string v) {					//determina el numero de un verti
 	for ( i = 0; (i < getNumVerts()) && !enc;) {			//ciclo de recorrido de vertices del grafo
 		enc = verts[i].igual(v);							//comprueba si vertice tiene nombre igual a parametro (metodo definido en Vertice.h)
 		if (!enc) {											//aun no se encuentra vertice con ese valor	
-			i++;											//continua la búsqueda
+			i++;											//continua la bï¿½squeda
 		}
 	}
 	return ((i < getNumVerts()) ? i : -1);					//retorna i (si se encontro) o -1 si no encuentra vertice con ese nombre
@@ -178,7 +178,7 @@ void GrafoMatriz::nuevoVertice(string v) {					//crea un nuevo vertice recibiend
 	if (!existe) {											//si no existe, es nuevo, por lo que lo crea
 		if (getNumVerts() < getMaxVerts()){					//si numero de vertices existentes es menor que cantidad maxima de vertices del grafo
 			Vertice nv = Vertice(v, numVerts);				//construye un nuevo vertice con el nombre recibido
-			verts[numVerts] = nv; 							//incorpora el nuevo vertice en vector de vértices
+			verts[numVerts] = nv; 							//incorpora el nuevo vertice en vector de vï¿½rtices
 			setNumVerts(getNumVerts()+1);					//incrementa cantidad de vertices existentes en el grafo
 		}
 	}
@@ -203,4 +203,4 @@ bool GrafoMatriz::adyacente(string a, string b) {			//determina si dos vertices 
 		return false;										//como no existen vertices, devuelve falso
 	}
 }
-#endif
+//#endif
