@@ -12,7 +12,6 @@ int main()
     GrafoLista ingresarVertices(int n1);
     void ingresarArcos(GrafoLista * g);          // añade arcos => grafos no valorados
     void imprimirGrafo(GrafoLista g);            // prototipo de la funcion que presenta los vertices del grafo
-    void imprimirLista(GrafoLista g);            // prototipo de la funcion que presenta los vertices apuntados desde cada uno, y su peso
     void verticeMayorEntrada(GrafoLista g);      // prototipo de función que permite encontrar el vertice con mayor grado de entrada
     void verticeMayorSalida(GrafoLista g);       // prototipo de funcion que permite encontrar el vertice con mayor grado de salida
     bool comprobarIgualdad(GrafoLista g, int x); // prototipo de funcion que comprueba si todos los vertices tienen el mismo grado de entrada o salida
@@ -102,40 +101,6 @@ void imprimirGrafo(GrafoLista g)
     cout << endl
          << "===============================================";
     cout << endl;
-}
-
-void imprimirLista(GrafoLista g)
-{ // funcion que presenta los datos del grafo
-    int nv = g.getNumVerts();
-    NodoG *actual; // apunta al nodo actual de la lista
-    int y = 0;
-
-    cout << endl
-         << "ELEMENTOS CONTENIDOS EN LA LISTA";
-
-    for (int i = 0; (i < nv); i++)
-    {
-        Vertice x = g.getVertice(i);
-        cout << endl
-             << "Vertice No. " << x.getNumero() + 1 << " - " << x.getNombre() << " - ";
-
-        ListaG vlista = g.listaAdyacencia(i);
-        if (!vlista.esVacia())
-        {
-            actual = vlista.getPrimero(); // copiar la direccion del primer nodo de la lista
-            y = actual->getDato();        // nodo actual
-            while (actual != NULL)
-            { // repetir el ciclo mientras haya nodos en la lista
-                cout << endl
-                     << "> " << y << " > " << actual->getPeso(); // visualiza el contenido del nodo actual de la lista
-                actual = actual->getPunt();                      // apuntador actual avanza al siguiente nodo
-            }
-        }
-        else
-        {
-            cout << "No tiene vertices de salida" << endl;
-        }
-    }
 }
 
 bool comprobarIgualdad(GrafoLista g, int x) // prototipo de funcion que comprueba si todos los vertices tienen el mismo grado de entrada o salida

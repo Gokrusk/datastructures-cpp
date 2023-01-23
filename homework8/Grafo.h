@@ -37,8 +37,9 @@ public:			  // m�todos p�blicos de la clase GrafoMatriz
 	bool getArco(int va, int vb);			 // devuelve el valor de un arco recibiendo numeros de vertices
 	bool getArco(string a, string b);		 // devuelve el valor de un arco recibiendo nombres de vertices
 
-	int getNumVertice(string v); // devuelve el numero de vertice conociendo su nombre
-	void nuevoVertice(string v); // crea un nuevo vertice recibiendo su nombre
+	int getNumVertice(string v);	// devuelve el numero de vertice conociendo su nombre
+	void nuevoVertice(string v);	// crea un nuevo vertice recibiendo su nombre
+	void eliminarVertice(string v); // elimina vertice recibiendo su nombre
 
 	bool adyacente(int va, int vb);		// determina si dos vertices son adyacentes recibiendo numeros de vertices
 	bool adyacente(string a, string b); // determina si dos vertices son adyacentes recibiendo sus nombres
@@ -150,6 +151,27 @@ void Grafo::nuevoVertice(string v)
 			Vertice nv = Vertice(v, numVerts); // construye un nuevo vertice con el nombre recibido
 			verts[numVerts] = nv;			   // incorpora el nuevo vertice en vector de v�rtices
 			setNumVerts(getNumVerts() + 1);	   // incrementa cantidad de vertices existentes en el grafo
+		}
+	}
+}
+
+void Grafo::eliminarVertice(string v)
+{
+	int x = getNumVertice(v);
+	bool existe = (x >= 0); // determina si ese vertice ya existe
+	if (existe)
+	{
+		if (getNumVerts() >= 0)
+		{								   // si numero de vertices existentes es menor que cantidad maxima de vertices del grafo
+			//verts[x] = 0xFFFF;			   // incorpora el nuevo vertice en vector de v�rtices
+			for (int i = x; i < getNumVerts(); i++) // ciclo recorrido de valores
+			{
+				if (i < getNumVerts() - 1)
+				{
+					verts[i] = verts[i + 1];
+				}
+			}
+			setNumVerts(getNumVerts() - 1); // incrementa cantidad de vertices existentes en el grafo
 		}
 	}
 }
@@ -324,6 +346,7 @@ public:
 	void setArco(string a, string b, int v); // actualiza valor de arco recibiendo nombres de vertices
 	int getArco(int va, int vb);			 // devuelve el valor de un arco recibiendo numeros de vertices
 	int getArco(string a, string b);		 // devuelve el valor de un arco recibiendo nombres de vertices
+	void eliminarArco(string a);
 	bool adyacente(int va, int vb);			 // determina si dos vertices son adyacentes recibiendo numeros de vertices
 	bool adyacente(string a, string b);		 // determina si dos vertices son adyacentes recibiendo sus nombres
 	ListaG listaAdyacencia(int v);			 // metodo que devuelve la lista de adyacencia del vertice v
@@ -370,6 +393,21 @@ void GrafoLista::setArco(string a, string b)
 	if ((va >= 0) && (vb >= 0))
 	{									// comprueba existencia de los dos vertices
 		arcos[va]->insertarAlFinal(vb); // a�ade un nuevo vertice en la lista de este elemento del vector
+	}
+}
+
+void GrafoLista::eliminarArco(string a)
+{						   // actualiza valor de arco recibiendo nombres de vertices en grafos no valorados
+	int va, vb;			   // variables para contener numeros de los vertices recibidos por nombre
+	va = getNumVertice(a); // calcula numero de vertice del primer nombre recibido
+
+	if ((va >= 0))
+	{									// comprueba existencia de los dos vertices
+		for (int i = 0; i < getNumVerts(); i++)
+		{
+			arcos[i]->eliminarNodoDeLista(va);
+			arcos[va]->eliminarNodoDeLista(i);
+		}
 	}
 }
 
