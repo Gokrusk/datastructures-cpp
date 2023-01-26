@@ -24,15 +24,15 @@ int main(){
 	cin.ignore();
 	
 	g = ingresarVertices(n);					//llamado a funcion de ingreso de los datos referentes al grafo
-	//ingresarArcos(&g);						//llamado a la funcion que ingresa los arcos del grafo
-	ingresarArcosValor(&g);						//llamado a la funcion que ingresa los arcos valorados del grafo
+	ingresarArcos(&g);						//llamado a la funcion que ingresa los arcos del grafo
+	//ingresarArcosValor(&g);						//llamado a la funcion que ingresa los arcos valorados del grafo
 	imprimirGrafo(g);							//llamado a la funcion que imprime la matriz de adyacencia
 	
 	recorrerGrafo(g);							//llamado a la funcion que recorre un grafo
-	matrizCaminos(g);							//llamado a la funcion que genera la matriz de caminos
+	//matrizCaminos(g);							//llamado a la funcion que genera la matriz de caminos
 	
-	calcularCaminoMinimo(g);					//llamado a la funcion que calcula el camino minimo
-	caminosMinimosHastaX(g);					//llamado a la funcion que calcula los caminos minimos desde todos los vertices hasta vertice X
+	//calcularCaminoMinimo(g);					//llamado a la funcion que calcula el camino minimo
+	//caminosMinimosHastaX(g);					//llamado a la funcion que calcula los caminos minimos desde todos los vertices hasta vertice X
 	
 	cout << endl;
 	system("pause");
@@ -58,7 +58,7 @@ void ingresarArcos(GrafoMatriz *g){				//funcion que ingresa los datos de los ar
 	for (int i = 0; (i < nv); i++){
 		Vertice x = g->getVertice(i);
 		cout << endl << "Vertice No. " << x.getNumero()+1 << " - " << x.getNombre() << " - ";
-		cout << endl << "CANTIDAD DE ARCOS DE SALIDA DEL VERTICE";
+		cout << endl << "CANTIDAD DE ARCOS DE SALIDA DEL VERTICE"<<endl;
 		na = leerN(0, 10);
 		cin.ignore();
 		
@@ -185,7 +185,7 @@ void calcularCaminoMinimo(GrafoMatriz g){		//funcion que calcula el camino minim
 	
 	CaminoMinimo c(g, g.getNumVertice(aux1));	//instancia la clase camino minimo para posibilitar su uso
 	
-	c.Dijkstra(g, g.getNumVertice(aux1));		//llama al metodo que aplica alg. Dijkstra				
+	c.Dijkstra(g);		//llama al metodo que aplica alg. Dijkstra				
 	v1 = c.OdistanciaMinima();					//recibe el vector de distancias minimas desde ese origen
 
 	cout << endl << "COSTOS MINIMOS DESDE EL VERTICE " << aux1;
@@ -217,7 +217,7 @@ void caminosMinimosHastaX(GrafoMatriz g){		//funcion PARA ENCONTRAR LOS CAMINOS 
 		if (i != g.getNumVertice(aux1)){		//no se calcula el costo minimo desde el mismo vertice x
 			cout << endl << "Desde vertice " << g.getVertice(i).getNombre() << " => ";
 			CaminoMinimo c(g, i);				//instancia la clase camino minimo para posibilitar su uso
-			c.Dijkstra(g, i);					//llama al metodo que aplica alg. Dijkstra				
+			c.Dijkstra(g);					//llama al metodo que aplica alg. Dijkstra				
 			v1 = c.OdistanciaMinima();			//recibe el vector de distancias minimas desde ese origen
 			cout << "Costo calculado: ";
 			if (v1[g.getNumVertice(aux1)] == 0xFFFF){			//no se pudo calcular el costo minimo
