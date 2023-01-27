@@ -17,20 +17,24 @@ int main()
     int n; // cantidad de vertices a crear
 
     GrafoMatriz ingresarVertices(int n1);
+    ListaG listaVisita(GrafoMatriz g);
     void ingresarArcos(GrafoMatriz * g); // a�ade arcos => grafos valorados
     void imprimirGrafo(GrafoMatriz g);   // prototipo de la funcion que presenta los vertices del grafo
+    void imprimirLista(ListaG l, GrafoMatriz g);
     void recorrerGrafo(GrafoMatriz g);
 
     cout << endl
          << "CANTIDAD DE VERTICES DEL GRAFO" << endl;
     n = leerN(1, 20); // lectura de cantidad de vertices del grafo
     cin.ignore();
-
+    ListaG l;
     g = ingresarVertices(n); // llamado a funcion de ingreso de los datos referentes al grafo
     ingresarArcos(&g);       // llamado a la funcion que ingresa los arcos del grafo
     imprimirGrafo(g);        // llamado a la funcion que imprime la matriz de adyacencia
-    recorrerGrafo(g);
     cout << endl;
+    //recorrerGrafo(g);
+    l = listaVisita(g);
+    imprimirLista(l, g);
     cout << endl;
     system("pause");
 }
@@ -109,6 +113,79 @@ void imprimirGrafo(GrafoMatriz g)
     cout << endl;
 }
 
+void imprimirLista(ListaG l, GrafoMatriz g) // recorrido de la lista
+{
+    NodoG *actual;            // referencia al nodo actual de la lista
+    actual = l.getPrimero(); // almacenar temporalmente la posición del primer nodo de la lista
+
+    while (actual != NULL) // repetir mientras no se alacance el final de la lista
+    {
+        cout << " " << g.getVertice(actual->getDato()).getNombre();
+        actual = actual->getPunt(); // desplaza el puntero actual al siguiente nodo
+    }
+    cout <<endl;
+}
+
+void buscarAnterior(ListaG *l, GrafoMatriz g)
+{
+    ListaG aux;
+    NodoG *val;
+
+    val = l->getPrimero();
+
+    while (val != NULL)
+    {
+        aux.insertarAlFinal(val->getDato());
+        val = val->getPunt();
+    }
+
+    while (true)
+    {
+        aux.eliminarNodoDeLista(aux.ultimoValorDeLista()->getDato());
+
+        l->insertarAlFinal(aux.ultimoValorDeLista()->getDato());
+
+        for (int i = 1; i < g.getNumVerts(); i++)
+        {
+            if (g.adyacente(aux.ultimoValorDeLista()->getDato(), i) && l->buscarValorEnLista(i) == NULL)
+                return;
+        }
+    }
+}
+ListaG listaVisita(GrafoMatriz g)
+{
+    ListaG visita;
+    NodoG *aux;
+    int r = rand()%g.getNumVerts();
+    visita.insertarAlFinal(r);
+
+    int con = 1;
+
+    aux->setDato(r);
+
+    for (int i = 0; i < g.getNumVerts(); i++)
+    {
+        if (g.adyacente(aux->getDato(), i) && visita.buscarValorEnLista(i) == NULL)
+        {
+            con++;
+            visita.insertarAlFinal(i);
+            aux->setDato(i);
+            i = 1;
+        }
+
+        if (i == g.getNumVerts() - 1)
+        {
+            buscarAnterior(&visita, g);
+            aux->setDato(visita.ultimoValorDeLista()->getDato());
+
+            i = 0;
+        }
+
+        if (con == g.getNumVerts())
+            break;
+    }
+    return visita;
+}
 void recorrerGrafo(GrafoMatriz g)
 {
     cout<<"RECORRIDO DE SALAS"<<endl;
@@ -116,4 +193,4 @@ void recorrerGrafo(GrafoMatriz g)
     x.Recorrer(g);
 }
 
-// rand()%g.getNumverts();						//genera un valor aleatorio entre 0 y numVertices
+// int r = rand()%g.getNumVerts();	//genera un valor aleatorio entre 0 y numVertices

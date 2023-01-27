@@ -178,6 +178,7 @@ void eliminarVertice(GrafoLista *g) // prototipo de funcion que elimina un verti
                 c.insertarVal(i); // insertando indices de vertices restantes
             }
         }
+    }
         i = 0;
         while (i == c.extraerVal())
         {
@@ -197,5 +198,4 @@ void eliminarVertice(GrafoLista *g) // prototipo de funcion que elimina un verti
             }
             i++;
         }
-    }
 }

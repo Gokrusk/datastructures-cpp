@@ -124,7 +124,7 @@ void distanciaArcos(GrafoMatriz g)	// encuentra vertices que se encuentran a N a
 		if ( v != i)
 		{							   // no se calcula el costo minimo desde el mismo vertice x
 			CaminoMinimo c(g, v);	   // instancia la clase camino minimo para posibilitar su uso
-			c.Dijkstra(g, v);		   // llama al metodo que aplica alg. Dijkstra
+			c.Dijkstra(g);		   // llama al metodo que aplica alg. Dijkstra
 			v1 = c.OdistanciaMinima(); // recibe el vector de distancias minimas desde ese origen
 			if (v1[i] == 0xFFFF)
 			{ // no se pudo calcular el costo minimo
