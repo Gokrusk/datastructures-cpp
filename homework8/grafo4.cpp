@@ -15,25 +15,26 @@ int main()
 {
     GrafoMatriz g;
     int n; // cantidad de vertices a crear
+    ListaG l;
 
     GrafoMatriz ingresarVertices(int n1);
-    ListaG listaVisita(GrafoMatriz g);
+    ListaG listaSalas(GrafoMatriz g);
     void ingresarArcos(GrafoMatriz * g); // a�ade arcos => grafos valorados
     void imprimirGrafo(GrafoMatriz g);   // prototipo de la funcion que presenta los vertices del grafo
     void imprimirLista(ListaG l, GrafoMatriz g);
-    void recorrerGrafo(GrafoMatriz g);
+    void salaAnterior(ListaG *l, GrafoMatriz g);
 
     cout << endl
          << "CANTIDAD DE VERTICES DEL GRAFO" << endl;
     n = leerN(1, 20); // lectura de cantidad de vertices del grafo
     cin.ignore();
-    ListaG l;
+    
     g = ingresarVertices(n); // llamado a funcion de ingreso de los datos referentes al grafo
     ingresarArcos(&g);       // llamado a la funcion que ingresa los arcos del grafo
     imprimirGrafo(g);        // llamado a la funcion que imprime la matriz de adyacencia
     cout << endl;
-    //recorrerGrafo(g);
-    l = listaVisita(g);
+
+    l = listaSalas(g);
     imprimirLista(l, g);
     cout << endl;
     system("pause");
@@ -126,7 +127,7 @@ void imprimirLista(ListaG l, GrafoMatriz g) // recorrido de la lista
     cout <<endl;
 }
 
-void buscarAnterior(ListaG *l, GrafoMatriz g)
+void salaAnterior(ListaG *l, GrafoMatriz g)
 {
     ListaG aux;
     NodoG *val;
@@ -152,45 +153,36 @@ void buscarAnterior(ListaG *l, GrafoMatriz g)
         }
     }
 }
-ListaG listaVisita(GrafoMatriz g)
+ListaG listaSalas(GrafoMatriz g)
 {
-    ListaG visita;
+    ListaG salas;
     NodoG *aux;
+    int cont = 1;
     int r = rand()%g.getNumVerts();
-    visita.insertarAlFinal(r);
 
-    int con = 1;
-
+    salas.insertarAlFinal(r);
     aux->setDato(r);
 
     for (int i = 0; i < g.getNumVerts(); i++)
     {
-        if (g.adyacente(aux->getDato(), i) && visita.buscarValorEnLista(i) == NULL)
+        if (g.adyacente(aux->getDato(), i) && salas.buscarValorEnLista(i) == NULL)
         {
-            con++;
-            visita.insertarAlFinal(i);
+            cont++;
+            salas.insertarAlFinal(i);
             aux->setDato(i);
             i = 1;
         }
 
         if (i == g.getNumVerts() - 1)
         {
-            buscarAnterior(&visita, g);
-            aux->setDato(visita.ultimoValorDeLista()->getDato());
-
+            salaAnterior(&salas, g);
+            aux->setDato(salas.ultimoValorDeLista()->getDato());
             i = 0;
         }
 
-        if (con == g.getNumVerts())
-            break;
+        if (cont == g.getNumVerts()) break;
     }
-    return visita;
-}
-void recorrerGrafo(GrafoMatriz g)
-{
-    cout<<"RECORRIDO DE SALAS"<<endl;
-    CaminoMinimo x(g,rand()%g.getNumVerts());
-    x.Recorrer(g);
+    return salas;
 }
 
 // int r = rand()%g.getNumVerts();	//genera un valor aleatorio entre 0 y numVertices
