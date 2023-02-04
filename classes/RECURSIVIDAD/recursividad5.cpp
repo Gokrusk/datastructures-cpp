@@ -1,5 +1,5 @@
 // 7. Programa que permita ingresar varios numeros enteros y determinar los valores perfectos, deficientes, abundantes
-// Perfecto: suma de divisores propios es igual al mismo numero ej{8: 1, 2, 4 ; 7}
+// Perfecto: suma de divisores propios es igual al mismo numero ej{6: 1, 2, 3 ; 6}
 // Deficiente: suma de divisores propios es menor al mismo numero ej{5: 1; 1}
 // Abundante: suma de divisores propios es mayor al mismo numero ej{12: 1, 2, 3, 4, 6; 17}
 #include <iostream>
@@ -41,7 +41,7 @@ void leer(int l, int n, int x, int d, int s)
 		}
 		else if (s > n)
 		{
-			cout << "El numero " << n << " ses abundante" << endl;
+			cout << "El numero " << n << " es abundante" << endl;
 		}
 	}
 }
