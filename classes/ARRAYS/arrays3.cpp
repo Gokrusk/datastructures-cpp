@@ -27,51 +27,51 @@ int main()
 	printV(v, n);				   // imprimir vector
 	// printAlrevez(v, n);	   // imprimir alrevez
 
-	calSumVec(v, &acum, n); // suma elementos vector
-	cout << "Ingrese el valor a insertar: ";
-	cin >> val;
-	cout << "Ingrese la posicion en la que va a insertar: ";
-	cin >> pos;
-	insertarElemento(v, &n, val, pos); // insertar elemento
-	printV(v, n);
+	// calSumVec(v, &acum, n); // suma elementos vector
+	// cout << "Ingrese el valor a insertar: ";
+	// cin >> val;
+	// cout << "Ingrese la posicion en la que va a insertar: ";
+	// cin >> pos;
+	// insertarElemento(v, &n, val, pos); // insertar elemento
+	// printV(v, n);
 
-	cout << "Ingrese la posicion a eliminar: ";
-	cin >> poseli;
-	eliminarElemento(v, &n, poseli); // eliminar elemento
-	printV(v, n);
+	// cout << "Ingrese la posicion a eliminar: ";
+	// cin >> poseli;
+	// eliminarElemento(v, &n, poseli); // eliminar elemento
+	// printV(v, n);
 
-	cout << "Ingrese elemento a buscar: ";
-	cin >> val;
-	pos2 = buscarElemento(v, n, val);
-	if (pos2 == -1)
-	{
-		cout << "El valor no existe" << endl;
-	}
-	else
-	{
-		cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
-	}
+	// cout << "Ingrese elemento a buscar: ";
+	// cin >> val;
+	// pos2 = buscarElemento(v, n, val);
+	// if (pos2 == -1)
+	// {
+	// 	cout << "El valor no existe" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
+	// }
 
-	ordenarBubble(v, n);
-	printV(v, n);
+	// ordenarBubble(v, n);
+	// printV(v, n);
 
-	pos2 = busquedaBinaria(v, n, val);
-	if (pos2 == -1)
-	{
-		cout << "El valor no existe" << endl;
-	}
-	else
-	{
-		cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
-	}
+	// pos2 = busquedaBinaria(v, n, val);
+	// if (pos2 == -1)
+	// {
+	// 	cout << "El valor no existe" << endl;
+	// }
+	// else
+	// {
+	// 	cout << "El elemento " << val << " se encuentra en la posicion: " << pos2 << endl;
+	// }
 
-	// cout << "Suma de elementos: " << acum << endl;
-	cout<<endl<<"Leer vector: "<<endl;
-	leerV(v, n); // leer vector
-	ordenarInsercion(v, n);
-	printV(v, n);
-	cout<<endl<<"Leer vector: "<<endl;
-	leerV(v, n); // leer vector
+	// // cout << "Suma de elementos: " << acum << endl;
+	// cout<<endl<<"Leer vector: "<<endl;
+	// leerV(v, n); // leer vector
+	// ordenarInsercion(v, n);
+	// printV(v, n);
+	// cout<<endl<<"Leer vector: "<<endl;
+	// leerV(v, n); // leer vector
 	ordernarSeleccion(v, n);
 	printV(v, n);
 	system("pause");
@@ -228,12 +228,9 @@ void ordernarSeleccion(int a[], int n)
 			{
 				min = j;
 			}
-			if (min != i)
-			{
-				aux = a[min];
-				a[min] = a[i];
-				a[i] = aux;
-			}
 		}
+			aux = a[min];
+			a[min] = a[i];
+			a[i] = aux;
 	}
 }
