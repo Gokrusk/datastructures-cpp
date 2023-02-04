@@ -1,4 +1,4 @@
-// Administracion de una pila  con recursividad
+// Administrar un stack con recursividad
 #include <iostream>
 using namespace std;
 #include "pila.h"
@@ -49,14 +49,11 @@ int main()
 void insertElements(Pila *p, Tipo x) // funcion recursiva para insertar elementos en una pila
 {
     Tipo f = 999;
+    cout << "Ingrese elemento: ";
+    cin >> x;
     if (x != f)
     {
-        cout << "Ingrese elemento: ";
-        cin >> x;
-        if (x != f)
-        {
-            p->push(x);
-        }
+        p->push(x);
         insertElements(p, x);
     }
 }

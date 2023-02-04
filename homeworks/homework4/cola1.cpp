@@ -11,8 +11,8 @@ int main()
     // PROTOTIPOS
     void ingresarCola(Cola * a);                      // metodo para insertar valores a cola
     void imprimirCola(Cola a);                        // metodo para imprimir cola
-    Tipo buscarPares(Cola a, Cola * b, Pila p);       // metodo para buscar los pares e invertir
-    Tipo insertarParesInvertidos(Cola * a, Cola * b); // metodo para insertar pares invertidos
+    void buscarPares(Cola a, Cola * b, Pila p);       // metodo para buscar los pares e invertir
+    void insertarParesInvertidos(Cola * a, Cola * b); // metodo para insertar pares invertidos
     Cola b, c;
     Pila p;
     Tipo val;
@@ -54,7 +54,7 @@ void imprimirCola(Cola a)
     cout << "]";
 }
 
-Tipo buscarPares(Cola a, Cola *b, Pila p)
+void buscarPares(Cola a, Cola *b, Pila p)
 {
     Tipo aux;
     while (!a.colaVacia()) // mientras no este vacia
@@ -71,7 +71,7 @@ Tipo buscarPares(Cola a, Cola *b, Pila p)
     }
 }
 
-Tipo insertarParesInvertidos(Cola *a, Cola *b)
+void insertarParesInvertidos(Cola *a, Cola *b)
 {
     Cola c;
     Tipo aux1, aux2;
