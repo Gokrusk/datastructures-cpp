@@ -213,16 +213,14 @@ void buscar(int a[], int n, int op) // funcion para buscar un elemento en el arr
         i = 0,
         f = n,
         m = (i + f) / 2;
+    cout << "Ingrese elemento a buscar: ";
+    cin >> x;
     switch (op)
     {
     case 1:
-        cout << "Ingrese elemento a buscar: ";
-        cin >> x;
         pos = busquedaSecuencial(a, n, x);
         break;
     case 2:
-        cout << "Ingrese elemento a buscar: ";
-        cin >> x;
         pos = busquedaBinaria(a, n, x, i, 0, f);
     }
     if (pos == -1)
@@ -295,11 +293,10 @@ void loop2(int a[], int j, int k, int n, int min, int aux)
 void selectionSort(int a[], int n, int j, int k) // funcion recursiva para ordenar elementos de un array mediante selection sort
 {
     int min = 0;
-    if(n >= 1)
+    if (n >= 1)
     {
-        selectionSort(a,n-1,j,k);
-        min = n-1;
-        loop2(a,n,n-1,k,min,0);
+        selectionSort(a, n - 1, j, k);
+        min = n - 1;
+        loop2(a, n, n - 1, k, min, 0);
     }
-    
 }
