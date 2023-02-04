@@ -38,7 +38,7 @@ void ingresarLista(Lista *a){	//funcion que ingresa los valores a incluir en la 
 
 		if (aux != fin){								//no ingresa marcador de fin de lectura
 //			a->insertarAlInicio(aux);					//llamado al metodo que inserta un nuevo nodo al inicio de una lista
-			a->insertarAlFinal(aux);					//llamado al metodo que inserta un nuevo nodo al final de una lista
+			a->insertarNodoFinal(aux);					//llamado al metodo que inserta un nuevo nodo al final de una lista
 //			a->insertarEnOrden(aux);					//llamado al metodo que inserta un nuevo nodo ordenadamente en una lista
 		}
 	}while (aux != fin);								//termina lectura con ingreso de marcador de fin

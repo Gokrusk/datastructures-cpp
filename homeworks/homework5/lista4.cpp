@@ -34,18 +34,6 @@ void leerLista(Lista *a) // insertar datos en una lista
     } while (x != fin);
 }
 
-Tipo invertirValor(Tipo x)
-{
-    Tipo aux,n;
-    while (x > 0 || x < 0)
-    {
-        aux = x % 10;
-        n = (n * 10) + aux;
-        x /= 10;
-    }
-    return n;
-}
-
 void imprimirLista(Lista a)
 {
     // recorrido de la lista
