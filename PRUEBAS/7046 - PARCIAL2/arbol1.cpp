@@ -2,25 +2,25 @@
 // de enteros positivos, y proceda a presentar un listado ordenado descendentemente de los niveles del mismo,
 // en base a la suma de valores de nodos.
 
-    //impresion de niveles con una lista con la suma e imprimir los niveles si su suma coincida con los elementos de la lista suma
 #include <iostream>
 using namespace std;
 #include "arbolbinario.h"
 #include "lista.h"
 int main()
 {
-    // PROTOTIPOS
-    void ingresarAB(ArbolBinario * a); // funcion que ingresa un arbol binario
-    void leerAB(ArbolBinario * a);
-    int contarNodosIzquierdos(NodoBinario * p);
-    int contarNodosDerechos(NodoBinario * p);
-    void nivelArbol(int *nivel, int cont1, int cont2);
-    void niveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]);
-    void sumarNivel(Lista l);
-    void impresionNiveles(Lista a[], int n);
     int cont = 0, cont1 = 0, cont2 = 0, nivel = 0;
     ArbolBinario a;
     int aux = 0;
+    // PROTOTIPOS
+    void ingresarAB(ArbolBinario * a); // funcion que ingresa un arbol binario
+    void leerAB(ArbolBinario * a);
+    int contarNodosIzquierdos(NodoBinario * p); // funcion para contar nodos de la izquierda
+    int contarNodosDerechos(NodoBinario * p);   // funcion para contar nodos de la derecha
+    void nivelArbol(int *nivel, int cont1, int cont2);  // funcion para establecer el nivel del arbol
+    void niveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]); // funcion para insertar los niveles del arbol en listas
+    void sumarNivel(Lista l);   // funcion para sumar los elementos de los niveles del arbol
+    void impresionNiveles(Lista a[], int n);    // funcion para imprimir los niveles con la suma
+
     leerAB(&a);
     cout << endl
          << "ARBOL BINARIO" << endl;
@@ -29,16 +29,10 @@ int main()
     cont2 = contarNodosDerechos(a.getRaiz());
     nivelArbol(&nivel, cont1, cont2);
     cout << endl
-         << "Nivel del arbol: " << nivel << endl
-         << endl;
+         << "Nivel del arbol: " << nivel << endl;
     Lista *m;
     m = new Lista[nivel];
     niveles(a.getRaiz(), 0, 0, aux, m);
-    for (int i = 0; i < nivel; i++)
-    {
-        sumarNivel(m[i]);
-    }
-    // sumarNivel(m);
     impresionNiveles(m, nivel);
     return 0;
 }
@@ -91,7 +85,7 @@ int contarNodosIzquierdos(NodoBinario *p)
 {
     if (p != NULL)
     {
-        return 1 + contarNodosIzquierdos(p->getIzq());
+        return 1 + contarNodosIzquierdos(p->getIzq());  // cuenta nodos izquierdos
     }
     else
         return 0;
@@ -101,7 +95,7 @@ int contarNodosDerechos(NodoBinario *p)
 {
     if (p != NULL)
     {
-        return 1 + contarNodosDerechos(p->getDer());
+        return 1 + contarNodosDerechos(p->getDer());    // cuenta nodos derechos
     }
     else
         return 0;
@@ -110,22 +104,20 @@ void nivelArbol(int *nivel, int cont1, int cont2)
 {
     if (cont1 > cont2)
     {
-        *nivel = cont1;
+        *nivel = cont1; // si nodos izquierdos son mayores, ese es el nivel
     }
     else
-        *nivel = cont2;
+        *nivel = cont2; // si nodos derechos son mayores, ese es el nivel
 }
 void niveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
 {
-    aux = 0;
     if (p == NULL)
     {
         return;
     }
     if (nivel == nivelaux)
     {
-        aux += p->getDato();
-        l[nivel].insertarEnOrden(aux);
+        l[nivel].insertarEnOrden(p->getDato()); // inserta en una lista los elementos de cada nivel
         niveles(p->getIzq(), nivel + 1, nivelaux + 1, aux, l);
         niveles(p->getDer(), nivel + 1, nivelaux + 1, aux, l);
     }
@@ -137,27 +129,39 @@ void sumarNivel(Lista l)
     actual = l.getPrimero();
     while (actual != NULL)
     {
-        aux += actual->getDato();
+        aux += actual->getDato();   // suma los elementos de cada lista
         actual = actual->getPunt();
     }
-    l.insertarNodoFinal(aux);
+    l.insertarNodoFinal(aux);   // inserta esa suma al final
 }
 void impresionNiveles(Lista a[], int n)
 {
+    Lista m;    // lista de sumas
     cout << endl;
-    // recorrido de la lista
     Nodo *actual; // referencia a nodo actual de la lista
     for (int i = 0; i < n; i++)
     {
-        cout << "NIVEL " << i << ":" << endl;
-        actual = a[i].getPrimero(); // almacena temporalmente la posicion del primer nodo
+        sumarNivel(a[i]);   // suma los elementos de cada lista
+        m.insertarEnOrden(a[i].ultimoNodo()->getDato());    // inserta esa suma en una lista
+    }
+    for (int i = 0; i < n; i++)
+    {
         cout << "[ ";
-        while (actual != NULL)
+        for (int j = 0; j < n; j++)
         {
-            cout << actual->getDato() << " ";
-            actual = actual->getPunt();
+            if (a[j].ultimoNodo()->getDato() == m.ultimoNodo()->getDato())  // si la suma (que esta en el ultimo nodo de cada lista) coincide con el ultimo nodo de la lista de sumas
+            {
+                a[j].eliminarNodo(a[j].ultimoNodo()->getDato());    // se elimina nodo de suma para no imprimirlo
+                actual = a[j].getPrimero(); // almacena temporalmente la posicion del primer nodo
+                while (actual != NULL)
+                {
+                    cout << actual->getDato() << " ";
+                    actual = actual->getPunt();
+                }
+            }
         }
-        cout << "]" << endl;
+        cout << "]: "<<m.ultimoNodo()->getDato()<<endl; // se imprime la suma del nivel
+        m.eliminarNodo(m.ultimoNodo()->getDato());  // se elimina la suma de la lista de listas
     }
 }
 /*EJEMPLO
