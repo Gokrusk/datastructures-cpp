@@ -8,8 +8,8 @@
 int main(){											//programa principal
 	int n;
 	
-	// n = leerN(1,20);								//cantidad de elementos
-	// Monticulo m(n);									//creacion de monticulo
+	n = leerN(1,20);								//cantidad de elementos
+	Monticulo m(n);									//creacion de monticulo
 	
 	void leerMonticulo(Monticulo * m1, int n1);		//prototipo de la funcion que lee un monticulo de datos
 	void imprimirMonticulo(Monticulo m1, int n1);	//prototipo de la funcion que imprime un monticulo
@@ -17,14 +17,15 @@ int main(){											//programa principal
 	void eliminarMinimo(Monticulo *m1);				//prototipo de la funcion que elimina el valor minimo del monticulo y lo reordena
 	void ordenacionVectorHeaps();					//prototipo de la funcion que demuestra ordenacion de vector por medio de heaps
 	void merge2Heaps();
-	// leerMonticulo(&m, n);							//llamada a ingreso de monticulo
-	// imprimirMonticulo(m, n);						//llamada a impresion de monticulo
+	
+	leerMonticulo(&m, n);							//llamada a ingreso de monticulo
+	imprimirMonticulo(m, n);						//llamada a impresion de monticulo
 
 	//imprimirMinimo(m);
 
 	//eliminarMinimo(&m);
 	//imprimirMonticulo(m, n);
-	merge2Heaps();
+	// merge2Heaps();
 	//ordenacionVectorHeaps();						//llama a funcion demostrativa de ordenamiento vectores => metodo 1
 	
 	cout << endl;

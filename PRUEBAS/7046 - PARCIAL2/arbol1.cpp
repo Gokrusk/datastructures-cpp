@@ -10,17 +10,17 @@ int main()
 {
     int cont = 0, cont1 = 0, cont2 = 0, nivel = 0;
     ArbolBinario a;
-    int aux = 0;
     // PROTOTIPOS
-    void ingresarAB(ArbolBinario * a); // funcion que ingresa un arbol binario
-    void leerAB(ArbolBinario * a);
+    void leerAB(ArbolBinario * a);  // funcion para ingresar un arbol binario
     int contarNodosIzquierdos(NodoBinario * p); // funcion para contar nodos de la izquierda
     int contarNodosDerechos(NodoBinario * p);   // funcion para contar nodos de la derecha
     void nivelArbol(int *nivel, int cont1, int cont2);  // funcion para establecer el nivel del arbol
-    void niveles(NodoBinario * p, int nivel, int nivelaux, int aux, Lista l[]); // funcion para insertar los niveles del arbol en listas
+    void niveles(NodoBinario * p, int nivel, int nivelaux, Lista l[]); // funcion para insertar los niveles del arbol en listas
     void sumarNivel(Lista l);   // funcion para sumar los elementos de los niveles del arbol
     void impresionNiveles(Lista a[], int n);    // funcion para imprimir los niveles con la suma
 
+    cout << endl
+         << "INGRESO ARBOL BINARIO" << endl;
     leerAB(&a);
     cout << endl
          << "ARBOL BINARIO" << endl;
@@ -32,7 +32,7 @@ int main()
          << "Nivel del arbol: " << nivel << endl;
     Lista *m;
     m = new Lista[nivel];
-    niveles(a.getRaiz(), 0, 0, aux, m);
+    niveles(a.getRaiz(), 0, 0, m);
     impresionNiveles(m, nivel);
     return 0;
 }
@@ -109,7 +109,7 @@ void nivelArbol(int *nivel, int cont1, int cont2)
     else
         *nivel = cont2; // si nodos derechos son mayores, ese es el nivel
 }
-void niveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
+void niveles(NodoBinario *p, int nivel, int nivelaux, Lista l[])
 {
     if (p == NULL)
     {
@@ -118,8 +118,8 @@ void niveles(NodoBinario *p, int nivel, int nivelaux, int aux, Lista l[])
     if (nivel == nivelaux)
     {
         l[nivel].insertarEnOrden(p->getDato()); // inserta en una lista los elementos de cada nivel
-        niveles(p->getIzq(), nivel + 1, nivelaux + 1, aux, l);
-        niveles(p->getDer(), nivel + 1, nivelaux + 1, aux, l);
+        niveles(p->getIzq(), nivel + 1, nivelaux + 1, l);
+        niveles(p->getDer(), nivel + 1, nivelaux + 1, l);
     }
 }
 void sumarNivel(Lista l)
