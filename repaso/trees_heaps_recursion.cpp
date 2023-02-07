@@ -1,4 +1,4 @@
-// Guardar un árbo en un heap y viceversa
+// Guardar elementos de un árbol en un heap y viceversa
 
 #include <iostream>
 using namespace std;
@@ -9,14 +9,12 @@ using namespace std;
 int main()
 {
     ArbolBinario a;
-    int n = 0, n1 = 0;
+    int n = 0;
 
     void leerAB(ArbolBinario * a);                                               // funcion para ingresar un arbol binario
     void ingresarMonticulo(NodoBinario * p, int nivel, int nivelaux, Lista l[]); // funcion recurisva para obtener nodos de un arbol
     void imprimirMonticulo(Monticulo m, int n);                                  // funcion que imprime un monticulo
-    void ordenarMonticulo(Monticulo * m, Monticulo m1, int n);                   // funcion recursiva para ordenar un monticulo
     void loopInsercion(Monticulo * m, Lista l[], int n);                         // funcion recursiva para insertar nodos de arbol en monticulo
-    void impresionNiveles(Lista a[], int n);                                     // funcion para imprimir los niveles con la suma
 
     cout << endl
          << "INGRESO ARBOL BINARIO" << endl;
@@ -30,12 +28,12 @@ int main()
     Monticulo m(n);
 
     cout << endl
-         << "INGRESO DE ELEMENTOS EN UN MONTICULO" << endl;
+         << "ELEMENTOS DE UN ARBOL EN UN MONTICULO" << endl;
     ingresarMonticulo(a.getRaiz(), 0, 0, v);
     loopInsercion(&m, v, a.calcularAltura(a.getRaiz()));
-    // ordenarMonticulo(&m, m1, m.getNumDatosAct());
-    imprimirMonticulo(m, m.getNumDatosAct());
-    impresionNiveles(v,a.calcularAltura(a.getRaiz()));
+    imprimirMonticulo(m, 0);
+
+    cout << endl<<endl;
     return 0;
 }
 
@@ -116,27 +114,10 @@ void ingresarMonticulo(NodoBinario *p, int nivel, int nivelaux, Lista l[]) // fu
 
 void imprimirMonticulo(Monticulo m, int n) // funcion que imprime un monticulo
 {
-    if (n > 0)
+    if (n < m.getNumDatosAct())
     {
-        imprimirMonticulo(m, n - 1);
         cout << endl
-             << "Valor obtenido del Monticulo: " << m.getValor(n)<<endl;
-    }
-}
-
-void impresionNiveles(Lista a[], int n)
-{
-    Nodo *actual; // referencia a nodo actual de la lista
-    for (int j = 0; j < n; j++)
-    {
-        cout<<"NIVEL "<<j<<endl;
-        cout << "[ ";
-        actual = a[j].getPrimero(); // almacena temporalmente la posicion del primer nodo
-        while (actual != NULL)
-        {
-            cout << actual->getDato() << " ";
-            actual = actual->getPunt();
-        }
-        cout << "]"<<endl;
+             << "Valor obtenido del Monticulo: " << m.getValor(n);
+        imprimirMonticulo(m, n + 1);
     }
 }
