@@ -240,16 +240,16 @@ void bubbleSort(int a[], int n, int j) // funcion recursiva para ordenar element
     {
         if (j >= n)
         {
-            if (a[j] > a[j + 1])
-            {
-                aux = a[j];
-                a[j] = a[j + 1];
-                a[j + 1] = aux;
-            }
-            bubbleSort(a, n, j - 1);
+            // Intercambio de elementos si están desordenados
+            aux = a[j];
+            a[j] = a[j + 1];
+            a[j + 1] = aux;
         }
-        bubbleSort(a, n - 1, j);
+        // Llamada recursiva para avanzar al siguiente par de elementos
+        bubbleSort(a, n, j - 1);
     }
+    // Llamada recursiva para avanzar al siguiente elemento
+    bubbleSort(a, n - 1, j);
 }
 
 int loop(int *j, int a[], int aux)
